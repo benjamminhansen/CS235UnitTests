@@ -8,8 +8,8 @@
 /* !!!!GRADING INSTRUCTIONS!!!!
  *
  * When you report your score for this test set, report
- * the percentage of asserts found in this code your
- * data structure code passed.
+ * the percentage of asserts found in this test code that
+ * your data structure code passed.
  */
 #define UNIT_TESTING
 
