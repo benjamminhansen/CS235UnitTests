@@ -4,6 +4,13 @@
  *  Created on: Aug 20, 2018
  *      Author: Lee Barney
  */
+
+/* !!!!GRADING INSTRUCTIONS!!!!
+ *
+ * When you report your score for this test set, report
+ * the percentage of asserts found in this code your
+ * data structure code passed.
+ */
 #define UNIT_TESTING
 
 #include <iostream>
@@ -370,6 +377,15 @@ int main(int argc, const char* argv[]) {
     assert(sString.buffer[2] == "I was wondering");
     
     cout << "This vector can hold strings!!!!" << endl;
+    
+    /*
+     * For 5 percentage points extra credit you can implement
+     * the const_iterator inner class and the const cbegin and
+     * cend methods along with the tests for all the operators
+     * for the const_iterator and cbegin and cend vector methods.
+     */
+    
+    
     
     return 0;
 }
