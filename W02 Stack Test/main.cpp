@@ -3,6 +3,8 @@
  *
  *  Created on: Apr 30, 2018
  *      Author: Daniel Hixson
+ *  Modified on: Aug 20, 2018
+ *      Author: Lee Barney
  */
 #define UNIT_TESTING
 
