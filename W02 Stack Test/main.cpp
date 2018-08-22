@@ -33,7 +33,7 @@
 #include <iostream>
 #include <string>
 #include <cassert>
-#include "stack.hpp"
+#include "stack.h"
 
 using std::cout;
 using std::cin;
