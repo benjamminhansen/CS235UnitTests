@@ -140,14 +140,14 @@ int main(int argc, const char* argv[]) {
     pushQueue.push(1);
     assert(pushQueue.numCapacity == 1);
     assert(pushQueue.numPush == 1);
-    assert(resizeQueue.numPop == 0);
+    assert(pushQueue.numPop == 0);
     assert(pushQueue.buffer[0] == 1);
     cout << "Push_back First ElementTest Passed" << endl;
     
     pushQueue.push(5);
     assert(pushQueue.numCapacity == 2);
     assert(pushQueue.numPush == 2);
-    assert(resizeQueue.numPop == 0);
+    assert(pushQueue.numPop == 0);
     assert(pushQueue.buffer[0] == 1);
     assert(pushQueue.buffer[1] == 5);
     cout << "Push_back Second Element Test Passed" << endl;
@@ -155,7 +155,7 @@ int main(int argc, const char* argv[]) {
     pushQueue.push(10);
     assert(pushQueue.numCapacity == 4);
     assert(pushQueue.numPush == 3);
-    assert(resizeQueue.numPop == 0);
+    assert(pushQueue.numPop == 0);
     assert(pushQueue.buffer[0] == 1);
     assert(pushQueue.buffer[1] == 5);
     assert(pushQueue.buffer[2] == 10);
