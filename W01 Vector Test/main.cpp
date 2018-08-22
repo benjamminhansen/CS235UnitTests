@@ -33,7 +33,7 @@
 #include <iostream>
 #include <string>
 #include <cassert>
-#include "vector.hpp"
+#include "vector.h"
 
 using std::cout;
 using std::cin;
