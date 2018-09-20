@@ -31,7 +31,7 @@
 #define UNIT_TESTING
 
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <cassert>
 #include "stack.h"
 
