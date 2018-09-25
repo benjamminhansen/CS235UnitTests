@@ -69,8 +69,12 @@ int main(int argc, const char* argv[]) {
     
     vector <int> sizedVector(4);
     assert(sizedVector.numCapacity == 4);
-    assert(sizedVector.numElements == 0);
+    assert(sizedVector.numElements == 4);
     assert(sizedVector.buffer != NULL);
+    assert(sizedVector.buffer[0] == 0);
+    assert(sizedVector.buffer[1] == 0);
+    assert(sizedVector.buffer[2] == 0);
+    assert(sizedVector.buffer[3] == 0);
     cout << "Sized Constructor Test Passed" << endl;
     
     /*
@@ -177,89 +181,32 @@ int main(int argc, const char* argv[]) {
      * Testing push_back with no resizing
      */
     vector <int> pushBackVector(5);
+    int * tempBuffer = pushBackVector.buffer;
     pushBackVector.push_back(1);
-    assert(pushBackVector.numCapacity == 5);
-    assert(pushBackVector.numElements == 1);
-    assert(pushBackVector.buffer[0] == 1);
+    assert(tempBuffer != pushBackVector.buffer);
+    assert(pushBackVector.numCapacity == 10);
+    assert(pushBackVector.numElements == 6);
+    assert(pushBackVector.buffer[0] == 0);
+    assert(pushBackVector.buffer[1] == 0);
+    assert(pushBackVector.buffer[2] == 0);
+    assert(pushBackVector.buffer[3] == 0);
+    assert(pushBackVector.buffer[4] == 0);
+    assert(pushBackVector.buffer[5] == 1);
     cout << "Push_back First ElementTest Passed" << endl;
     
     pushBackVector.push_back(3);
-    assert(pushBackVector.numCapacity == 5);
-    assert(pushBackVector.numElements == 2);
-    assert(pushBackVector.buffer[0] == 1);
-    assert(pushBackVector.buffer[1] == 3);
-    cout << "Push_back Second ElementTest Passed" << endl;
+    assert(pushBackVector.numCapacity == 10);
+    assert(pushBackVector.numElements == 7);
+    assert(pushBackVector.buffer[0] == 0);
+    assert(pushBackVector.buffer[1] == 0);
+    assert(pushBackVector.buffer[2] == 0);
+    assert(pushBackVector.buffer[3] == 0);
+    assert(pushBackVector.buffer[4] == 0);
+    assert(pushBackVector.buffer[5] == 1);
+    assert(pushBackVector.buffer[6] == 3);
     
-    pushBackVector.push_back(5);
-    assert(pushBackVector.numCapacity == 5);
-    assert(pushBackVector.numElements == 3);
-    assert(pushBackVector.buffer[0] == 1);
-    assert(pushBackVector.buffer[1] == 3);
-    assert(pushBackVector.buffer[2] == 5);
-    cout << "Push_back Third ElementTest Passed" << endl;
     
-    pushBackVector.push_back(7);
-    assert(pushBackVector.numCapacity == 5);
-    assert(pushBackVector.numElements == 4);
-    assert(pushBackVector.buffer[0] == 1);
-    assert(pushBackVector.buffer[1] == 3);
-    assert(pushBackVector.buffer[2] == 5);
-    assert(pushBackVector.buffer[3] == 7);
-    cout << "Push_back Fourth ElementTest Passed" << endl;
     
-    pushBackVector.push_back(9);
-    assert(pushBackVector.numCapacity == 5);
-    assert(pushBackVector.numElements == 5);
-    assert(pushBackVector.buffer[0] == 1);
-    assert(pushBackVector.buffer[1] == 3);
-    assert(pushBackVector.buffer[2] == 5);
-    assert(pushBackVector.buffer[3] == 7);
-    assert(pushBackVector.buffer[4] == 9);
-    cout << "Push_back Fifth ElementTest Passed" << endl;
-    
-    /*
-     * Testing push_back with resizing
-     */
-    vector <int> pushBackResizeVector;
-    pushBackResizeVector.push_back(1);
-    assert(pushBackResizeVector.numCapacity == 1);
-    assert(pushBackResizeVector.numElements == 1);
-    assert(pushBackResizeVector.buffer[0] == 1);
-    cout << "Push_back with resize First ElementTest Passed" << endl;
-    
-    pushBackResizeVector.push_back(5);
-    assert(pushBackResizeVector.numCapacity == 2);
-    assert(pushBackResizeVector.numElements == 2);
-    assert(pushBackResizeVector.buffer[0] == 1);
-    assert(pushBackResizeVector.buffer[1] == 5);
-    cout << "Push_back with resize Second Element Test Passed" << endl;
-    
-    pushBackResizeVector.push_back(10);
-    assert(pushBackResizeVector.numCapacity == 4);
-    assert(pushBackResizeVector.numElements == 3);
-    assert(pushBackResizeVector.buffer[0] == 1);
-    assert(pushBackResizeVector.buffer[1] == 5);
-    assert(pushBackResizeVector.buffer[2] == 10);
-    cout << "Push_back with resize Third Element Test Passed" << endl;
-    
-    pushBackResizeVector.push_back(11);
-    assert(pushBackResizeVector.numCapacity == 4);
-    assert(pushBackResizeVector.numElements == 4);
-    assert(pushBackResizeVector.buffer[0] == 1);
-    assert(pushBackResizeVector.buffer[1] == 5);
-    assert(pushBackResizeVector.buffer[2] == 10);
-    assert(pushBackResizeVector.buffer[3] == 11);
-    cout << "Push_back with resize Fourth Element Test Passed" << endl;
-    
-    pushBackResizeVector.push_back(13);
-    assert(pushBackResizeVector.numCapacity == 8);
-    assert(pushBackResizeVector.numElements == 5);
-    assert(pushBackResizeVector.buffer[0] == 1);
-    assert(pushBackResizeVector.buffer[1] == 5);
-    assert(pushBackResizeVector.buffer[2] == 10);
-    assert(pushBackResizeVector.buffer[3] == 11);
-    assert(pushBackResizeVector.buffer[4] == 13);
-    cout << "Push_back with resize Fifth Element Test Passed" << endl;
     
     /*
      * Testing Accessor

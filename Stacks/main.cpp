@@ -69,8 +69,12 @@ int main(int argc, const char* argv[]) {
     
     stack <int> sizedStack(4);
     assert(sizedStack.numCapacity == 4);
-    assert(sizedStack.numElements == 0);
+    assert(sizedStack.numElements == 4);
     assert(sizedStack.buffer != NULL);
+    assert(sizedStack.buffer[0] == 0);
+    assert(sizedStack.buffer[1] == 0);
+    assert(sizedStack.buffer[2] == 0);
+    assert(sizedStack.buffer[3] == 0);
     cout << "Sized Constructor Test Passed" << endl;
     
     /*
@@ -178,88 +182,29 @@ int main(int argc, const char* argv[]) {
      */
     stack <int> pushStack(5);
     pushStack.push(1);
-    assert(pushStack.numCapacity == 5);
-    assert(pushStack.numElements == 1);
-    assert(pushStack.buffer[0] == 1);
+    assert(pushStack.numCapacity == 10);
+    assert(pushStack.numElements == 6);
+    assert(pushStack.buffer[0] == 0);
+    assert(pushStack.buffer[1] == 0);
+    assert(pushStack.buffer[2] == 0);
+    assert(pushStack.buffer[3] == 0);
+    assert(pushStack.buffer[4] == 0);
+    assert(pushStack.buffer[5] == 1);
     cout << "Push First ElementTest Passed" << endl;
     
     pushStack.push(3);
-    assert(pushStack.numCapacity == 5);
-    assert(pushStack.numElements == 2);
-    assert(pushStack.buffer[0] == 1);
-    assert(pushStack.buffer[1] == 3);
+    assert(pushStack.numCapacity == 10);
+    assert(pushStack.numElements == 7);
+    assert(pushStack.buffer[0] == 0);
+    assert(pushStack.buffer[1] == 0);
+    assert(pushStack.buffer[2] == 0);
+    assert(pushStack.buffer[3] == 0);
+    assert(pushStack.buffer[4] == 0);
+    assert(pushStack.buffer[5] == 1);
+    assert(pushStack.buffer[6] == 3);
     cout << "Push Second ElementTest Passed" << endl;
     
-    pushStack.push(5);
-    assert(pushStack.numCapacity == 5);
-    assert(pushStack.numElements == 3);
-    assert(pushStack.buffer[0] == 1);
-    assert(pushStack.buffer[1] == 3);
-    assert(pushStack.buffer[2] == 5);
-    cout << "Push Third ElementTest Passed" << endl;
     
-    pushStack.push(7);
-    assert(pushStack.numCapacity == 5);
-    assert(pushStack.numElements == 4);
-    assert(pushStack.buffer[0] == 1);
-    assert(pushStack.buffer[1] == 3);
-    assert(pushStack.buffer[2] == 5);
-    assert(pushStack.buffer[3] == 7);
-    cout << "Push Fourth ElementTest Passed" << endl;
-    
-    pushStack.push(9);
-    assert(pushStack.numCapacity == 5);
-    assert(pushStack.numElements == 5);
-    assert(pushStack.buffer[0] == 1);
-    assert(pushStack.buffer[1] == 3);
-    assert(pushStack.buffer[2] == 5);
-    assert(pushStack.buffer[3] == 7);
-    assert(pushStack.buffer[4] == 9);
-    cout << "Push Fifth ElementTest Passed" << endl;
-    
-    /*
-     * Testing push with resizing
-     */
-    stack <int> pushResizeStack;
-    pushResizeStack.push(1);
-    assert(pushResizeStack.numCapacity == 1);
-    assert(pushResizeStack.numElements == 1);
-    assert(pushResizeStack.buffer[0] == 1);
-    cout << "Push with resize First ElementTest Passed" << endl;
-    
-    pushResizeStack.push(5);
-    assert(pushResizeStack.numCapacity == 2);
-    assert(pushResizeStack.numElements == 2);
-    assert(pushResizeStack.buffer[0] == 1);
-    assert(pushResizeStack.buffer[1] == 5);
-    cout << "Push with resize Second Element Test Passed" << endl;
-    
-    pushResizeStack.push(10);
-    assert(pushResizeStack.numCapacity == 4);
-    assert(pushResizeStack.numElements == 3);
-    assert(pushResizeStack.buffer[0] == 1);
-    assert(pushResizeStack.buffer[1] == 5);
-    assert(pushResizeStack.buffer[2] == 10);
-    cout << "Push with resize Third Element Test Passed" << endl;
-    
-    pushResizeStack.push(11);
-    assert(pushResizeStack.numCapacity == 4);
-    assert(pushResizeStack.numElements == 4);
-    assert(pushResizeStack.buffer[0] == 1);
-    assert(pushResizeStack.buffer[1] == 5);
-    assert(pushResizeStack.buffer[2] == 10);
-    assert(pushResizeStack.buffer[3] == 11);
-    cout << "Push with resize Fourth Element Test Passed" << endl;
-    
-    pushResizeStack.push(13);
-    assert(pushResizeStack.numCapacity == 8);
-    assert(pushResizeStack.numElements == 5);
-    assert(pushResizeStack.buffer[0] == 1);
-    assert(pushResizeStack.buffer[1] == 5);
-    assert(pushResizeStack.buffer[2] == 10);
-    assert(pushResizeStack.buffer[3] == 11);
-    assert(pushResizeStack.buffer[4] == 13);
-    cout << "Push with resize Fifth Element Test Passed" << endl;
     
     /*
      * Testing pop
