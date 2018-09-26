@@ -56,26 +56,6 @@ int main(int argc, const char* argv[]) {
     assert(defaultStack.buffer == NULL);
     cout << "Default Constructor Test Passed" << endl;
     
-    /*
-     * Testing sized stack constructor
-     */
-    try{
-        stack<int> badSizeStack(-3);
-        assert(false);
-    }
-    catch(const char* exceptionMessage){
-        assert(strcmp(exceptionMessage,"Error: stack sizes must be greater than or equal to 0.") == 0);
-    }
-    
-    stack <int> sizedStack(4);
-    assert(sizedStack.numCapacity == 4);
-    assert(sizedStack.numElements == 4);
-    assert(sizedStack.buffer != NULL);
-    assert(sizedStack.buffer[0] == 0);
-    assert(sizedStack.buffer[1] == 0);
-    assert(sizedStack.buffer[2] == 0);
-    assert(sizedStack.buffer[3] == 0);
-    cout << "Sized Constructor Test Passed" << endl;
     
     /*
      * Testing Size
@@ -178,31 +158,47 @@ int main(int argc, const char* argv[]) {
     
     
     /*
-     * Testing push with no resizing
+     * Testing push with resizing
      */
-    stack <int> pushStack(5);
+    stack <int> pushStack;
+    theBuffer = pushStack.buffer;
     pushStack.push(1);
-    assert(pushStack.numCapacity == 10);
-    assert(pushStack.numElements == 6);
-    assert(pushStack.buffer[0] == 0);
-    assert(pushStack.buffer[1] == 0);
-    assert(pushStack.buffer[2] == 0);
-    assert(pushStack.buffer[3] == 0);
-    assert(pushStack.buffer[4] == 0);
-    assert(pushStack.buffer[5] == 1);
+    assert(pushStack.numCapacity == 1);
+    assert(pushStack.numElements == 1);
+    assert(theBuffer != pushStack.buffer);
+    assert(pushStack.buffer[0] == 1);
     cout << "Push First ElementTest Passed" << endl;
     
+    theBuffer = pushStack.buffer;
     pushStack.push(3);
-    assert(pushStack.numCapacity == 10);
-    assert(pushStack.numElements == 7);
-    assert(pushStack.buffer[0] == 0);
-    assert(pushStack.buffer[1] == 0);
-    assert(pushStack.buffer[2] == 0);
-    assert(pushStack.buffer[3] == 0);
-    assert(pushStack.buffer[4] == 0);
-    assert(pushStack.buffer[5] == 1);
-    assert(pushStack.buffer[6] == 3);
+    assert(pushStack.numCapacity == 2);
+    assert(pushStack.numElements == 2);
+    assert(theBuffer != pushStack.buffer);
+    assert(pushStack.buffer[0] == 1);
+    assert(pushStack.buffer[1] == 3);
     cout << "Push Second ElementTest Passed" << endl;
+    
+    theBuffer = pushStack.buffer;
+    pushStack.push(5);
+    assert(pushStack.numCapacity == 4);
+    assert(pushStack.numElements == 3);
+    assert(theBuffer != pushStack.buffer);
+    assert(pushStack.buffer[0] == 1);
+    assert(pushStack.buffer[1] == 3);
+    assert(pushStack.buffer[2] == 5);
+    cout << "Push Third ElementTest Passed" << endl;
+    
+    
+    theBuffer = pushStack.buffer;
+    pushStack.push(7);
+    assert(pushStack.numCapacity == 4);
+    assert(pushStack.numElements == 4);
+    assert(theBuffer == pushStack.buffer);
+    assert(pushStack.buffer[0] == 1);
+    assert(pushStack.buffer[1] == 3);
+    assert(pushStack.buffer[2] == 5);
+    assert(pushStack.buffer[3] == 7);
+    cout << "Push Fourth ElementTest Passed" << endl;
     
     
     
