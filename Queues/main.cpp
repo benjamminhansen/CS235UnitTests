@@ -376,11 +376,64 @@ int main(int argc, const char* argv[]) {
     
     
     /*
+     * Testing back
+     */
+    
+    queue<int> frontBackQueue;
+    frontBackQueue.numPush = 0;
+    frontBackQueue.numPop = 0;
+    frontBackQueue.numCapacity = 16;
+    try{
+        int& theBackRef = frontBackQueue.back();
+        assert(false);
+    }
+    catch(const char* message){
+        assert(strcmp(message, "Error: asking for back of empty queue.") == 0);
+    }
+    //simulating use
+    frontBackQueue.buffer = new int[16];
+    for (int i = 0; i < 16; i++) {
+        frontBackQueue.buffer[i] = 2*i;
+    }
+    frontBackQueue.numPush = 8;
+    frontBackQueue.numPop = 4;
+    assert(frontBackQueue.back() == 14);
+    frontBackQueue.back() = 15;
+    assert(frontBackQueue.buffer[7] == 15);
+    
+    
+    //reset queue
+    frontBackQueue.buffer = new int[16];
+    for (int i = 0; i < 16; i++) {
+        frontBackQueue.buffer[i] = 2*i;
+    }
+    frontBackQueue.numPush = 0;
+    frontBackQueue.numPop = 0;
+    frontBackQueue.numCapacity = 16;
+    /*
+     * Testing front
+     */
+    try{
+        int& theFrontRef = frontBackQueue.front();
+        assert(false);
+    }
+    catch(const char* message){
+        assert(strcmp(message, "Error: asking for front of empty queue.") == 0);
+    }
+    
+    frontBackQueue.numPush = 8;
+    frontBackQueue.numPop = 4;
+    
+    assert(frontBackQueue.front() == 8);
+    frontBackQueue.front() = 9;
+    assert(frontBackQueue.buffer[4] == 9);
+    
+    /*
      * Testing push for Non-Integer Queue Behavior (Just to Make Sure queue Works For Other Types)
      */
     queue <string> stringQueue;
     
-    stringQueue.push("Hello");  
+    stringQueue.push("Hello");
     stringQueue.push("It's me");
     stringQueue.push("I was wondering");
     assert(stringQueue.numCapacity == 4);
