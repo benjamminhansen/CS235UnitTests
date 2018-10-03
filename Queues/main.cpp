@@ -359,19 +359,19 @@ int main(int argc, const char* argv[]) {
     assert(notFullQueueAssignedCopy.numPush == 3);
     assert(notFullQueueAssignedCopy.numPop == 0);
     assert(notFullQueueAssignedCopy.buffer != queueToCopy.buffer);
-    assert(notFullQueueAssignedCopy.buffer[0] == 1);
-    assert(notFullQueueAssignedCopy.buffer[1] == 2);
-    assert(notFullQueueAssignedCopy.buffer[2] == 5);
+    assert(notFullQueueAssignedCopy.buffer[0] == 26);
+    assert(notFullQueueAssignedCopy.buffer[1] == 37);
+    assert(notFullQueueAssignedCopy.buffer[2] == 50);
     cout << "(Not full) = Operator Test Passed" << endl;
     
     queue <int> notFullQueueCopy(queueToCopy);
     assert(notFullQueueCopy.numCapacity == 3);
-    assert(notFullQueueAssignedCopy.numPush == 3);
-    assert(notFullQueueAssignedCopy.numPop == 0);
+    assert(notFullQueueCopy.numPush == 3);
+    assert(notFullQueueCopy.numPop == 0);
     assert(notFullQueueCopy.buffer != queueToCopy.buffer);
-    assert(notFullQueueCopy.buffer[0] == 1);
-    assert(notFullQueueCopy.buffer[1] == 2);
-    assert(notFullQueueCopy.buffer[2] == 5);
+    assert(notFullQueueCopy.buffer[0] == 26);
+    assert(notFullQueueCopy.buffer[1] == 37);
+    assert(notFullQueueCopy.buffer[2] == 50);
     cout << "(Not Full) Copy Constructor Test Passed" << endl;
     
     
