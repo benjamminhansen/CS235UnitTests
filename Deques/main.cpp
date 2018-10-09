@@ -33,7 +33,7 @@
 #include <iostream>
 #include <cstring>
 #include <cassert>
-#include "stack.h"
+#include "deque.h"
 
 using std::cout;
 using std::cin;
