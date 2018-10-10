@@ -564,7 +564,7 @@ int main(int argc, const char* argv[]) {
     }
     catch(const char* message)
     {
-        assert(strcmp(message, "Error: Can not pop an empty deque."))
+        assert(strcmp(message, "Error: Can not pop an empty deque."));
     }
     assert(popDeque.iFront == -1);
     assert(popDeque.iBack == 0);
@@ -671,7 +671,7 @@ int main(int argc, const char* argv[]) {
     }
     catch(const char* message)
     {
-        assert(strcmp(message, "Error: Can not pop an empty deque."))
+        assert(strcmp(message, "Error: Can not pop an empty deque."));
     }
     
     cout << "Push Back Pop Front Test Passed" << endl;
@@ -768,7 +768,7 @@ int main(int argc, const char* argv[]) {
     }
     catch(const char* message)
     {
-        assert(strcmp(message, "Error: Can not pop an empty deque."))
+        assert(strcmp(message, "Error: Can not pop an empty deque."));
     }
     
     cout << "Push Back Pop Back Test Passed" << endl;
@@ -813,7 +813,7 @@ int main(int argc, const char* argv[]) {
     assert(frontBackDeque.buffer[0] == 35);
     
     frontBackDeque.iFront = 0;
-    assert(frontBackDeque.front() == -500);
+    assert(frontBackDeque.front() == 35);
     
     frontBackDeque.iFront = -7;
     assert(frontBackDeque.front() == -1);
