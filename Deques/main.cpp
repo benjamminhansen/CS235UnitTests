@@ -557,7 +557,15 @@ int main(int argc, const char* argv[]) {
     assert(popDeque.buffer[5]== 0);
     
     //testing popping an empty deque
-    popDeque.pop_front();
+    try
+    {
+        popDeque.pop_front();
+        assert(false)
+    }
+    catch(const char* message)
+    {
+        assert(strcmp(message, "Error: Can not pop an empty deque."))
+    }
     assert(popDeque.iFront == -1);
     assert(popDeque.iBack == 0);
     assert(popDeque.numCapacity = 6);
@@ -584,18 +592,6 @@ int main(int argc, const char* argv[]) {
     popDeque.iFront = 0;
     popDeque.iBack = 5;
     popDeque.numCapacity = 6;
-    
-    popDeque.pop_front();
-    assert(popDeque.iFront == 0);
-    assert(popDeque.iBack == 5);
-    assert(popDeque.numCapacity = 6);
-    assert(popDeque.buffer[0] == -500);
-    assert(popDeque.buffer[1] == 0);
-    assert(popDeque.buffer[2] == -100);
-    assert(popDeque.buffer[3] == 300);
-    assert(popDeque.buffer[4]== 10);
-    assert(popDeque.buffer[5]== 0);
-    
     
     popDeque.pop_front();
     assert(popDeque.iFront == 1);
@@ -644,6 +640,18 @@ int main(int argc, const char* argv[]) {
     assert(popDeque.buffer[4]== 10);
     assert(popDeque.buffer[5]== 0);
     
+    
+    popDeque.pop_front();
+    assert(popDeque.iFront == 5);
+    assert(popDeque.iBack == 5);
+    assert(popDeque.numCapacity = 6);
+    assert(popDeque.buffer[0] == -500);
+    assert(popDeque.buffer[1] == 0);
+    assert(popDeque.buffer[2] == -100);
+    assert(popDeque.buffer[3] == 300);
+    assert(popDeque.buffer[4]== 10);
+    assert(popDeque.buffer[5]== 0);
+    
     popDeque.pop_front();
     assert(popDeque.iFront == 5);
     assert(popDeque.iBack == 5);
@@ -656,16 +664,15 @@ int main(int argc, const char* argv[]) {
     assert(popDeque.buffer[5]== 0);
     
     //testing popping an empty deque
-    popDeque.pop_front();
-    assert(popDeque.iFront == 5);
-    assert(popDeque.iBack == 5);
-    assert(popDeque.numCapacity = 6);
-    assert(popDeque.buffer[0] == -500);
-    assert(popDeque.buffer[1] == 0);
-    assert(popDeque.buffer[2] == -100);
-    assert(popDeque.buffer[3] == 300);
-    assert(popDeque.buffer[4]== 10);
-    assert(popDeque.buffer[5]== 0);
+    try
+    {
+        popDeque.pop_front();
+        assert(false)
+    }
+    catch(const char* message)
+    {
+        assert(strcmp(message, "Error: Can not pop an empty deque."))
+    }
     
     cout << "Push Back Pop Front Test Passed" << endl;
     /*
