@@ -482,25 +482,13 @@ int main(int argc, const char* argv[]) {
     popDeque.buffer[3] = 300;
     popDeque.buffer[4] = 10;
     popDeque.buffer[5] = 0;
-    popDeque.iFront = -7;
-    popDeque.iBack = 0;
+    popDeque.iFront = -6;
+    popDeque.iBack = -1;
     popDeque.numCapacity = 6;
     
     popDeque.pop_front();
-    assert(popDeque.iFront == -6);
-    assert(popDeque.iBack == 0);
-    assert(popDeque.numCapacity = 6);
-    assert(popDeque.buffer[0] == -500);
-    assert(popDeque.buffer[1] == 0);
-    assert(popDeque.buffer[2] == -100);
-    assert(popDeque.buffer[3] == 300);
-    assert(popDeque.buffer[4]== 10);
-    assert(popDeque.buffer[5]== 0);
-    
-    
-    popDeque.pop_front();
     assert(popDeque.iFront == -5);
-    assert(popDeque.iBack == 0);
+    assert(popDeque.iBack == -1);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
     assert(popDeque.buffer[1] == 0);
@@ -512,7 +500,7 @@ int main(int argc, const char* argv[]) {
     
     popDeque.pop_front();
     assert(popDeque.iFront == -4);
-    assert(popDeque.iBack == 0);
+    assert(popDeque.iBack == -1);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
     assert(popDeque.buffer[1] == 0);
@@ -524,7 +512,7 @@ int main(int argc, const char* argv[]) {
     
     popDeque.pop_front();
     assert(popDeque.iFront == -3);
-    assert(popDeque.iBack == 0);
+    assert(popDeque.iBack == -1);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
     assert(popDeque.buffer[1] == 0);
@@ -536,7 +524,19 @@ int main(int argc, const char* argv[]) {
     
     popDeque.pop_front();
     assert(popDeque.iFront == -2);
-    assert(popDeque.iBack == 0);
+    assert(popDeque.iBack == -1);
+    assert(popDeque.numCapacity = 6);
+    assert(popDeque.buffer[0] == -500);
+    assert(popDeque.buffer[1] == 0);
+    assert(popDeque.buffer[2] == -100);
+    assert(popDeque.buffer[3] == 300);
+    assert(popDeque.buffer[4]== 10);
+    assert(popDeque.buffer[5]== 0);
+    
+    
+    popDeque.pop_front();
+    assert(popDeque.iFront == -1);
+    assert(popDeque.iBack == -1);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
     assert(popDeque.buffer[1] == 0);
@@ -546,8 +546,8 @@ int main(int argc, const char* argv[]) {
     assert(popDeque.buffer[5]== 0);
     
     popDeque.pop_front();
-    assert(popDeque.iFront == -1);
-    assert(popDeque.iBack == 0);
+    assert(popDeque.iFront == 0);
+    assert(popDeque.iBack == -1);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
     assert(popDeque.buffer[1] == 0);
