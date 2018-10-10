@@ -560,7 +560,7 @@ int main(int argc, const char* argv[]) {
     try
     {
         popDeque.pop_front();
-        assert(false)
+        assert(false);
     }
     catch(const char* message)
     {
@@ -667,7 +667,7 @@ int main(int argc, const char* argv[]) {
     try
     {
         popDeque.pop_front();
-        assert(false)
+        assert(false);
     }
     catch(const char* message)
     {
@@ -761,16 +761,15 @@ int main(int argc, const char* argv[]) {
     assert(popDeque.buffer[5]== 0);
     
     //testing popping an empty deque
-    popDeque.pop_back();
-    assert(popDeque.iFront == 0);
-    assert(popDeque.iBack == -1);
-    assert(popDeque.numCapacity = 6);
-    assert(popDeque.buffer[0] == -500);
-    assert(popDeque.buffer[1] == 0);
-    assert(popDeque.buffer[2] == -100);
-    assert(popDeque.buffer[3] == 300);
-    assert(popDeque.buffer[4]== 10);
-    assert(popDeque.buffer[5]== 0);
+    try
+    {
+        popDeque.pop_back();
+        assert(false);
+    }
+    catch(const char* message)
+    {
+        assert(strcmp(message, "Error: Can not pop an empty deque."))
+    }
     
     cout << "Push Back Pop Back Test Passed" << endl;
     /*
