@@ -243,6 +243,17 @@ int main(int argc, const char* argv[]) {
      */
     //setting up as if all had been pushed front then one popped front and one popped back
     deque <int> resizeDeque;
+    resizeDeque.buffer = NULL;
+    resizeDeque.iFront = 0;
+    resizeDeque.iBack = -1;
+    resizeDeque.resize(3);
+    
+    assert(resizeDeque.buffer != NULL);
+    assert(resizeDeque.iFront == 0);
+    assert(resizeDeque.iBack == -1);
+    assert(resizeDeque.numCapacity = 3);
+    
+    //resetting
     resizeDeque.buffer = new int[5];
     resizeDeque.iFront = 0 - 5 + 1;// 5 push_fronts (7,8,9,10,12) then one pop_front removing 12
     resizeDeque.iBack = -1 - 1;//then one pop_back removing 7
