@@ -344,8 +344,8 @@ int main(int argc, const char* argv[]) {
     deque <int> pushFrontResizeDeque;
     pushFrontResizeDeque.push_front(1);
     assert(pushFrontResizeDeque.numCapacity == 1);
-    assert(pushFrontResizeDeque.iFront == -1);
-    assert(pushFrontResizeDeque.iBack == -1);
+    assert(pushFrontResizeDeque.iFront == 0);
+    assert(pushFrontResizeDeque.iBack == 0);
     assert(pushFrontResizeDeque.buffer[0] == 1);
     cout << "Push_back First ElementTest Passed" << endl;
     
@@ -353,17 +353,17 @@ int main(int argc, const char* argv[]) {
     assert(pushFrontResizeDeque.numCapacity == 2);
     assert(pushFrontResizeDeque.iFront == -1);
     assert(pushFrontResizeDeque.iBack == 0);
-    assert(pushFrontResizeDeque.buffer[0] == 5);
-    assert(pushFrontResizeDeque.buffer[1] == 1);
+    assert(pushFrontResizeDeque.buffer[0] == 1);
+    assert(pushFrontResizeDeque.buffer[1] == 5);
     cout << "Push_back Second Element Test Passed" << endl;
     
     pushFrontResizeDeque.push_front(10);
     assert(pushFrontResizeDeque.numCapacity == 4);
     assert(pushFrontResizeDeque.iFront == -1);
     assert(pushFrontResizeDeque.iBack == 1);
-    assert(pushFrontResizeDeque.buffer[0] == 10);
-    assert(pushFrontResizeDeque.buffer[1] == 5);
-    assert(pushFrontResizeDeque.buffer[2] == 1);
+    assert(pushFrontResizeDeque.buffer[0] == 5);
+    assert(pushFrontResizeDeque.buffer[1] == 1);
+    assert(pushFrontResizeDeque.buffer[3] == 10);
     cout << "Push Third Element Test Passed" << endl;
     
     
@@ -371,10 +371,10 @@ int main(int argc, const char* argv[]) {
     assert(pushFrontResizeDeque.numCapacity == 4);
     assert(pushFrontResizeDeque.iFront == -2);
     assert(pushFrontResizeDeque.iBack == 1);
-    assert(pushFrontResizeDeque.buffer[0] == 10);
-    assert(pushFrontResizeDeque.buffer[1] == 5);
-    assert(pushFrontResizeDeque.buffer[2] == 1);
-    assert(pushFrontResizeDeque.buffer[3] == 20);
+    assert(pushFrontResizeDeque.buffer[0] == 5);
+    assert(pushFrontResizeDeque.buffer[1] == 1);
+    assert(pushFrontResizeDeque.buffer[2] == 20);
+    assert(pushFrontResizeDeque.buffer[3] == 10);
     cout << "Push Fourth Element Test Passed" << endl;
     
     /*
@@ -388,12 +388,12 @@ int main(int argc, const char* argv[]) {
     popDeque.buffer[3] = 300;
     popDeque.buffer[4] = 10;
     popDeque.buffer[5] = 0;
-    popDeque.iFront = -7;
+    popDeque.iFront = -6;
     popDeque.iBack = -1;
     popDeque.numCapacity = 6;
     
     popDeque.pop_back();
-    assert(popDeque.iFront == -7);
+    assert(popDeque.iFront == -6);
     assert(popDeque.iBack == -2);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
@@ -405,7 +405,7 @@ int main(int argc, const char* argv[]) {
     
     
     popDeque.pop_back();
-    assert(popDeque.iFront == -7);
+    assert(popDeque.iFront == -6);
     assert(popDeque.iBack == -3);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
@@ -417,7 +417,7 @@ int main(int argc, const char* argv[]) {
     
     
     popDeque.pop_back();
-    assert(popDeque.iFront == -7);
+    assert(popDeque.iFront == -6);
     assert(popDeque.iBack == -4);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
@@ -429,7 +429,7 @@ int main(int argc, const char* argv[]) {
     
     
     popDeque.pop_back();
-    assert(popDeque.iFront == -7);
+    assert(popDeque.iFront == -6);
     assert(popDeque.iBack == -5);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
@@ -441,7 +441,7 @@ int main(int argc, const char* argv[]) {
     
     
     popDeque.pop_back();
-    assert(popDeque.iFront == -7);
+    assert(popDeque.iFront == -6);
     assert(popDeque.iBack == -6);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
@@ -452,7 +452,7 @@ int main(int argc, const char* argv[]) {
     assert(popDeque.buffer[5]== 0);
     
     popDeque.pop_back();
-    assert(popDeque.iFront == -7);
+    assert(popDeque.iFront == -6);
     assert(popDeque.iBack == -7);
     assert(popDeque.numCapacity = 6);
     assert(popDeque.buffer[0] == -500);
@@ -463,16 +463,13 @@ int main(int argc, const char* argv[]) {
     assert(popDeque.buffer[5]== 0);
     
     //testing popping an empty deque
-    popDeque.pop_back();
-    assert(popDeque.iFront == -7);
-    assert(popDeque.iBack == -7);
-    assert(popDeque.numCapacity = 6);
-    assert(popDeque.buffer[0] == -500);
-    assert(popDeque.buffer[1] == 0);
-    assert(popDeque.buffer[2] == -100);
-    assert(popDeque.buffer[3] == 300);
-    assert(popDeque.buffer[4]== 10);
-    assert(popDeque.buffer[5]== 0);
+    try{
+        popDeque.pop_back();
+        assert(false);
+    }
+    catch(const char* message){
+        assert(strcmp(message,"Error: Can not pop an empty deque.") == 0);
+    }
     cout << "Push Front Pop Back Test Passed" << endl;
     /*
      * Testing push_front-pop_front
