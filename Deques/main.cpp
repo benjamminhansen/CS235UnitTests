@@ -245,11 +245,11 @@ int main(int argc, const char* argv[]) {
     resizeDeque.iFront = 0 - 5 + 1;// 5 push_fronts (7,8,9,10,12) then one pop_front removing 12
     resizeDeque.iBack = -1 - 1;//then one pop_back removing 7
     resizeDeque.numCapacity = 5;
-    resizeDeque.buffer[0] = 7;
-    resizeDeque.buffer[1] = 12;
-    resizeDeque.buffer[2] = 10;
-    resizeDeque.buffer[3] = 9;
-    resizeDeque.buffer[4] = 8;
+    resizeDeque.buffer[0] = 12;
+    resizeDeque.buffer[1] = 10;
+    resizeDeque.buffer[2] = 9;
+    resizeDeque.buffer[3] = 8;
+    resizeDeque.buffer[4] = 7;
     int *theBuffer = resizeDeque.buffer;
     resizeDeque.resize(10);
     assert(theBuffer != resizeDeque.buffer);
@@ -260,17 +260,16 @@ int main(int argc, const char* argv[]) {
     assert(resizeDeque.buffer[1] == 9);
     assert(resizeDeque.buffer[2] == 8);
     
+    theBuffer = resizeDeque.buffer;
     resizeDeque.resize(2);
     assert(theBuffer != resizeDeque.buffer);
     assert(resizeDeque.iFront == 0);
     assert(resizeDeque.iBack == 1);
     assert(resizeDeque.numCapacity == 2);
-    cout<<"blah "<<resizeDeque.buffer[0]<<endl;
-    cout<<"blah "<<resizeDeque.buffer[1]<<endl;
     assert(resizeDeque.buffer[0] == 10);
     assert(resizeDeque.buffer[1] == 9);
     
-    
+    theBuffer = resizeDeque.buffer;
     resizeDeque.resize(0);
     assert(theBuffer != resizeDeque.buffer);
     assert(resizeDeque.iFront == 0);
