@@ -360,7 +360,7 @@ int main(int argc, const char* argv[]) {
     assert(pushFrontResizeDeque.iFront == 0);
     assert(pushFrontResizeDeque.iBack == 0);
     assert(pushFrontResizeDeque.buffer[0] == 1);
-    cout << "Push_back First ElementTest Passed" << endl;
+    cout << "Push_front First ElementTest Passed" << endl;
     
     pushFrontResizeDeque.push_front(5);
     assert(pushFrontResizeDeque.numCapacity == 2);
@@ -808,7 +808,7 @@ int main(int argc, const char* argv[]) {
     frontBackDeque.buffer[5] = -1;
     frontBackDeque.numCapacity = 6;
     //simulating all push_front
-    frontBackDeque.iFront = 6;
+    frontBackDeque.iFront = -6;
     frontBackDeque.iBack = -1;
     //test accessor
     assert(frontBackDeque.front() == -500);
@@ -825,6 +825,8 @@ int main(int argc, const char* argv[]) {
     frontBackDeque.iFront = -3;
     assert(frontBackDeque.front() == 13);
     
+    //simulate 6 push_backs and 4 pop fronts
+    frontBackDeque.iBack = 5;
     frontBackDeque.iFront = 3;
     assert(frontBackDeque.front() == 13);
     
