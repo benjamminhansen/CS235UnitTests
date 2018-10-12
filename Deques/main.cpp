@@ -904,11 +904,11 @@ int main(int argc, const char* argv[]) {
     assert(dequeCopiedTo.iFront == 0);
     assert(dequeCopiedTo.iBack == 5);
     assert(dequeCopiedTo.numCapacity == 5);
-    assert(dequeCopiedTo.buffer[0] == 10);
-    assert(dequeCopiedTo.buffer[1] == 17);
-    assert(dequeCopiedTo.buffer[2] == 26);
-    assert(dequeCopiedTo.buffer[3] == 37);
-    assert(dequeCopiedTo.buffer[4] == 50);
+    assert(dequeCopiedTo.buffer[0] == 2);
+    assert(dequeCopiedTo.buffer[1] == 5);
+    assert(dequeCopiedTo.buffer[2] == 10);
+    assert(dequeCopiedTo.buffer[3] == 17);
+    assert(dequeCopiedTo.buffer[4] == 26);
     cout << "= Operator and Copy Constructor Test Passed" << endl;
     
     
@@ -922,11 +922,11 @@ int main(int argc, const char* argv[]) {
     sString.push_front("It's me");
     sString.push_front("I was wondering");
     assert(sString.numCapacity == 4);
-    assert(sString.iFront == 2);
-    assert(sString.iBack == 0);
-    assert(sString.buffer[3] == "Hello");
+    assert(sString.iFront == -1);
+    assert(sString.iBack == 1);
     assert(sString.buffer[0] == "It's me");
-    assert(sString.buffer[1] == "I was wondering");
+    assert(sString.buffer[1] == "Hello");
+    assert(sString.buffer[3] == "I was wondering");
     
     cout << "This deque can hold strings!!!!" << endl;
     
