@@ -822,18 +822,18 @@ int main(int argc, const char* argv[]) {
     assert(frontBackDeque.front() == 35);
     
     //simulating seven push_fronts and one pop_back
-    frontBackDeque.iBack = 0;
+    frontBackDeque.iBack = -2;
     frontBackDeque.iFront = -7;
     assert(frontBackDeque.front() == -1);
     
     //simulate six push_backs and three pop_fronts
     frontBackDeque.iBack = 5
-    frontBackDeque.iFront = -3;
+    frontBackDeque.iFront = 3;
     assert(frontBackDeque.front() == 13);
     
-    //simulate 6 push_backs and 3 pop fronts
-    frontBackDeque.iBack = 5;
-    frontBackDeque.iFront = 3;
+    //simulate 3 push_backs and 3 push_fronts
+    frontBackDeque.iBack = 2;
+    frontBackDeque.iFront = -3;
     assert(frontBackDeque.front() == 13);
     
     
@@ -864,9 +864,9 @@ int main(int argc, const char* argv[]) {
     frontBackDeque.iBack = 0;
     assert(frontBackDeque.back() == 35);
     
-    //simulating six push_fronts and six push_backs
+    //simulating six push_fronts and six pop_backs
     frontBackDeque.iBack = -7;
-    assert(frontBackDeque.back() == -1);
+    assert(frontBackDeque.back() == 15);
     
     //simulating six push_fronts and two pop_backs
     frontBackDeque.iBack = -3;
