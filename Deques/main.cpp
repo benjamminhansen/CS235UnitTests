@@ -357,8 +357,8 @@ int main(int argc, const char* argv[]) {
     deque <int> pushFrontResizeDeque;
     pushFrontResizeDeque.push_front(1);
     assert(pushFrontResizeDeque.numCapacity == 1);
-    assert(pushFrontResizeDeque.iFront == 0);
-    assert(pushFrontResizeDeque.iBack == 0);
+    assert(pushFrontResizeDeque.iFront == -1);
+    assert(pushFrontResizeDeque.iBack == -1);
     assert(pushFrontResizeDeque.buffer[0] == 1);
     cout << "Push_front First ElementTest Passed" << endl;
     
@@ -866,7 +866,7 @@ int main(int argc, const char* argv[]) {
     
     //simulating six push_fronts and six pop_backs
     frontBackDeque.iBack = -7;
-    assert(frontBackDeque.back() == 15);
+    assert(frontBackDeque.back() == 18);
     
     //simulating six push_fronts and two pop_backs
     frontBackDeque.iBack = -3;
@@ -904,11 +904,11 @@ int main(int argc, const char* argv[]) {
     assert(dequeCopiedTo.iFront == 0);
     assert(dequeCopiedTo.iBack == 5);
     assert(dequeCopiedTo.numCapacity == 5);
-    assert(dequeCopiedTo.buffer[3] == 10);
-    assert(dequeCopiedTo.buffer[4] == 17);
-    assert(dequeCopiedTo.buffer[5] == 26);
-    assert(dequeCopiedTo.buffer[6] == 37);
-    assert(dequeCopiedTo.buffer[7] == 50);
+    assert(dequeCopiedTo.buffer[0] == 10);
+    assert(dequeCopiedTo.buffer[1] == 17);
+    assert(dequeCopiedTo.buffer[2] == 26);
+    assert(dequeCopiedTo.buffer[3] == 37);
+    assert(dequeCopiedTo.buffer[4] == 50);
     cout << "= Operator and Copy Constructor Test Passed" << endl;
     
     
