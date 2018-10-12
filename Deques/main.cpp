@@ -791,8 +791,8 @@ int main(int argc, const char* argv[]) {
     assert(dequeCopy.iBack == 1);
     assert(dequeCopy.numCapacity == 2);
     assert(dequeCopy.buffer != sizedDeque.buffer);
-    sizedDeque.buffer[0] = 5;
-    sizedDeque.buffer[1] = 10;
+    assert(dequeCopy.buffer[0] == 5);
+    assert(dequeCopy.buffer[1] == 10);
     cout << "Copy Constructor Test Passed" << endl;
     
     /*
