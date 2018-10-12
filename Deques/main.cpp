@@ -816,16 +816,22 @@ int main(int argc, const char* argv[]) {
     frontBackDeque.front() = 35;
     assert(frontBackDeque.buffer[0] == 35);
     
+    //simulating one push_back of 35 and zero push_fronts.
     frontBackDeque.iFront = 0;
+    frontBackDeque.iBack = 0;
     assert(frontBackDeque.front() == 35);
     
+    //simulating seven push_fronts and one pop_back
+    frontBackDeque.iBack = 0;
     frontBackDeque.iFront = -7;
     assert(frontBackDeque.front() == -1);
     
+    //simulate six push_backs and three pop_fronts
+    frontBackDeque.iBack = 5
     frontBackDeque.iFront = -3;
     assert(frontBackDeque.front() == 13);
     
-    //simulate 6 push_backs and 4 pop fronts
+    //simulate 6 push_backs and 3 pop fronts
     frontBackDeque.iBack = 5;
     frontBackDeque.iFront = 3;
     assert(frontBackDeque.front() == 13);
@@ -851,18 +857,23 @@ int main(int argc, const char* argv[]) {
     //test accessor
     assert(frontBackDeque.back() == -1);
     //test mutator
-    frontBackDeque.back() = 35;
-    assert(frontBackDeque.buffer[5] == 35);
+    frontBackDeque.back() = 18;
+    assert(frontBackDeque.buffer[5] == 18);
     
+    //simulating six push_fronts and one pop_back
     frontBackDeque.iBack = 0;
-    assert(frontBackDeque.back() == -500);
+    assert(frontBackDeque.back() == 35);
     
+    //simulating six push_fronts and six push_backs
     frontBackDeque.iBack = -7;
     assert(frontBackDeque.back() == -1);
     
+    //simulating six push_fronts and two pop_backs
     frontBackDeque.iBack = -3;
     assert(frontBackDeque.back() == 13);
     
+    //simulating six push_fronts, five pop_fronts, and four push_backs
+    frontBackDeque.iFront = -1;
     frontBackDeque.iBack = 3;
     assert(frontBackDeque.back() == 13);
     
