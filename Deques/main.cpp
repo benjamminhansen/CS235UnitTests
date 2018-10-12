@@ -827,7 +827,7 @@ int main(int argc, const char* argv[]) {
     assert(frontBackDeque.front() == -1);
     
     //simulate six push_backs and three pop_fronts
-    frontBackDeque.iBack = 5
+    frontBackDeque.iBack = 5;
     frontBackDeque.iFront = 3;
     assert(frontBackDeque.front() == 13);
     
