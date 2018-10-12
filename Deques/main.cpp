@@ -903,7 +903,7 @@ int main(int argc, const char* argv[]) {
     deque <int> dequeCopiedTo = dequeToCopy;
     assert(dequeCopiedTo.iFront == 0);
     assert(dequeCopiedTo.iBack == 5);
-    assert(dequeCopiedTo.numCapacity == 5);
+    assert(dequeCopiedTo.numCapacity == 4);
     assert(dequeCopiedTo.buffer[0] == 2);
     assert(dequeCopiedTo.buffer[1] == 5);
     assert(dequeCopiedTo.buffer[2] == 10);
