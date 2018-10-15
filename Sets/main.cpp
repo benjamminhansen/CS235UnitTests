@@ -94,7 +94,7 @@ int main(int argc, const char* argv[])
      * Resetting for further use
      */
     sizeTestset.numCapacity = 8;
-    sizeTestset.numElements = 0;
+    sizeTestset.numElements = 8;
     sizeTestset.buffer = new int[sizeTestset.numCapacity];
     for (int i = 0; i < sizeTestset.numCapacity; i++)
     {
@@ -127,7 +127,7 @@ int main(int argc, const char* argv[])
     set <int> insertset(5);
     int * tempBuffer = insertset.buffer;
     insertset.insert(3);
-    assert(tempBuffer != insertset.buffer);
+    assert(tempBuffer == insertset.buffer);
     assert(insertset.numCapacity == 10);
     assert(insertset.numElements == 1);
     assert(insertset.buffer[0] == 3);
