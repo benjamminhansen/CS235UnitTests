@@ -154,7 +154,7 @@ int main(int argc, const char* argv[])
     
     insertset.insert(-5);
     assert(insertset.numCapacity == 5);
-    assert(insertset.numElements == 4);
+    assert(insertset.numElements == 3);
     assert(insertset.buffer[0] == -5);
     assert(insertset.buffer[1] == 3);
     assert(insertset.buffer[2] == 7);
@@ -237,7 +237,7 @@ int main(int argc, const char* argv[])
     cout<<"Passed operator == test."<<endl;
     
     assert(iteratorToAssign != assignedToIterator);
-    assert(!(assignedToIterator != duplicateValueIterator));
+    assert(!(iteratorToAssign != duplicateValueIterator));
     cout<<"Passed operator != test."<<endl;
     /*
      * Testing Dereference Operator
