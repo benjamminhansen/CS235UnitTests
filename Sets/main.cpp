@@ -137,6 +137,7 @@ int main(int argc, const char* argv[])
     assert(insertset.buffer[0] == 3);
     cout << "Insert First Element Test Passed" << endl;
     
+    //make sure inserting a duplicate makes no changes to the end result.
     insertset.insert(3);
     assert(insertset.numCapacity == 5);
     assert(insertset.numElements == 1);
@@ -251,6 +252,7 @@ int main(int argc, const char* argv[])
     assert((++nullIt).ptr == NULL);
     
     set<int> incrementTesterSet;
+    incrementTesterSet.buffer = new int[3];
     //setting to the beginning of buffer
     set<int>::iterator fakeBeginIt = set<int>::iterator();
     fakeBeginIt.ptr = incrementTesterSet.buffer;
