@@ -179,11 +179,11 @@ int main(int argc, const char* argv[])
     findIndexSet.buffer[0] = 2;
     findIndexSet.buffer[1] = 4;
     findIndexSet.buffer[2] = 8;
-    //buffer - [8,4,2]
+    //buffer - [2,4,8]
     //Testing happy paths
     assert(findIndexSet.findIndex(8) == 2);
     assert(findIndexSet.findIndex(2) == 0);
-    assert(findIndexSet.findIndex(4) == 3);
+    assert(findIndexSet.findIndex(4) == 1);
     //Testing not found. Indicates where the element should be inserted when not found.
     assert(findIndexSet.findIndex(5) == 2);
     assert(findIndexSet.findIndex(27) == 3);
@@ -226,14 +226,17 @@ int main(int argc, const char* argv[])
     int* someOtherIntPtr = &someOtherInt;
     assignedToIterator.ptr = someOtherIntPtr;
     
+    set<int>::iterator duplicateValueIterator;
+    duplicateValueIterator.ptr = someIntPtr;
     
-    assert(iteratorToAssign == assignedToIterator);
+    
+    assert(iteratorToAssign == duplicateValueIterator);
     assert(!(assignedToIterator == iteratorToAssign));
     
     cout<<"Passed operator == test."<<endl;
     
     assert(iteratorToAssign != assignedToIterator);
-    assert(!(assignedToIterator != assignedToIterator));
+    assert(!(assignedToIterator != duplicateValueIterator));
     cout<<"Passed operator != test."<<endl;
     /*
      * Testing Dereference Operator
