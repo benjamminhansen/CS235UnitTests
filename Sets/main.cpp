@@ -124,25 +124,28 @@ int main(int argc, const char* argv[])
     /*
      * Testing insert with no resizing
      */
-    set <int> insertset(5);
+    set <int> insertset;
+    insertset.buffer = new int[5];
+    insertset.numCapacity = 5;
+    insertset.numElements = 0;
+    
     int * tempBuffer = insertset.buffer;
     insertset.insert(3);
     assert(tempBuffer == insertset.buffer);
-    assert(insertset.numCapacity == 10);
+    assert(insertset.numCapacity == 5);
     assert(insertset.numElements == 1);
     assert(insertset.buffer[0] == 3);
     cout << "Insert First Element Test Passed" << endl;
     
     insertset.insert(3);
-    assert(insertset.numCapacity == 10);
-    assert(insertset.numElements == 2);
-    assert(insertset.buffer[0] == 1);
-    assert(insertset.buffer[1] == 3);
+    assert(insertset.numCapacity == 5);
+    assert(insertset.numElements == 1);
+    assert(insertset.buffer[0] == 3);
     cout << "Insert Second Element Test Passed" << endl;
     
     
     insertset.insert(7);
-    assert(insertset.numCapacity == 10);
+    assert(insertset.numCapacity == 5);
     assert(insertset.numElements == 2);
     assert(insertset.buffer[0] == 1);
     assert(insertset.buffer[1] == 3);
@@ -151,7 +154,7 @@ int main(int argc, const char* argv[])
     
     
     insertset.insert(-5);
-    assert(insertset.numCapacity == 10);
+    assert(insertset.numCapacity == 5);
     assert(insertset.numElements == 4);
     assert(insertset.buffer[0] == -5);
     assert(insertset.buffer[1] == 1);
