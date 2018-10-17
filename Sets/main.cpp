@@ -147,9 +147,8 @@ int main(int argc, const char* argv[])
     insertset.insert(7);
     assert(insertset.numCapacity == 5);
     assert(insertset.numElements == 2);
-    assert(insertset.buffer[0] == 1);
-    assert(insertset.buffer[1] == 3);
-    assert(insertset.buffer[2] == 7);
+    assert(insertset.buffer[0] == 3);
+    assert(insertset.buffer[1] == 7);
     cout << "Insert Third Element Test Passed" << endl;
     
     
@@ -157,9 +156,8 @@ int main(int argc, const char* argv[])
     assert(insertset.numCapacity == 5);
     assert(insertset.numElements == 4);
     assert(insertset.buffer[0] == -5);
-    assert(insertset.buffer[1] == 1);
-    assert(insertset.buffer[2] == 3);
-    assert(insertset.buffer[3] == 7);
+    assert(insertset.buffer[1] == 3);
+    assert(insertset.buffer[2] == 7);
     
     cout<<"Passed insert no-resize Tests"<<endl;
     
