@@ -446,6 +446,13 @@ int main(int argc, const char* argv[])
     assert((longSet || longSet).buffer[7] == 11);
     assert((longSet || longSet).buffer[9] == 12);
     
+    /**
+     - ToDo: test partial and partial together.
+     */
+    
+    /**
+     - ToDo: test returning empty.
+     */
     cout<<"Passed Union Tests."<<endl;
     
     /*
