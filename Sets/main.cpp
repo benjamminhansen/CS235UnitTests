@@ -336,8 +336,8 @@ int main(int argc, const char* argv[])
     //testing union empty set with partially filled buffer set
     //reset longSet
     longSet.numElements = 3;
-    assert((shortSet || longSet).numCapacity == 10);
-    assert((shortSet || longSet).numElements == 10);
+    assert((shortSet || longSet).numCapacity == 3);
+    assert((shortSet || longSet).numElements == 3);
     assert((shortSet || longSet).buffer != NULL);
     assert((shortSet || longSet).buffer != longSet.buffer);
     assert((shortSet || longSet).buffer != shortSet.buffer);
@@ -345,17 +345,31 @@ int main(int argc, const char* argv[])
     assert((shortSet || longSet).buffer[1] == 4);
     assert((shortSet || longSet).buffer[2] == 5);
     
-    //testing union partially filled buffer set with empty set
+    //testing union partially filled buffer set with full buffer
     //reset longSet
     longSet.numElements = 3;
-    assert((shortSet || longSet).numCapacity == 10);
-    assert((shortSet || longSet).numElements == 10);
+    //reset shortSet
+    shortSet.buffer = new int[5];
+    shortSet.numCapacity = 5;
+    shortSet.numElements = 5;
+    shortSet.buffer[0] = 5;
+    shortSet.buffer[1] = 6;
+    shortSet.buffer[2] = 7;
+    shortSet.buffer[3] = 8;
+    shortSet.buffer[4] = 9;
+    
+    assert((shortSet || longSet).numCapacity == 7);
+    assert((shortSet || longSet).numElements == 7);
     assert((shortSet || longSet).buffer != NULL);
     assert((shortSet || longSet).buffer != longSet.buffer);
     assert((shortSet || longSet).buffer != shortSet.buffer);
     assert((shortSet || longSet).buffer[0] == 3);
     assert((shortSet || longSet).buffer[1] == 4);
     assert((shortSet || longSet).buffer[2] == 5);
+    assert((shortSet || longSet).buffer[3] == 6);
+    assert((shortSet || longSet).buffer[4] == 7);
+    assert((shortSet || longSet).buffer[5] == 8);
+    assert((shortSet || longSet).buffer[6] == 9);
     
     //testing union two full sets -- no elements in common
     //resetting longSet
@@ -363,12 +377,12 @@ int main(int argc, const char* argv[])
     shortSet.buffer = new int[6];
     shortSet.numCapacity = 6;
     shortSet.numElements = 6;
-    shortSet.buffer[0] = -1;
-    shortSet.buffer[1] = -2;
-    shortSet.buffer[2] = -3;
-    shortSet.buffer[3] = -4;
-    shortSet.buffer[4] = -5;
-    shortSet.buffer[5] = -6;
+    shortSet.buffer[0] = -6;
+    shortSet.buffer[1] = -5;
+    shortSet.buffer[2] = -4;
+    shortSet.buffer[3] = -3;
+    shortSet.buffer[4] = -2;
+    shortSet.buffer[5] = -1;
     assert((shortSet || longSet).numCapacity == 16);
     assert((shortSet || longSet).numElements == 16);
     assert((shortSet || longSet).buffer != NULL);
@@ -413,24 +427,24 @@ int main(int argc, const char* argv[])
     assert((shortSet || longSet).buffer[5] == 8);
     assert((shortSet || longSet).buffer[6] == 9);
     assert((shortSet || longSet).buffer[7] == 10);
-    assert((shortSet || longSet).buffer[7] == 11);
+    assert((shortSet || longSet).buffer[8] == 11);
     assert((shortSet || longSet).buffer[9] == 12);
     
     //testing union with itself
-    assert((shortSet || longSet).numCapacity == 10);
-    assert((shortSet || longSet).numElements == 10);
-    assert((shortSet || longSet).buffer != NULL);
-    assert((shortSet || longSet).buffer != longSet.buffer);
-    assert((shortSet || longSet).buffer[0] == 3);
-    assert((shortSet || longSet).buffer[1] == 4);
-    assert((shortSet || longSet).buffer[2] == 5);
-    assert((shortSet || longSet).buffer[3] == 6);
-    assert((shortSet || longSet).buffer[4] == 7);
-    assert((shortSet || longSet).buffer[5] == 8);
-    assert((shortSet || longSet).buffer[6] == 9);
-    assert((shortSet || longSet).buffer[7] == 10);
-    assert((shortSet || longSet).buffer[7] == 11);
-    assert((shortSet || longSet).buffer[9] == 12);
+    assert((longSet || longSet).numCapacity == 10);
+    assert((longSet || longSet).numElements == 10);
+    assert((longSet || longSet).buffer != NULL);
+    assert((longSet || longSet).buffer != longSet.buffer);
+    assert((longSet || longSet).buffer[0] == 3);
+    assert((longSet || longSet).buffer[1] == 4);
+    assert((longSet || longSet).buffer[2] == 5);
+    assert((longSet || longSet).buffer[3] == 6);
+    assert((longSet || longSet).buffer[4] == 7);
+    assert((longSet || longSet).buffer[5] == 8);
+    assert((longSet || longSet).buffer[6] == 9);
+    assert((longSet || longSet).buffer[7] == 10);
+    assert((longSet || longSet).buffer[7] == 11);
+    assert((longSet || longSet).buffer[9] == 12);
     
     cout<<"Passed Union Tests."<<endl;
     
@@ -476,12 +490,12 @@ int main(int argc, const char* argv[])
     
     //resetting shortSet
     shortSet.buffer = new int[6];
-    shortSet.buffer[0] = -1;
-    shortSet.buffer[1] = -2;
-    shortSet.buffer[2] = -3;
-    shortSet.buffer[3] = -4;
-    shortSet.buffer[4] = -5;
-    shortSet.buffer[5] = -6;
+    shortSet.buffer[0] = -6;
+    shortSet.buffer[1] = -5;
+    shortSet.buffer[2] = -4;
+    shortSet.buffer[3] = -3;
+    shortSet.buffer[4] = -2;
+    shortSet.buffer[5] = -1;
     
     //testing intersection nothing in common
     (shortSet && longSet) = shortSet && longSet;
@@ -582,7 +596,7 @@ int main(int argc, const char* argv[])
     assert((shortSet - longSet).buffer[5] == 8);
     assert((shortSet - longSet).buffer[6] == 9);
     assert((shortSet - longSet).buffer[7] == 10);
-    assert((shortSet - longSet).buffer[7] == 11);
+    assert((shortSet - longSet).buffer[8] == 11);
     assert((shortSet - longSet).buffer[9] == 12);
     
     //testing difference for sets with same elements
@@ -595,12 +609,12 @@ int main(int argc, const char* argv[])
     shortSet.numCapacity = 6;
     shortSet.numElements = 6;
     shortSet.buffer = new int[6];
-    shortSet.buffer[0] = -1;
-    shortSet.buffer[1] = -2;
-    shortSet.buffer[2] = -3;
-    shortSet.buffer[3] = -4;
-    shortSet.buffer[4] = -5;
-    shortSet.buffer[5] = -6;
+    shortSet.buffer[0] = -6;
+    shortSet.buffer[1] = -5;
+    shortSet.buffer[2] = -4;
+    shortSet.buffer[3] = -3;
+    shortSet.buffer[4] = -2;
+    shortSet.buffer[5] = -1;
     
     //testing difference nothing in common both ways
     
