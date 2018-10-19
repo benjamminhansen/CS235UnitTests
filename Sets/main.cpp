@@ -330,7 +330,7 @@ int main(int argc, const char* argv[])
     assert((shortSet || longSet).buffer[5] == 8);
     assert((shortSet || longSet).buffer[6] == 9);
     assert((shortSet || longSet).buffer[7] == 10);
-    assert((shortSet || longSet).buffer[7] == 11);
+    assert((shortSet || longSet).buffer[8] == 11);
     assert((shortSet || longSet).buffer[9] == 12);
     
     //testing union empty set with partially filled buffer set
