@@ -443,7 +443,7 @@ int main(int argc, const char* argv[])
     assert((longSet || longSet).buffer[5] == 8);
     assert((longSet || longSet).buffer[6] == 9);
     assert((longSet || longSet).buffer[7] == 10);
-    assert((longSet || longSet).buffer[7] == 11);
+    assert((longSet || longSet).buffer[8] == 11);
     assert((longSet || longSet).buffer[9] == 12);
     
     /**
@@ -469,10 +469,9 @@ int main(int argc, const char* argv[])
     longSet.numElements = 0;
     //testing intersection of empty sets
     
-    (shortSet && longSet) = shortSet && longSet;
-    assert((shortSet && longSet).numCapacity == 0);
+        assert((shortSet && longSet).numCapacity == 0);
     assert((shortSet && longSet).numElements == 0);
-    assert((shortSet && longSet).buffer = NULL);
+    assert((shortSet && longSet).buffer == NULL);
     
     //resetting longSet
     longSet.buffer = new int[10];
@@ -490,10 +489,9 @@ int main(int argc, const char* argv[])
     longSet.buffer[9] = 12;
     
     //testing intersection of empty set and non-empty set
-    (shortSet && longSet) = shortSet && longSet;
-    assert((shortSet && longSet).numCapacity == 0);
+        assert((shortSet && longSet).numCapacity == 0);
     assert((shortSet && longSet).numElements == 0);
-    assert((shortSet && longSet).buffer = NULL);
+    assert((shortSet && longSet).buffer == NULL);
     
     //resetting shortSet
     shortSet.buffer = new int[6];
@@ -505,10 +503,9 @@ int main(int argc, const char* argv[])
     shortSet.buffer[5] = -1;
     
     //testing intersection nothing in common
-    (shortSet && longSet) = shortSet && longSet;
-    assert((shortSet && longSet).numCapacity == 0);
+        assert((shortSet && longSet).numCapacity == 0);
     assert((shortSet && longSet).numElements == 0);
-    assert((shortSet && longSet).buffer = NULL);
+    assert((shortSet && longSet).buffer == NULL);
     
     
     //resetting shortSet
@@ -643,7 +640,7 @@ int main(int argc, const char* argv[])
     assert((shortSet - longSet).buffer[5] == 8);
     assert((shortSet - longSet).buffer[6] == 9);
     assert((shortSet - longSet).buffer[7] == 10);
-    assert((shortSet - longSet).buffer[7] == 11);
+    assert((shortSet - longSet).buffer[8] == 11);
     assert((shortSet - longSet).buffer[9] == 12);
     
     //resetting shortSet
