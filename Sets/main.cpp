@@ -495,6 +495,8 @@ int main(int argc, const char* argv[])
     
     //resetting shortSet
     shortSet.buffer = new int[6];
+    shortSet.numCapacity = 6;
+    shortSet.numElements = 6;
     shortSet.buffer[0] = -6;
     shortSet.buffer[1] = -5;
     shortSet.buffer[2] = -4;
@@ -536,8 +538,8 @@ int main(int argc, const char* argv[])
     
     
     //testing intersection some elements in common
-    assert((shortSet && longSet).numCapacity == 6);
-    assert((shortSet && longSet).numElements == 6);
+    assert((shortSet && longSet).numCapacity == 3);
+    assert((shortSet && longSet).numElements == 3);
     assert((shortSet && longSet).buffer != NULL);
     assert((shortSet && longSet).buffer != shortSet.buffer);
     assert((shortSet && longSet).buffer != longSet.buffer);
