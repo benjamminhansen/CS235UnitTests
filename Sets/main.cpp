@@ -629,8 +629,8 @@ int main(int argc, const char* argv[])
     
     //testing difference nothing in common both ways
     //longSet [3,4,5,6,7,8,9,10,11,12]
-    assert((shortSet - longSet).numCapacity = 6);
-    assert((shortSet - longSet).numElements = 6);
+    assert((shortSet - longSet).numCapacity == 6);
+    assert((shortSet - longSet).numElements == 6);
     assert((shortSet - longSet).buffer != NULL);
     assert((shortSet - longSet).buffer != shortSet.buffer);
     assert((shortSet - longSet).buffer != longSet.buffer);
