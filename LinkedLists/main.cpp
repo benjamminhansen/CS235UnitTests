@@ -33,6 +33,7 @@
 #include <iostream>
 #include <cstring>
 #include <cassert>
+#include "unit_testing_delete.h"
 #include "linked_list.h"
 
 using std::cout;
@@ -76,7 +77,7 @@ int main(int argc, const char* argv[])
     //The Copy function should produce a shallow copy.
     //That means the data doesn't get copied but the nodes do.
     
-    //Generating small doubley linked list with the ordered list of values 5<->6<->7<->9<->9<->10. The character set <-> indicates doubley linked nodes.
+    //Generating small doubly linked list with the ordered list of values 5<->6<->7<->9<->9<->10. The character set <-> indicates doubly linked nodes.
     node<int>* theHead = new node<int>(5);
     node<int>* currentNodePtr = theHead;
     node<int>* aNode = new node<int>(6);
@@ -114,6 +115,7 @@ int main(int argc, const char* argv[])
     assert(theCopyHead->pNext->pNext->pNext->pNext != theHead->pNext->pNext->pNext->pNext);
     assert(theCopyHead->pNext->pNext->pNext->pNext->pNext != theHead->pNext->pNext->pNext->pNext->pNext);
     assert(theCopyHead->pNext->pNext->pNext->pNext->pNext->pNext == NULL);
+    
     //ensuring the pPrev pointers were duplicated correctly.
     assert(theCopyHead->pPrev == NULL);
     assert(theCopyHead->pNext->pPrev == theCopyHead);
@@ -122,6 +124,7 @@ int main(int argc, const char* argv[])
     assert(theCopyHead->pNext->pNext->pNext->pNext->pPrev == theCopyHead->pNext->pNext->pNext);
     assert(theCopyHead->pNext->pNext->pNext->pNext->pPrev == theCopyHead->pNext->pNext->pNext);
     assert(theCopyHead->pNext->pNext->pNext->pNext->pNext->pPrev == theCopyHead->pNext->pNext->pNext->pNext);
+    
     //ensuring the data pointers were set correctly
     assert(theCopyHead->data == theHead->data);
     assert(theCopyHead->pNext->data == theHead->pNext->data);
@@ -149,7 +152,7 @@ int main(int argc, const char* argv[])
      */
     
     //Reuse the list of values 5<->6<->7<->9<->9<->10.
-    //Testing inserting to NULL list.
+    //Testing inserting after a NULL node in the list.
     node<int>* nullNode = NULL;
     node<int>* createdNode = NULL;
     try
@@ -171,7 +174,7 @@ int main(int argc, const char* argv[])
     assert(theHead->pPrev == createdNode);
     
     //Testing insertion between two existing nodes after the first.
-    //reset theHeadPointer
+    //reset theHead pointer
     theHead = createdNode;//theHead now has value of 3
     node<int>* nodeToBeInsertedBefore = theHead->pNext;
     createdNode = insert(theHead, 4, true);
@@ -190,7 +193,8 @@ int main(int argc, const char* argv[])
     assert(createdNode->pNext == NULL);
     assert(lastNode->pNext == createdNode);
     
-    //test insertion between two existing nodes before the second.
+    //testing insertion between two existing nodes before the second.
+    
     //reset lastNode
     lastNode = createdNode;
     node<int>* nodeToBeInsertedAfter = lastNode->pPrev;
@@ -226,17 +230,30 @@ int main(int argc, const char* argv[])
     node<int>* foundNode = find(nullNode, 5);
     assert(foundNode == NULL);
     
-    //Testing searching entire list without value
+    //Testing searching entire list without requested value
     foundNode = find(findHead,10);
     assert(foundNode = NULL);
     
-    //Testing searching sub-list without value
+    //Testing searching sub-list without requested value
     foundNode = find(findHead->pNext,10);
     assert(foundNode == NULL);
     
-    //Testing searching full list for first value
+    //Testing searching full list with requested value
+    foundNode = find(findHead,7);
+    assert(foundNode == findHead->pNext->pNext);
+    
+    //Testing searching partial list with requested value
+    foundNode = find(findHead->pNext,7);
+    assert(foundNode == findHead->pNext);
+    
+    //Testing searching full list for first duplicate value
     foundNode = find(findHead,5);
     assert(foundNode == findHead);
+    
+    
+    //Testing searching sub list where sublist starts with last node
+    foundNode = find(findHead->pNext->pNext->pNext,7);
+    assert(foundNode == NULL);
     
     /*
      * Testing freeData
@@ -249,25 +266,38 @@ int main(int argc, const char* argv[])
         assert(false);
     } catch (const char* message) {
         assert(strcmp(message, "Error: freeing NULL list."));
+        //this int variable is declared in the unit_testing_delete.h file. You should NEVER touch any code in that file.
+        assert(unit_testing_delete_call_counter == 0);
     }
     //Testing freeing list consisting of a single node.
     node<int>* singleNode = new node<int>(3);
     freeData(singleNode);
-    assert(singleNode == NULL);//If you don't reset the pointer to the node passed in, you have a zombie pointer.
+    assert(singleNode == NULL);//If you don't reset the pointer to the node passed in to your code in your code, you have a zombie pointer. Nasty things, zombie pointers.
+    assert(unit_testing_delete_call_counter == 2);
     
-    //Reusing findHead list of values 5<->6<->7<->5.
     
+    //Resetting unit_testing_delete_call_counter
+    unit_testing_delete_call_counter = 0;
+    //Reusing findHead list with values 5<->6<->7<->5.
     //testing freeing a sublist
     freeData(findHead->pNext->pNext);
     assert(findHead->pNext == NULL);
+    assert(unit_testing_delete_call_counter == 2);
     
     //testing freeing an entire list
-    freeData(findHead);
-    assert(findHead == NULL);
+    //Resetting unit_testing_delete_call_counter
+    unit_testing_delete_call_counter = 0;
+    //theHead list is currently 3<->4<->5<->6<->7<->9<->9<->10<->11<->12
+    freeData(theHead);
+    assert(theHead == NULL);
+    assert(unit_testing_delete_call_counter == 20);
     
     /*
      * Testing Remove
      */
+    
+    //Resetting unit_testing_delete_call_counter
+    unit_testing_delete_call_counter = 0;
     
     //Building list
     node<int>* removeHead = new node<int>(5);
@@ -293,6 +323,7 @@ int main(int argc, const char* argv[])
     
     node<int>* nodeBefore = remove(nullNode);
     assert(nodeBefore == NULL);
+    assert(unit_testing_delete_call_counter == 0);
     
     //testing remove malformed node
     node<int>* malformedNode = new node<int>(5);
@@ -301,6 +332,7 @@ int main(int argc, const char* argv[])
     nodeBefore = remove(malformedNode);
     assert(malformedNode == NULL);
     assert(nodeBefore == NULL);
+    assert(unit_testing_delete_call_counter == 0);
     
     //testing remove middle node
     //list is currently 5<->6<->7<->5<->13.
@@ -311,6 +343,7 @@ int main(int argc, const char* argv[])
     assert(nodeToRemove == NULL);
     assert(nodeBefore->pNext == nodeAfterToRemove);
     assert(nodeAfterToRemove->pPrev == nodeBefore);
+    assert(unit_testing_delete_call_counter == 0);
     
     //testing removing headNode
     nodeToRemove = removeHead;
@@ -319,6 +352,7 @@ int main(int argc, const char* argv[])
     //list is now 6<->5<->13.
     assert(currentFirstNode == secondNode);
     assert(removeHead == NULL);
+    assert(unit_testing_delete_call_counter == 0);
     
     //testing removing lastNode
     //resetting removeHead
@@ -327,15 +361,7 @@ int main(int argc, const char* argv[])
     nodeBefore = remove(nodeToRemove);
     assert(nodeBefore == removeHead->pNext);
     assert(nodeToRemove == NULL);
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    assert(unit_testing_delete_call_counter == 0);
     
     /*
      * Testing insert for Non-Integer set Behavior (Just to Make Sure set Works For Other Types)
@@ -349,8 +375,5 @@ int main(int argc, const char* argv[])
     assert(stringNode->pPrev == NULL);
     
     cout << "This node can hold strings!!!!" << endl;
-    
-    
-    
     return 0;
 }
