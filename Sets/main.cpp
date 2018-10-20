@@ -283,6 +283,11 @@ int main(int argc, const char* argv[])
     assert((--fakeEndIt).ptr == incrementTesterSet.buffer+incrementTesterSet.numElements - 1);
     cout<<"Passed pre and post-increment -- test."<<endl;
     
+    /**
+     - ToDo: Move union, intersection, and difference to be tested after
+     resize() since they use resize.
+     */
+    
     /*
      * Testing union operator
      */
@@ -469,7 +474,7 @@ int main(int argc, const char* argv[])
     longSet.numElements = 0;
     //testing intersection of empty sets
     
-        assert((shortSet && longSet).numCapacity == 0);
+    assert((shortSet && longSet).numCapacity == 0);
     assert((shortSet && longSet).numElements == 0);
     assert((shortSet && longSet).buffer == NULL);
     
@@ -489,7 +494,7 @@ int main(int argc, const char* argv[])
     longSet.buffer[9] = 12;
     
     //testing intersection of empty set and non-empty set
-        assert((shortSet && longSet).numCapacity == 0);
+    assert((shortSet && longSet).numCapacity == 0);
     assert((shortSet && longSet).numElements == 0);
     assert((shortSet && longSet).buffer == NULL);
     
@@ -565,9 +570,9 @@ int main(int argc, const char* argv[])
     assert((shortSet - longSet).numElements == 0);
     assert((shortSet - longSet).buffer == NULL);
     
-    assert((shortSet - longSet).numCapacity == 0);
-    assert((shortSet - longSet).numElements == 0);
-    assert((shortSet - longSet).buffer == NULL);
+    assert((longSet - shortSet).numCapacity == 0);
+    assert((longSet - shortSet).numElements == 0);
+    assert((longSet - shortSet).buffer == NULL);
     
     //resetting longSet
     longSet.buffer = new int[10];
@@ -590,26 +595,26 @@ int main(int argc, const char* argv[])
     assert((shortSet - longSet).numElements == 0);
     assert((shortSet - longSet).buffer == NULL);
     
-    assert((shortSet - longSet).numCapacity == 10);
-    assert((shortSet - longSet).numElements == 10);
-    assert((shortSet - longSet).buffer != NULL);
-    assert((shortSet - longSet).buffer != longSet.buffer);
-    assert((shortSet - longSet).buffer[0] == 3);
-    assert((shortSet - longSet).buffer[1] == 4);
-    assert((shortSet - longSet).buffer[2] == 5);
-    assert((shortSet - longSet).buffer[3] == 6);
-    assert((shortSet - longSet).buffer[4] == 7);
-    assert((shortSet - longSet).buffer[5] == 8);
-    assert((shortSet - longSet).buffer[6] == 9);
-    assert((shortSet - longSet).buffer[7] == 10);
-    assert((shortSet - longSet).buffer[8] == 11);
-    assert((shortSet - longSet).buffer[9] == 12);
+    assert((longSet - shortSet).numCapacity == 10);
+    assert((longSet - shortSet).numElements == 10);
+    assert((longSet - shortSet).buffer != NULL);
+    assert((longSet - shortSet).buffer != longSet.buffer);
+    assert((longSet - shortSet).buffer[0] == 3);
+    assert((longSet - shortSet).buffer[1] == 4);
+    assert((longSet - shortSet).buffer[2] == 5);
+    assert((longSet - shortSet).buffer[3] == 6);
+    assert((longSet - shortSet).buffer[4] == 7);
+    assert((longSet - shortSet).buffer[5] == 8);
+    assert((longSet - shortSet).buffer[6] == 9);
+    assert((longSet - shortSet).buffer[7] == 10);
+    assert((longSet - shortSet).buffer[8] == 11);
+    assert((longSet - shortSet).buffer[9] == 12);
     
     //testing difference for sets with same elements
     
-    assert((shortSet - longSet).numCapacity == 0);
-    assert((shortSet - longSet).numElements == 0);
-    assert((shortSet - longSet).buffer == NULL);
+    assert((shortSet - shortSet).numCapacity == 0);
+    assert((shortSet - shortSet).numElements == 0);
+    assert((shortSet - shortSet).buffer == NULL);
     
     //resetting shortSet
     shortSet.numCapacity = 6;
@@ -623,27 +628,34 @@ int main(int argc, const char* argv[])
     shortSet.buffer[5] = -1;
     
     //testing difference nothing in common both ways
-    
+    //longSet [3,4,5,6,7,8,9,10,11,12]
     assert((shortSet - longSet).numCapacity = 6);
     assert((shortSet - longSet).numElements = 6);
     assert((shortSet - longSet).buffer != NULL);
     assert((shortSet - longSet).buffer != shortSet.buffer);
     assert((shortSet - longSet).buffer != longSet.buffer);
+    assert((shortSet - longSet).buffer[0] == -6);
+    assert((shortSet - longSet).buffer[1] == -5);
+    assert((shortSet - longSet).buffer[2] == -4);
+    assert((shortSet - longSet).buffer[3] == -3);
+    assert((shortSet - longSet).buffer[4] == -2);
+    assert((shortSet - longSet).buffer[5] == -1);
     
-    assert((shortSet - longSet).numCapacity == 10);
-    assert((shortSet - longSet).numElements == 10);
-    assert((shortSet - longSet).buffer != NULL);
-    assert((shortSet - longSet).buffer != longSet.buffer);
-    assert((shortSet - longSet).buffer[0] == 3);
-    assert((shortSet - longSet).buffer[1] == 4);
-    assert((shortSet - longSet).buffer[2] == 5);
-    assert((shortSet - longSet).buffer[3] == 6);
-    assert((shortSet - longSet).buffer[4] == 7);
-    assert((shortSet - longSet).buffer[5] == 8);
-    assert((shortSet - longSet).buffer[6] == 9);
-    assert((shortSet - longSet).buffer[7] == 10);
-    assert((shortSet - longSet).buffer[8] == 11);
-    assert((shortSet - longSet).buffer[9] == 12);
+    assert((longSet - shortSet).numCapacity == 10);
+    assert((longSet - shortSet).numElements == 10);
+    assert((longSet - shortSet).buffer != NULL);
+    assert((longSet - shortSet).buffer != longSet.buffer);
+    assert((longSet - shortSet).buffer != shortSet.buffer);
+    assert((longSet - shortSet).buffer[0] == 3);
+    assert((longSet - shortSet).buffer[1] == 4);
+    assert((longSet - shortSet).buffer[2] == 5);
+    assert((longSet - shortSet).buffer[3] == 6);
+    assert((longSet - shortSet).buffer[4] == 7);
+    assert((longSet - shortSet).buffer[5] == 8);
+    assert((longSet - shortSet).buffer[6] == 9);
+    assert((longSet - shortSet).buffer[7] == 10);
+    assert((longSet - shortSet).buffer[8] == 11);
+    assert((longSet - shortSet).buffer[9] == 12);
     
     //resetting shortSet
     shortSet.buffer[0] = -21;
@@ -654,6 +666,7 @@ int main(int argc, const char* argv[])
     shortSet.buffer[5] = 11;
     
     //testing some elements in common both ways
+    //longSet [3,4,5,6,7,8,9,10,11,12]
     assert((shortSet - longSet).numCapacity == 4);
     assert((shortSet - longSet).numElements == 4);
     assert((shortSet - longSet).buffer != NULL);
@@ -663,19 +676,20 @@ int main(int argc, const char* argv[])
     assert((shortSet - longSet).buffer[1] == -13);
     assert((shortSet - longSet).buffer[2] == 0);
     assert((shortSet - longSet).buffer[3] == 1);
-    assert((shortSet - longSet).numCapacity == 8);
-    assert((shortSet - longSet).numElements == 8);
-    assert((shortSet - longSet).buffer != NULL);
-    assert((shortSet - longSet).buffer != longSet.buffer);
-    assert((shortSet - longSet).buffer != shortSet.buffer);
-    assert((shortSet - longSet).buffer[0] == 3);
-    assert((shortSet - longSet).buffer[1] == 4);
-    assert((shortSet - longSet).buffer[2] == 6);
-    assert((shortSet - longSet).buffer[3] == 7);
-    assert((shortSet - longSet).buffer[4] == 8);
-    assert((shortSet - longSet).buffer[5] == 9);
-    assert((shortSet - longSet).buffer[6] == 10);
-    assert((shortSet - longSet).buffer[7] == 12);
+    
+    assert((longSet - shortSet).numCapacity == 8);
+    assert((longSet - shortSet).numElements == 8);
+    assert((longSet - shortSet).buffer != NULL);
+    assert((longSet - shortSet).buffer != longSet.buffer);
+    assert((longSet - shortSet).buffer != shortSet.buffer);
+    assert((longSet - shortSet).buffer[0] == 3);
+    assert((longSet - shortSet).buffer[1] == 4);
+    assert((longSet - shortSet).buffer[2] == 6);
+    assert((longSet - shortSet).buffer[3] == 7);
+    assert((longSet - shortSet).buffer[4] == 8);
+    assert((longSet - shortSet).buffer[5] == 9);
+    assert((longSet - shortSet).buffer[6] == 10);
+    assert((longSet - shortSet).buffer[7] == 12);
     
     cout<<"Passed Difference Tests."<<endl;
     
@@ -689,7 +703,7 @@ int main(int argc, const char* argv[])
     
     set<int>::iterator foundIt;
     foundIt = findSet.find(3);
-    assert(foundIt.ptr == 0);
+    assert(foundIt.ptr == NULL);
     
     //resetting
     findSet.numCapacity = 5;
@@ -710,7 +724,9 @@ int main(int argc, const char* argv[])
     //testing non-existant
     
     foundIt = findSet.find(23);
-    assert(foundIt.ptr == 0);
+    assert(foundIt.ptr == NULL);
+    
+    cout<<"Passed find tests"<<endl;
     
     /*
      * Testing Erase
@@ -734,6 +750,7 @@ int main(int argc, const char* argv[])
     assert(eraseSet.buffer[3] == 13);
     assert(eraseSet.buffer[4] == 23);
     
+    cout<<"Passed erase tests"<<endl;
     
     /*
      * Testing resize
@@ -928,11 +945,11 @@ int main(int argc, const char* argv[])
     
     stringset.insert("Hello");
     stringset.insert("It's me");
-    stringset.insert("I was wondering");
+    stringset.insert("Are you wondering");
     assert(stringset.numCapacity == 4);
-    assert(stringset.buffer[0] == "Hello");
-    assert(stringset.buffer[1] == "It's me");
-    assert(stringset.buffer[2] == "I was wondering");
+    assert(stringset.buffer[0] == "Are you wondering");
+    assert(stringset.buffer[1] == "Hello");
+    assert(stringset.buffer[2] == "It's me");
     
     cout << "This set can hold strings!!!!" << endl;
     
