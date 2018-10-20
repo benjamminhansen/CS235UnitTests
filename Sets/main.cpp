@@ -835,7 +835,7 @@ int main(int argc, const char* argv[])
     oldBuffer = insertResizeSet.buffer;
     insertResizeSet.insert(7);
     assert(insertResizeSet.buffer != NULL);
-    assert(insertResizeSet.buffer != oldBuffer);
+    assert(insertResizeSet.buffer == oldBuffer);
     assert(insertResizeSet.numCapacity == 2);
     assert(insertResizeSet.numElements == 2);
     assert(insertResizeSet.buffer[0] = 7);
@@ -859,7 +859,7 @@ int main(int argc, const char* argv[])
     assert(insertResizeSet.buffer != NULL);
     assert(insertResizeSet.buffer != oldBuffer);
     assert(insertResizeSet.numCapacity == 4);
-    assert(insertResizeSet.numElements == 3);
+    assert(insertResizeSet.numElements == 4);
     assert(insertResizeSet.buffer[0] = 7);
     assert(insertResizeSet.buffer[1] = 21);
     assert(insertResizeSet.buffer[2] = 50);
