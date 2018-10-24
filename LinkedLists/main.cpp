@@ -232,7 +232,7 @@ int main(int argc, const char* argv[])
     
     //Testing searching entire list without requested value
     foundNode = find(findHead,10);
-    assert(foundNode = NULL);
+    assert(foundNode == NULL);
     
     //Testing searching sub-list without requested value
     foundNode = find(findHead->pNext,10);
