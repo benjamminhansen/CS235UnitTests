@@ -132,8 +132,6 @@ int main(int argc, const char* argv[])
     assert(theCopyHead->pNext->pNext->pNext->data == theHead->pNext->pNext->pNext->data);
     assert(theCopyHead->pNext->pNext->pNext->pNext->data == theHead->pNext->pNext->pNext->pNext->data);
     assert(theCopyHead->pNext->pNext->pNext->pNext->pNext->data == theHead->pNext->pNext->pNext->pNext->pNext->data);
-    assert(theCopyHead->pNext->pNext->pNext->pNext->pNext->pNext->data == theHead->pNext->pNext->pNext->pNext->pNext->pNext->data);
-    assert(theCopyHead->pNext->pNext->pNext->pNext->pNext->pNext->data == theHead->pNext->pNext->pNext->pNext->pNext->pNext->data);
     
 
     //Copying a subset of nodes.
