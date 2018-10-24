@@ -55,7 +55,6 @@ int main(int argc, const char* argv[])
     assert(defaultNode.data == NULL);
     assert(defaultNode.pNext == NULL);
     assert(defaultNode.pPrev == NULL);
-    cout << "Default Node Constructor Test Passed" << endl;
     
     /*
      * Testing Node constructor with data
@@ -65,7 +64,7 @@ int main(int argc, const char* argv[])
     assert(dataNode.pNext == NULL);
     assert(dataNode.pPrev == NULL);
     
-    cout<<"Constructor with Data Test Passed"<<endl;
+    cout<<"Passed Node Constructor Tests"<<endl;
     
     /*
      * Testing Node Destructor
@@ -230,6 +229,8 @@ int main(int argc, const char* argv[])
     //kill potential zombie
     listToDelete = NULL;
     
+    cout<<"Passed Destructor Tests"<<endl;
+    
     /*
      * Testing size
      */
@@ -278,6 +279,8 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
     assert(fourthNode->pPrev = thirdNode);
     
+    cout<<"Passed Size Tests"<<endl;
+    
     /*
      * Testing empty
      */
@@ -299,6 +302,8 @@ int main(int argc, const char* argv[])
     assert(thirdNode->pPrev = secondNode);
     assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
     assert(fourthNode->pPrev = thirdNode);
+    
+    cout<<"Passed Empty Tests"<<endl;
     
     /*
      * Testing front
@@ -354,6 +359,8 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
     assert(fourthNode->pPrev = thirdNode);
     
+    cout<<"Passed Front Tests"<<endl;
+    
     /*
      * Testing back
      */
@@ -404,6 +411,8 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
     assert(fourthNode->pPrev = thirdNode);
     
+    cout<<"Passed Back Tests"<<endl;
+    
     /*
      * Testing pop_back
      */
@@ -427,6 +436,8 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.pHead->pNext->pNext = thirdNode);
     assert(thirdNode->pPrev = secondNode);
     
+    cout<<"Passed pop_back Tests"<<endl;
+    
     /*
      * Testing pop_front
      */
@@ -448,6 +459,8 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.pHead->pNext = secondNode);
     assert(secondNode->pPrev = firstNode);
     
+    cout<<"Passed Pop Front Tests"<<endl;
+    
     /*
      * Testing clear
      */
@@ -466,6 +479,8 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.numElements == 0);
     assert(listWithStuffInIt.pHead == NULL);
     assert(listWithStuffInIt.pTail == NULL);
+    
+    cout<<"Passed Clear tests"<<endl;
     
     /*
      * Testing push_front
@@ -518,6 +533,7 @@ int main(int argc, const char* argv[])
     assert(*(pushTestingList.pTail->data) == 3);
     assert(*(previousHead->data) == 5);
     
+    cout<<"Passed Push Front Tests"<<endl;
     
     /*
      * Testing push_back
@@ -566,7 +582,7 @@ int main(int argc, const char* argv[])
     assert(*(previousTail->data) == 0);
     assert(*(pushBackTestingList.pTail->data) == 32);
     
-    
+    cout<<"Passed Push Back Tests"<<endl;
     
     /*
      * Testing iterator Constructors
@@ -608,6 +624,23 @@ int main(int argc, const char* argv[])
     assert(*(leftNode->data) == 5);
     assert(*(rightNode->data) == -76);
     
+    
+    cout<<"Passed Iterator Constructor Tests"<<endl;
+    
+    /*
+     * Testing iterator copy constructors
+     */
+    
+    
+    //copies of iterators are shallow copies
+    
+    //testing copy of iterator with null node
+    list<int>::iterator nullNodeIterator;
+    nullNodeIterator.ptr = NULL;
+    
+    list<int>::iterator nullNodeIteratorCopy(nullNodeIterator);
+    assert(nullNodeIteratorCopy.ptr == NULL);
+    
     //testing non-default constructor with node that has a non-null data pointer
     int middleNodeDataValue = 512;
     list<int>::node* nonNullDataNode;
@@ -632,7 +665,6 @@ int main(int argc, const char* argv[])
     assert(*(leftNode->data) == 5);
     assert(*(rightNode->data) == -76);
     
-    //copies of iterators are shallow copies
     
     //Testing copy constructor with null data node
     list<int>::iterator nullDataCopiedIterator(nullDataNodeIterator);
@@ -654,7 +686,40 @@ int main(int argc, const char* argv[])
     assert(*(leftNode->data) == 5);
     assert(*(rightNode->data) == -76);
     
-    cout<<"Passed Copy Constructor Tests"<<endl;
+    cout<<"Passed Iterator Copy Constructor Tests"<<endl;
+    
+    /*
+     * Testing iterator assignment operator
+     */
+    
+    //testing copy of iterator when node pointer is null
+    
+    //reuse nullNodeIterator
+    list<int>::iterator nullNodeAssignedIterator = nullNodeIterator;
+    assert(nullNodeAssignedIterator.ptr == NULL);
+    
+    
+    //testing iterator when data in the node is null
+    list<int>::iterator nullDataAssignedTo = nullDataNodeIterator;
+    assert(nullDataAssignedTo.ptr == nullDataNodeIterator.ptr);
+    assert(nullDataAssignedTo.ptr->pNext == rightNode);
+    assert(nullDataAssignedTo.ptr->pPrev == leftNode);
+    //make sure the values didn't get messed up
+    assert(nullDataAssignedTo.ptr->data == NULL);
+    assert(*(leftNode->data) == 5);
+    assert(*(rightNode->data) == -76);
+    
+    //testing when data in the node is non-null
+    list<int>::iterator nonNullDataAssignedTo = nonNullDataNodeIterator;
+    assert(nonNullDataAssignedTo.ptr == nonNullDataNodeIterator.ptr);
+    assert(nonNullDataAssignedTo.ptr->pNext == rightNode);
+    assert(nonNullDataAssignedTo.ptr->pPrev == leftNode);
+    //make sure the values didn't get messed up
+    assert(*(nonNullDataNode->data) == 512);
+    assert(*(leftNode->data) == 5);
+    assert(*(rightNode->data) == -76);
+    
+    cout<<"Passed Iterator Assignment Operator Tests"<<endl;
     
     
     
