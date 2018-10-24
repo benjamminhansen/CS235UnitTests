@@ -721,7 +721,122 @@ int main(int argc, const char* argv[])
     
     cout<<"Passed Iterator Assignment Operator Tests"<<endl;
     
+    /*
+     * Testing iterator equality operator
+     */
     
+    //testing equality of self
+    assert(nullNodeIterator == nullNodeIterator);
+    //testing equality of not-self (null node)
+    assert(nullNodeIteratorCopy == nullNodeIterator);
+    //testing equality of not-self, non-null node, null data in node
+    assert(nullDataNodeIterator == nullDataCopiedIterator);
+    //testing equality of not-self, non-null node, non-null data in node
+    assert(nonNullDataNodeIterator == nonNullDataCopiedIterator);
+    //testing equality of non-null node, null data in node
+    list<int>::node secondNullNode;
+    secondNullNode.data = NULL;
+    list<int>::iterator secondNullNodeIterator;
+    secondNullNodeIterator.ptr = &secondNullNode;
+    assert(!(nullNodeIterator == secondNullNodeIterator));
+    //testing equality of non-null node, non-null data in node
+    int anInt = 7;
+    list<int>::node secondNonNullDataNode;
+    secondNonNullDataNode.data = &anInt;
+    list<int>::iterator secondNonNullDataNodeIterator;
+    secondNonNullDataNodeIterator.ptr = &secondNonNullDataNode;
+    assert(!(nonNullDataNodeIterator == secondNullNodeIterator));
+    //testing equality of iterator with different node but same value in node
+    list<int>::node thirdNonNullDataNode;
+    thirdNonNullDataNode.data = &anInt;
+    list<int>::iterator thirdNonNullDataNodeIterator;
+    thirdNonNullDataNodeIterator.ptr = &thirdNonNullDataNode;
+    assert(!(secondNonNullDataNodeIterator == thirdNonNullDataNodeIterator));
+    
+    cout<<"Passed Iterator Equality Tests"<<endl;
+    
+    /*
+     * Testing inequality operator
+     */
+    //testing inequality of non-null node, null data in node
+    assert(secondNullNodeIterator != nullNodeIterator);
+    //testing inequality of non-null node, non-null data in node
+    assert(nonNullDataNodeIterator != secondNonNullDataNodeIterator);
+    //testing inequality of self
+    assert(!(nullNodeIterator != nullNodeIterator));
+    //testing inequality of not-self (null node)
+    assert(!(nullNodeIteratorCopy != nullNodeIterator));
+    //testing inequality of not-self, non-null node, null data in node
+    assert(!(nullDataNodeIterator != nullDataCopiedIterator));
+    //testing inequality of not-self, non-null node, non-null data in node
+    assert(!(nonNullDataNodeIterator != nonNullDataCopiedIterator));
+    //testing equality of iterator with different node but same value in node
+    assert(secondNonNullDataNodeIterator != thirdNonNullDataNodeIterator);
+    
+    cout<<"Passed Iterator Inequality Tests"<<endl;
+    
+    
+    //building list for incrementor tests
+    list<int>incrementorList;
+    //building listWithStuffInIt: 5<=>6<=>7<=>9
+    incrementorList.numElements = 4;
+    firstNode = new list<int>::node(5);
+    incrementorList.pHead = firstNode;
+    //reusing currentNodePtr variable
+    currentNodePtr = incrementorList.pHead;
+    secondNode = new list<int>::node(6);
+    currentNodePtr->pNext = secondNode;
+    currentNodePtr->pNext->pPrev = currentNodePtr;
+    currentNodePtr = currentNodePtr->pNext;
+    
+    thirdNode = new list<int>::node(7);
+    currentNodePtr->pNext = thirdNode;
+    currentNodePtr->pNext->pPrev = currentNodePtr;
+    currentNodePtr = currentNodePtr->pNext;
+    
+    fourthNode = new list<int>::node(9);
+    currentNodePtr->pNext = secondNode;
+    currentNodePtr->pNext->pPrev = currentNodePtr;
+    /*
+     * Testing post-incrementor operator
+     */
+    
+    //testing incrementor when node is NULL
+    try {
+        nullNodeIterator++;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: incrementing null node."));
+    }
+    list<int>::iterator nonNullNodeIterator;
+    //testing incrementing with tail
+    nonNullNodeIterator.ptr = fourthNode;
+    assert((nonNullNodeIterator++).ptr == fourthNode);
+    assert(nonNullNodeIterator.ptr == fourthNode);
+    //testing for any node other than tail
+    nonNullNodeIterator.ptr = secondNode;
+    assert((nonNullNodeIterator++).ptr == secondNode);
+    assert(nonNullNodeIterator.ptr == thirdNode);
+    cout<<"Passed Iterator Post-Incrementor Test"<<endl;
+    
+    /*
+     * Testing pre-incrementor operator
+     */
+    
+    //testing incrementor when node is NULL
+    try {
+        ++nullNodeIterator;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: incrementing null node."));
+    }
+    //testing incrementing with tail
+    nonNullNodeIterator.ptr = fourthNode;
+    assert((++nonNullNodeIterator).ptr == fourthNode);
+    //testing for any node other than tail
+    nonNullNodeIterator.ptr = secondNode;
+    assert((++nonNullNodeIterator).ptr == thirdNode);
+    cout<<"Passed Iterator Pre-Incrementor Test"<<endl;
     
     /*
      * Testing push_back for Non-Integer list Behavior (Just to Make Sure set Works For Other Types)
