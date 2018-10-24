@@ -160,7 +160,7 @@ int main(int argc, const char* argv[])
     }
     catch(const char* message)
     {
-        assert(strcmp(message, "Error: inserting into NULL list."));
+        assert(strcmp(message, "Error: inserting into NULL list.") == 0);
     }
     
     //Testing insertion before the head node.
@@ -263,7 +263,7 @@ int main(int argc, const char* argv[])
         freeData(nullNode);
         assert(false);
     } catch (const char* message) {
-        assert(strcmp(message, "Error: freeing NULL list."));
+        assert(strcmp(message, "Error: freeing NULL list.") == 0);
         //this int variable is declared in the unit_testing_delete.h file. You should NEVER touch any code in that file.
         assert(unit_testing_delete_call_counter == 0);
     }
