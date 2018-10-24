@@ -839,6 +839,63 @@ int main(int argc, const char* argv[])
     cout<<"Passed Iterator Pre-Incrementor Test"<<endl;
     
     /*
+     * Testing post-decrement operator
+     */
+    //testing decrementor when node is NULL
+    try {
+        nullNodeIterator--;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: decrementing null node."));
+    }
+    //list<int>::iterator nonNullNodeIterator;
+    //testing decrementing with head
+    nonNullNodeIterator.ptr = firstNode;
+    assert((nonNullNodeIterator--).ptr == firstNode);
+    assert(nonNullNodeIterator.ptr == firstNode);
+    //testing for any node other than tail
+    nonNullNodeIterator.ptr = secondNode;
+    assert((nonNullNodeIterator--).ptr == secondNode);
+    assert(nonNullNodeIterator.ptr == firstNode);
+    cout<<"Passed Iterator Post-Decrementor Test"<<endl;
+    /*
+     * Testing pre-decrement operator
+     */
+    //testing decrementor when node is NULL
+    try {
+        --nullNodeIterator;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: decrementing null node."));
+    }
+    //testing decrementing with head
+    nonNullNodeIterator.ptr = firstNode;
+    assert((--nonNullNodeIterator).ptr == firstNode);
+    //testing for any node other than tail
+    nonNullNodeIterator.ptr = thirdNode;
+    assert((--nonNullNodeIterator).ptr == secondNode);
+    cout<<"Passed Iterator Pre-Decrementor Test"<<endl;
+    
+    /*
+     * Testing dereference operator
+     */
+    //testing dereference of null node
+    try {
+        *nullNodeIterator;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message,"Error: dereferencing null node.") == 0);
+    }
+    try {
+        *nullDataNodeIterator;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: dereferncing null data") == 0);
+    }
+    assert(*nonNullDataNodeIterator == 512);
+    
+    cout<<"Passed Dereference Operator Tests"<<endl;
+    /*
      * Testing push_back for Non-Integer list Behavior (Just to Make Sure set Works For Other Types)
      */
     
