@@ -77,7 +77,7 @@ int main(int argc, const char* argv[])
     //The Copy function should produce a shallow copy.
     //That means the data doesn't get copied but the nodes do.
     
-    //Generating small doubly linked list with the ordered list of values 5<->6<->7<->9<->9<->10. The character set <-> indicates doubly linked nodes.
+    //Generating small doubly linked list with the ordered list of values 5<->6<->7<->8<->9<->10. The character set <-> indicates doubly linked nodes.
     node<int>* theHead = new node<int>(5);
     node<int>* currentNodePtr = theHead;
     node<int>* aNode = new node<int>(6);
