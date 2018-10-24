@@ -16,7 +16,7 @@
 int unit_testing_delete_call_counter = 0;
 //overloading the delete operator globally.
 //DON'T EDIT THIS CODE!! IF YOU DO, YOU WILL HATE LIFE.
-void operator delete(void * p)_NOEXCEPT
+void operator delete(void * p)
 {
     free(p);
     unit_testing_delete_call_counter++;
