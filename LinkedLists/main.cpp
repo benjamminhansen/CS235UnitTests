@@ -242,7 +242,7 @@ int main(int argc, const char* argv[])
     
     //Testing searching partial list with requested value
     foundNode = find(findHead->pNext,7);
-    assert(foundNode == findHead->pNext);
+    assert(foundNode == findHead->pNext->pNext);
     
     //Testing searching full list for first duplicate value
     foundNode = find(findHead,5);
