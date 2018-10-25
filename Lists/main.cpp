@@ -472,7 +472,7 @@ int main(int argc, const char* argv[])
     assert(emptyList.numElements == 0);
     assert(emptyList.pHead == NULL);
     assert(emptyList.pTail == NULL);
-    //testing non-empty list
+    //testing non-empty list: 6<=>7
     unit_testing_delete_call_counter = 0;
     listWithStuffInIt.clear();
     assert(unit_testing_delete_call_counter == 4);
@@ -583,6 +583,58 @@ int main(int argc, const char* argv[])
     assert(*(pushBackTestingList.pTail->data) == 32);
     
     cout<<"Passed Push Back Tests"<<endl;
+
+    /*
+     * Testing assignment operator
+     */
+    //testing assigning to an empty list
+    list<int>assignedToList;
+    assignedToList.numElements = 0;
+    assignedToList.pHead = NULL;
+    assignedToList.pTail = NULL;
+    
+    unit_testing_delete_call_counter = 0;
+    assignedToList = pushBackTestingList;
+    assert(assignedToList.numElements = 3);
+    //making sure the pointers all got set correctly
+    assert(assignedToList.pHead != NULL);
+    assert(assignedToList.pTail != NULL);
+    assert(assignedToList.pHead != assignedToList.pTail);
+    assert(assignedToList.pHead != pushBackTestingList.pHead);
+    assert(assignedToList.pHead->pNext != pushBackTestingList.pHead->pNext);
+    assert(assignedToList.pTail != pushBackTestingList.pTail);
+    //making sure the data didn't get messed up
+    assert(*(assignedToList.pHead->data) == 20);
+    assert(*(assignedToList.pHead->pNext->data) == 0);
+    assert(*(assignedToList.pTail->data) == 32);
+    assert(unit_testing_delete_call_counter == 0);
+    
+    //testing assigning to a non-empty list
+    
+    list<int>listToAssign;
+    int simpleValue = 123;
+    list<int>::node* simpleNode = new list<int>::node(simpleValue);
+    listToAssign.numElements = 1;
+    listToAssign.pHead = simpleNode;
+    listToAssign.pTail = simpleNode;
+    
+    unit_testing_delete_call_counter = 0;
+    assert(assignedToList.numElements = 3);
+    //making sure the pointers all got set correctly
+    assert(assignedToList.pHead != NULL);
+    assert(assignedToList.pTail != NULL);
+    assert(assignedToList.pHead != assignedToList.pTail);
+    assert(assignedToList.pHead != pushBackTestingList.pHead);
+    assert(assignedToList.pHead->pNext != pushBackTestingList.pHead->pNext);
+    assert(assignedToList.pTail != pushBackTestingList.pTail);
+    //making sure the data didn't get messed up
+    assert(*(assignedToList.pHead->data) == 20);
+    assert(*(assignedToList.pHead->pNext->data) == 0);
+    assert(*(assignedToList.pTail->data) == 32);
+    assert(unit_testing_delete_call_counter == 2);
+
+    cout<<"Passed Assignment Operator Tests"<<endl;
+    
     
     /*
      * Testing iterator Constructors
@@ -894,9 +946,194 @@ int main(int argc, const char* argv[])
     }
     assert(*nonNullDataNodeIterator == 512);
     
-    cout<<"Passed Dereference Operator Tests"<<endl;
+    cout<<"Passed Iterator Dereference Operator Tests"<<endl;
+    
+    
+    
+    
+    //building empty begin/end list
+    list<int>emptyBeginEndList;
+    emptyBeginEndList.numElements = 0;
+    emptyBeginEndList.pHead = NULL;
+    emptyBeginEndList.pTail = NULL;
+    
+    
+    //building a list do begin and end
+    list<int>beginEndList;
+    //building listWithStuffInIt: 5<=>6<=>7<=>9
+    beginEndList.numElements = 4;
+    firstNode = new list<int>::node(5);
+    beginEndList.pHead = firstNode;
+    //reusing currentNodePtr variable
+    currentNodePtr = beginEndList.pHead;
+    secondNode = new list<int>::node(6);
+    currentNodePtr->pNext = secondNode;
+    currentNodePtr->pNext->pPrev = currentNodePtr;
+    currentNodePtr = currentNodePtr->pNext;
+    
+    thirdNode = new list<int>::node(7);
+    currentNodePtr->pNext = thirdNode;
+    currentNodePtr->pNext->pPrev = currentNodePtr;
+    currentNodePtr = currentNodePtr->pNext;
+    
+    fourthNode = new list<int>::node(9);
+    currentNodePtr->pNext = secondNode;
+    currentNodePtr->pNext->pPrev = currentNodePtr;
+    //make sure we don't have a zombie
+    currentNodePtr = NULL;
     /*
-     * Testing push_back for Non-Integer list Behavior (Just to Make Sure set Works For Other Types)
+     * Testing Begin
+     */
+    assert(emptyBeginEndList.begin().ptr == NULL);
+    assert(beginEndList.begin().ptr == beginEndList.pHead);
+    cout<<"Passed Begin Tests"<<endl;
+    
+    /*
+     * Testing End
+     */
+    assert(emptyBeginEndList.end().ptr == NULL);
+    assert(beginEndList.end().ptr == NULL);
+    
+    
+    /*
+     * Testing Find
+     */
+    list<int>emptyFindList;
+    emptyFindList.numElements = 0;
+    emptyFindList.pHead = NULL;
+    emptyFindList.pTail = NULL;
+    
+    //testing for something not found in the list
+    assert(emptyFindList.find(10).ptr == NULL);
+    
+    //building a list do search
+    list<int>filledFindList;
+    //building listWithStuffInIt: 5<=>6<=>7<=>9
+    filledFindList.numElements = 4;
+    firstNode = new list<int>::node(5);
+    filledFindList.pHead = firstNode;
+    //reusing currentNodePtr variable
+    currentNodePtr = filledFindList.pHead;
+    secondNode = new list<int>::node(6);
+    currentNodePtr->pNext = secondNode;
+    currentNodePtr->pNext->pPrev = currentNodePtr;
+    currentNodePtr = currentNodePtr->pNext;
+    
+    thirdNode = new list<int>::node(7);
+    currentNodePtr->pNext = thirdNode;
+    currentNodePtr->pNext->pPrev = currentNodePtr;
+    currentNodePtr = currentNodePtr->pNext;
+    
+    fourthNode = new list<int>::node(9);
+    currentNodePtr->pNext = secondNode;
+    currentNodePtr->pNext->pPrev = currentNodePtr;
+    //make sure we don't have a zombie
+    currentNodePtr = NULL;
+    
+    
+    //testing for something not found in the list
+    assert(filledFindList.find(10).ptr == NULL);
+    //testing finding the first element
+    assert(filledFindList.find(5).ptr == filledFindList.pHead);
+    //testing finding the last element
+    assert(filledFindList.find(9).ptr == filledFindList.pTail);
+    //testing finding an element somewhere in the middle
+    assert(filledFindList.find(6).ptr == filledFindList.pHead->pNext);
+    
+    cout<<"Passed Find Tests"<<endl;
+    
+    /*
+     * Testing erase
+     */
+    
+    //testing for erasing end iterator
+    //reusing iterator with a null node to simulate end iterator
+    unit_testing_delete_call_counter = 0;
+    assert(emptyFindList.erase(nullNodeIterator).ptr == NULL);
+    assert(unit_testing_delete_call_counter == 0);
+    assert(filledFindList.erase(nullNodeIterator).ptr == NULL);
+    assert(unit_testing_delete_call_counter == 0);
+    
+    //testing erasing head from list:  5<=>6<=>7<=>9
+    list<int>::iterator headIterator;
+    headIterator.ptr = filledFindList.pHead;
+    list<int>::node* nextHead = filledFindList.pHead->pNext;
+    unit_testing_delete_call_counter = 0;
+    assert(filledFindList.pHead == nextHead);
+    assert(filledFindList.erase(headIterator).ptr == nextHead);
+    assert(unit_testing_delete_call_counter == 2);
+    
+    //testing erasing something in the middle: 6<=>7<=>9
+    unit_testing_delete_call_counter = 0;
+    list<int>::iterator midIterator;
+    midIterator.ptr = filledFindList.pHead->pNext;
+    assert(filledFindList.erase(midIterator).ptr == filledFindList.pTail);
+    assert(unit_testing_delete_call_counter == 2);
+    
+    //testing erasing tail of list: 6<=>9
+    unit_testing_delete_call_counter = 0;
+    list<int>::iterator endIterator;
+    endIterator.ptr = filledFindList.pTail;
+    assert(filledFindList.erase(endIterator).ptr == NULL);
+    assert(unit_testing_delete_call_counter == 2);
+    
+    cout<<"Passed Erase Tests"<<endl;
+    
+    /*
+     * Testing Insert
+     */
+    list<int>insertList;
+    insertList.numElements = 0;
+    insertList.pHead = NULL;
+    insertList.pTail = NULL;
+    
+    //testing inserting into a list with an invalid iterator (might be one from a different list, etc.)
+    list<int>::iterator insertIterator;
+    insertIterator.ptr = new list<int>::node(2);
+    
+    try {
+        insertList.insert(insertIterator, -7);
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: invalid insertion location.") == 0);
+    }
+    //resetting insertIterator
+    delete insertIterator.ptr;
+    insertIterator.ptr = NULL;
+    unit_testing_delete_call_counter = 0;
+    
+    //testing inserting into an empty list with valid iterator (simulating end iterator)
+    insertList.insert(insertIterator, 4);
+    assert(insertList.pHead != NULL);
+    assert(*(insertList.pHead->data) == 4);
+    assert(insertList.pHead == insertList.pTail);
+    
+    
+    //testing inserting before head, list will be: 8<=>4
+    //reusing previous head variable
+    previousHead = insertList.pHead;
+    insertIterator.ptr = insertList.pHead;
+    insertList.insert(insertIterator, 8);
+    assert(insertList.pHead != NULL);
+    assert(insertList.pHead != previousHead);
+    assert(insertList.pHead->pNext == previousHead);
+    assert(*(insertList.pHead->data) == 8);
+    assert(*(insertList.pTail->data) == 4);
+    
+    //testing inserting in middle, list will be: 8<=>13<=>4
+    insertIterator.ptr = insertList.pTail;
+    insertList.insert(insertIterator, 13);
+    assert(insertList.pTail != NULL);
+    assert(insertList.pTail->pPrev != insertList.pHead);
+    assert(*(insertList.pTail->pPrev->data) == 13);
+    assert(*(insertList.pTail->data) == 4);
+    assert(*(insertList.pHead->data) == 8);
+    
+    cout<<"Passed Insert Tests"<<endl;
+    
+    
+    /*
+     * Testing push_back for Non-Integer list Behavior (just to see if it works for other types)
      */
     
     list<string>stringList;
