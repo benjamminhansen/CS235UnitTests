@@ -44,11 +44,6 @@ using std::ostream;
 using std::ios;
 using namespace custom;
 
-/*
- * While set can be implemented either sorted
- * or not sorted, for this class, you are
- * required to implement the sorted design.
- */
 
 int main(int argc, const char* argv[])
 {
