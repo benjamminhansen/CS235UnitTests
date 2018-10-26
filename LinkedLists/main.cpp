@@ -279,8 +279,8 @@ int main(int argc, const char* argv[])
     //Reusing findHead list with values 5<->6<->7<->5.
     //testing freeing a sublist
     freeData(findHead->pNext->pNext);
-    assert(findHead->pNext == NULL);
-    assert(unit_testing_delete_call_counter == 2);
+    assert(findHead->pNext->pNext == NULL);
+    assert(unit_testing_delete_call_counter == 4);
     
     //testing freeing an entire list
     //Resetting unit_testing_delete_call_counter
@@ -330,10 +330,12 @@ int main(int argc, const char* argv[])
     nodeBefore = remove(malformedNode);
     assert(malformedNode == NULL);
     assert(nodeBefore == NULL);
-    assert(unit_testing_delete_call_counter == 0);
+    assert(unit_testing_delete_call_counter == 2);
+    
     
     //testing remove middle node
     //list is currently 5<->6<->7<->5<->13.
+    unit_testing_delete_call_counter = 0;
     node<int>* nodeToRemove = removeHead->pNext->pNext;
     node<int>* nodeAfterToRemove = nodeToRemove->pNext;
     nodeBefore = remove(nodeToRemove);
@@ -341,25 +343,27 @@ int main(int argc, const char* argv[])
     assert(nodeToRemove == NULL);
     assert(nodeBefore->pNext == nodeAfterToRemove);
     assert(nodeAfterToRemove->pPrev == nodeBefore);
-    assert(unit_testing_delete_call_counter == 0);
+    assert(unit_testing_delete_call_counter == 2);
     
     //testing removing headNode
+    unit_testing_delete_call_counter = 0l
     nodeToRemove = removeHead;
     node<int>* secondNode = removeHead->pNext;
     node<int>* currentFirstNode = remove(removeHead);
     //list is now 6<->5<->13.
     assert(currentFirstNode == secondNode);
     assert(removeHead == NULL);
-    assert(unit_testing_delete_call_counter == 0);
+    assert(unit_testing_delete_call_counter == 2);
     
     //testing removing lastNode
     //resetting removeHead
+    unit_testing_delete_call_counter = 0;
     removeHead = currentFirstNode;
     nodeToRemove = removeHead->pNext->pNext;
     nodeBefore = remove(nodeToRemove);
     assert(nodeBefore == removeHead->pNext);
     assert(nodeToRemove == NULL);
-    assert(unit_testing_delete_call_counter == 0);
+    assert(unit_testing_delete_call_counter == 2);
     
     /*
      * Testing insert for Non-Integer set Behavior (Just to Make Sure set Works For Other Types)
