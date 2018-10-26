@@ -341,7 +341,7 @@ int main(int argc, const char* argv[])
     assert(unit_testing_delete_call_counter == 2);
     
     //testing removing headNode
-    unit_testing_delete_call_counter = 0l
+    unit_testing_delete_call_counter = 0;
     nodeToRemove = removeHead;
     node<int>* secondNode = removeHead->pNext;
     node<int>* currentFirstNode = remove(removeHead);
