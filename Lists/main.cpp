@@ -206,7 +206,6 @@ int main(int argc, const char* argv[])
     //reset deletion counter
     unit_testing_delete_call_counter = 0;
     //resetting listToDelete to: 5<=>6<=>7<=>9
-    listToDelete->numElements = 4;
     listToDelete->pHead = new list<int>::node(5);
     //reusing currentNodePtr variable
     currentNodePtr = listToDelete->pHead;
@@ -220,6 +219,7 @@ int main(int argc, const char* argv[])
     
     currentNodePtr->pNext = new list<int>::node(9);
     currentNodePtr->pNext->pPrev = currentNodePtr;
+    listToDelete->numElements = 4;
     
     //kill potential zombie
     currentNodePtr = NULL;
@@ -260,6 +260,9 @@ int main(int argc, const char* argv[])
     list<int>::node* fourthNode = new list<int>::node(9);
     currentNodePtr->pNext = secondNode;
     currentNodePtr->pNext->pPrev = currentNodePtr;
+    
+    listWithStuffInIt.pTail = fourthNode;
+    listWithStuffInIt.pHead = firstNode;
     
     //testing empty list
     assert(emptyList.size() == 0);
@@ -653,7 +656,7 @@ int main(int argc, const char* argv[])
     list<int>::node* rightNode = new list<int>::node();
     rightNode->data = &rightDataValue;
     
-    list<int>::node* nullDataNode;
+    list<int>::node* nullDataNode = new list<int>::node();
     nullDataNode->data = NULL;
     //set up the pointers correctly
     nullDataNode->pNext = rightNode;
@@ -695,7 +698,7 @@ int main(int argc, const char* argv[])
     
     //testing non-default constructor with node that has a non-null data pointer
     int middleNodeDataValue = 512;
-    list<int>::node* nonNullDataNode;
+    list<int>::node* nonNullDataNode = new list<int>::node();
     nonNullDataNode->data = &middleNodeDataValue;
     //set up the pointers correctly
     nonNullDataNode->pNext = rightNode;
