@@ -520,7 +520,7 @@ int main(int argc, const char* argv[])
     
     //testing push_front on a list with multiple nodes: 5<=>3 becomes -2<=>5<=>3
     list<int>::node* previousHead = pushTestingList.pHead;
-    pushTestingList.push_front(5);
+    pushTestingList.push_front(-2);
     assert(pushTestingList.numElements == 3);
     //making sure the pointers all got set correctly
     assert(pushTestingList.pHead != NULL);
@@ -551,7 +551,7 @@ int main(int argc, const char* argv[])
     pushBackTestingList.push_back(20);
     assert(pushBackTestingList.numElements = 1);
     assert(pushBackTestingList.pHead != NULL);
-    assert(pushBackTestingList.pTail == emptyList.pHead);
+    assert(pushBackTestingList.pTail == pushBackTestingList.pHead);
     assert(pushBackTestingList.pHead->pNext == NULL);
     assert(pushBackTestingList.pTail->pPrev == NULL);
     assert(*(pushBackTestingList.pTail->data) == 20);
@@ -568,8 +568,8 @@ int main(int argc, const char* argv[])
     assert(*(pushBackTestingList.pHead->data) == 20);
     
     //testing push_back on a list with multiple nodes: 20<=>0 becomes 20<=>0<=>32
-    list<int>::node* previousTail = pushTestingList.pTail;
-    pushTestingList.push_back(32);
+    list<int>::node* previousTail = pushBackTestingList.pTail;
+    pushBackTestingList.push_back(32);
     assert(pushBackTestingList.numElements = 3);
     //making sure the pointers all got set correctly
     assert(pushBackTestingList.pHead != NULL);
@@ -580,7 +580,7 @@ int main(int argc, const char* argv[])
     assert(pushBackTestingList.pTail->pPrev == previousTail);
     assert(pushBackTestingList.pTail->pNext == NULL);
     assert(previousTail->pPrev == pushBackTestingList.pHead);
-    assert(previousTail->pNext == pushTestingList.pTail);
+    assert(previousTail->pNext == pushBackTestingList.pTail);
     //making sure the data didn't get messed up
     assert(*(pushBackTestingList.pHead->data) == 20);
     assert(*(previousTail->data) == 0);
@@ -623,19 +623,17 @@ int main(int argc, const char* argv[])
     listToAssign.pTail = simpleNode;
     
     unit_testing_delete_call_counter = 0;
-    assert(assignedToList.numElements = 3);
+    //assignedToList is currently: 20<=>0<=>32
+    assignedToList = listToAssign;
+    //now assignedToList should be: 123
+    assert(assignedToList.numElements = 1);
     //making sure the pointers all got set correctly
     assert(assignedToList.pHead != NULL);
     assert(assignedToList.pTail != NULL);
-    assert(assignedToList.pHead != assignedToList.pTail);
-    assert(assignedToList.pHead != pushBackTestingList.pHead);
-    assert(assignedToList.pHead->pNext != pushBackTestingList.pHead->pNext);
-    assert(assignedToList.pTail != pushBackTestingList.pTail);
+    assert(assignedToList.pHead == assignedToList.pTail);
     //making sure the data didn't get messed up
-    assert(*(assignedToList.pHead->data) == 20);
-    assert(*(assignedToList.pHead->pNext->data) == 0);
-    assert(*(assignedToList.pTail->data) == 32);
-    assert(unit_testing_delete_call_counter == 2);
+    assert(*(assignedToList.pHead->data) == 123);
+    assert(unit_testing_delete_call_counter == 6);
 
     cout<<"Passed Assignment Operator Tests"<<endl;
     
