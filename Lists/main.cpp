@@ -460,8 +460,8 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.numElements == 2);
     assert(listWithStuffInIt.pHead == secondNode);
     assert(listWithStuffInIt.pTail == thirdNode);
-    assert(listWithStuffInIt.pHead->pNext = thirdNode);
-    assert(listWithStuffInIt.pHead->pPrev = NULL);
+    assert(listWithStuffInIt.pHead->pNext == thirdNode);
+    assert(listWithStuffInIt.pHead->pPrev == NULL);
     
     cout<<"Passed Pop Front Tests"<<endl;
     
