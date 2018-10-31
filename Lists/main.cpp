@@ -206,6 +206,7 @@ int main(int argc, const char* argv[])
     //reset deletion counter
     unit_testing_delete_call_counter = 0;
     //resetting listToDelete to: 5<=>6<=>7<=>9
+    listToDelete = new list<int>();
     listToDelete->pHead = new list<int>::node(5);
     //reusing currentNodePtr variable
     currentNodePtr = listToDelete->pHead;
@@ -316,7 +317,7 @@ int main(int argc, const char* argv[])
         emptyList.front();
         assert(false);
     } catch (const char* message) {
-        assert(strcmp(message, "Error: calling front on empty list."));
+        assert(strcmp(message, "Error: calling front on empty list.") == 0);
     }
     assert(emptyList.numElements == 0);
     assert(emptyList.pHead == NULL);
@@ -328,7 +329,7 @@ int main(int argc, const char* argv[])
         assert(false);
         
     } catch (const char* message) {
-        assert(strcmp(message, "Error: calling front on empty list."));
+        assert(strcmp(message, "Error: calling front on empty list.") == 0);
     }
     assert(emptyList.numElements == 0);
     assert(emptyList.pHead == NULL);
@@ -372,7 +373,7 @@ int main(int argc, const char* argv[])
         emptyList.back();
         assert(false);
     } catch (const char* message) {
-        assert(strcmp(message, "Error: calling front on empty list."));
+        assert(strcmp(message, "Error: calling back on empty list.") == 0);
     }
     assert(emptyList.numElements == 0);
     assert(emptyList.pHead == NULL);
@@ -384,7 +385,7 @@ int main(int argc, const char* argv[])
         assert(false);
         
     } catch (const char* message) {
-        assert(strcmp(message, "Error: calling front on empty list."));
+        assert(strcmp(message, "Error: calling back on empty list.") == 0);
     }
     //testing non-empty list back getter:7<=>6<=>7<=>9
     assert(listWithStuffInIt.back() == 9);
@@ -457,10 +458,10 @@ int main(int argc, const char* argv[])
     //testing pop_front for non-empty list:7<=>6<=>7 becomes 6<=>7
     listWithStuffInIt.pop_front();
     assert(listWithStuffInIt.numElements == 2);
-    assert(listWithStuffInIt.pHead == firstNode);
-    assert(listWithStuffInIt.pTail == secondNode);
-    assert(listWithStuffInIt.pHead->pNext = secondNode);
-    assert(secondNode->pPrev = firstNode);
+    assert(listWithStuffInIt.pHead == secondNode);
+    assert(listWithStuffInIt.pTail == thirdNode);
+    assert(listWithStuffInIt.pHead->pNext = thirdNode);
+    assert(listWithStuffInIt.pHead->pPrev = NULL);
     
     cout<<"Passed Pop Front Tests"<<endl;
     
@@ -861,7 +862,7 @@ int main(int argc, const char* argv[])
         nullNodeIterator++;
         assert(false);
     } catch (const char* message) {
-        assert(strcmp(message, "Error: incrementing null node."));
+        assert(strcmp(message, "Error: incrementing null node.") == 0);
     }
     list<int>::iterator nonNullNodeIterator;
     //testing incrementing with tail
@@ -883,7 +884,7 @@ int main(int argc, const char* argv[])
         ++nullNodeIterator;
         assert(false);
     } catch (const char* message) {
-        assert(strcmp(message, "Error: incrementing null node."));
+        assert(strcmp(message, "Error: incrementing null node.") == 0);
     }
     //testing incrementing with tail
     nonNullNodeIterator.ptr = fourthNode;
@@ -901,7 +902,7 @@ int main(int argc, const char* argv[])
         nullNodeIterator--;
         assert(false);
     } catch (const char* message) {
-        assert(strcmp(message, "Error: decrementing null node."));
+        assert(strcmp(message, "Error: decrementing null node.") == 0);
     }
     //list<int>::iterator nonNullNodeIterator;
     //testing decrementing with head
@@ -921,7 +922,7 @@ int main(int argc, const char* argv[])
         --nullNodeIterator;
         assert(false);
     } catch (const char* message) {
-        assert(strcmp(message, "Error: decrementing null node."));
+        assert(strcmp(message, "Error: decrementing null node.") == 0);
     }
     //testing decrementing with head
     nonNullNodeIterator.ptr = firstNode;
