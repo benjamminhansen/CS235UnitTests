@@ -69,9 +69,10 @@ int main(int argc, const char* argv[])
     /*
      * Testing Node Destructor
      */
+    unit_testing_delete_call_counter = 0;
     list<int>::node* nodeToDelete = new list<int>::node();
     delete nodeToDelete;
-    assert(unit_testing_delete_call_counter = 1);
+    assert(unit_testing_delete_call_counter == 1);
     //When done with a pointer set it to NULL so you don't create a zombie pointer.
     nodeToDelete = NULL;
     
