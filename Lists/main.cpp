@@ -850,8 +850,9 @@ int main(int argc, const char* argv[])
     currentNodePtr = currentNodePtr->pNext;
     
     fourthNode = new list<int>::node(9);
-    currentNodePtr->pNext = secondNode;
+    currentNodePtr->pNext = fourthNode;
     currentNodePtr->pNext->pPrev = currentNodePtr;
+    incrementorList.pTail = fourthNode;
     /*
      * Testing post-incrementor operator
      */
@@ -1031,8 +1032,9 @@ int main(int argc, const char* argv[])
     currentNodePtr = currentNodePtr->pNext;
     
     fourthNode = new list<int>::node(9);
-    currentNodePtr->pNext = secondNode;
+    currentNodePtr->pNext = fourthNode;
     currentNodePtr->pNext->pPrev = currentNodePtr;
+    filledFindList.pTail = fourthNode;
     //make sure we don't have a zombie
     currentNodePtr = NULL;
     
@@ -1065,22 +1067,22 @@ int main(int argc, const char* argv[])
     headIterator.ptr = filledFindList.pHead;
     list<int>::node* nextHead = filledFindList.pHead->pNext;
     unit_testing_delete_call_counter = 0;
-    assert(filledFindList.pHead == nextHead);
     assert(filledFindList.erase(headIterator).ptr == nextHead);
+    assert(filledFindList.pHead == nextHead);
     assert(unit_testing_delete_call_counter == 2);
     
     //testing erasing something in the middle: 6<=>7<=>9
     unit_testing_delete_call_counter = 0;
     list<int>::iterator midIterator;
     midIterator.ptr = filledFindList.pHead->pNext;
-    assert(filledFindList.erase(midIterator).ptr == filledFindList.pTail);
+    assert(filledFindList.erase(midIterator).ptr == filledFindList.pHead);
     assert(unit_testing_delete_call_counter == 2);
     
     //testing erasing tail of list: 6<=>9
     unit_testing_delete_call_counter = 0;
     list<int>::iterator endIterator;
     endIterator.ptr = filledFindList.pTail;
-    assert(filledFindList.erase(endIterator).ptr == NULL);
+    assert(filledFindList.erase(endIterator).ptr == filledFindList.pHead);
     assert(unit_testing_delete_call_counter == 2);
     
     cout<<"Passed Erase Tests"<<endl;
