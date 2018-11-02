@@ -949,7 +949,7 @@ int main(int argc, const char* argv[])
         *nullDataNodeIterator;
         assert(false);
     } catch (const char* message) {
-        assert(strcmp(message, "Error: dereferncing null data") == 0);
+        assert(strcmp(message, "Error: dereferencing null data") == 0);
     }
     assert(*nonNullDataNodeIterator == 512);
     
