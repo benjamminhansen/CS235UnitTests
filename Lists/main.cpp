@@ -923,6 +923,9 @@ int main(int argc, const char* argv[])
     } catch (const char* message) {
         assert(strcmp(message, "Error: decrementing null node.") == 0);
     }
+    //resetting node relationships
+    firstNode->pNext = secondNode;
+    secondNode->pPrev = firstNode;
     //testing decrementing with head
     nonNullNodeIterator.ptr = firstNode;
     assert((--nonNullNodeIterator).ptr == firstNode);
