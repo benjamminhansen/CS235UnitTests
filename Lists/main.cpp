@@ -260,7 +260,7 @@ int main(int argc, const char* argv[])
     currentNodePtr = currentNodePtr->pNext;
     
     list<int>::node* fourthNode = new list<int>::node(9);
-    currentNodePtr->pNext = secondNode;
+    currentNodePtr->pNext = fourthNode;
     currentNodePtr->pNext->pPrev = currentNodePtr;
     
     listWithStuffInIt.pTail = fourthNode;
