@@ -277,12 +277,12 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.numElements == 4);
     assert(listWithStuffInIt.pHead == firstNode);
     assert(listWithStuffInIt.pTail == fourthNode);
-    assert(listWithStuffInIt.pHead->pNext = secondNode);
-    assert(secondNode->pPrev = firstNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext = thirdNode);
-    assert(thirdNode->pPrev = secondNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
-    assert(fourthNode->pPrev = thirdNode);
+    assert(listWithStuffInIt.pHead->pNext == secondNode);
+    assert(secondNode->pPrev == firstNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext == thirdNode);
+    assert(thirdNode->pPrev == secondNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext->pNext == fourthNode);
+    assert(fourthNode->pPrev == thirdNode);
     
     cout<<"Passed Size Tests"<<endl;
     
@@ -301,12 +301,12 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.numElements == 4);
     assert(listWithStuffInIt.pHead == firstNode);
     assert(listWithStuffInIt.pTail == fourthNode);
-    assert(listWithStuffInIt.pHead->pNext = secondNode);
-    assert(secondNode->pPrev = firstNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext = thirdNode);
-    assert(thirdNode->pPrev = secondNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
-    assert(fourthNode->pPrev = thirdNode);
+    assert(listWithStuffInIt.pHead->pNext == secondNode);
+    assert(secondNode->pPrev == firstNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext == thirdNode);
+    assert(thirdNode->pPrev == secondNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext->pNext == fourthNode);
+    assert(fourthNode->pPrev == thirdNode);
     
     cout<<"Passed Empty Tests"<<endl;
     
@@ -342,12 +342,12 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.numElements == 4);
     assert(listWithStuffInIt.pHead == firstNode);
     assert(listWithStuffInIt.pTail == fourthNode);
-    assert(listWithStuffInIt.pHead->pNext = secondNode);
-    assert(secondNode->pPrev = firstNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext = thirdNode);
-    assert(thirdNode->pPrev = secondNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
-    assert(fourthNode->pPrev = thirdNode);
+    assert(listWithStuffInIt.pHead->pNext == secondNode);
+    assert(secondNode->pPrev == firstNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext == thirdNode);
+    assert(thirdNode->pPrev == secondNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext->pNext == fourthNode);
+    assert(fourthNode->pPrev == thirdNode);
     
     //testing non-empty lists front setter:5<=>6<=>7<=>9 becomes 7<=>6<=>7<=>9
     listWithStuffInIt.front() = 7;
@@ -357,12 +357,12 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.numElements == 4);
     assert(listWithStuffInIt.pHead == firstNode);
     assert(listWithStuffInIt.pTail == fourthNode);
-    assert(listWithStuffInIt.pHead->pNext = secondNode);
-    assert(secondNode->pPrev = firstNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext = thirdNode);
-    assert(thirdNode->pPrev = secondNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
-    assert(fourthNode->pPrev = thirdNode);
+    assert(listWithStuffInIt.pHead->pNext == secondNode);
+    assert(secondNode->pPrev == firstNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext == thirdNode);
+    assert(thirdNode->pPrev == secondNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext->pNext == fourthNode);
+    assert(fourthNode->pPrev == thirdNode);
     
     cout<<"Passed Front Tests"<<endl;
     
@@ -394,12 +394,12 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.numElements == 4);
     assert(listWithStuffInIt.pHead == firstNode);
     assert(listWithStuffInIt.pTail == fourthNode);
-    assert(listWithStuffInIt.pHead->pNext = secondNode);
-    assert(secondNode->pPrev = firstNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext = thirdNode);
-    assert(thirdNode->pPrev = secondNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
-    assert(fourthNode->pPrev = thirdNode);
+    assert(listWithStuffInIt.pHead->pNext == secondNode);
+    assert(secondNode->pPrev == firstNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext == thirdNode);
+    assert(thirdNode->pPrev == secondNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext->pNext == fourthNode);
+    assert(fourthNode->pPrev == thirdNode);
     
     //testing non-empty list back setter: 7<=>6<=>7<=>9 becomes 7<=>6<=>7<=>1
     listWithStuffInIt.back() = 1;
@@ -409,12 +409,12 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.numElements == 4);
     assert(listWithStuffInIt.pHead == firstNode);
     assert(listWithStuffInIt.pTail == fourthNode);
-    assert(listWithStuffInIt.pHead->pNext = secondNode);
-    assert(secondNode->pPrev = firstNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext = thirdNode);
-    assert(thirdNode->pPrev = secondNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext->pNext = fourthNode);
-    assert(fourthNode->pPrev = thirdNode);
+    assert(listWithStuffInIt.pHead->pNext == secondNode);
+    assert(secondNode->pPrev == firstNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext == thirdNode);
+    assert(thirdNode->pPrev == secondNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext->pNext == fourthNode);
+    assert(fourthNode->pPrev == thirdNode);
     
     cout<<"Passed Back Tests"<<endl;
     
@@ -436,10 +436,10 @@ int main(int argc, const char* argv[])
     assert(listWithStuffInIt.numElements == 3);
     assert(listWithStuffInIt.pHead == firstNode);
     assert(listWithStuffInIt.pTail == thirdNode);
-    assert(listWithStuffInIt.pHead->pNext = secondNode);
-    assert(secondNode->pPrev = firstNode);
-    assert(listWithStuffInIt.pHead->pNext->pNext = thirdNode);
-    assert(thirdNode->pPrev = secondNode);
+    assert(listWithStuffInIt.pHead->pNext == secondNode);
+    assert(secondNode->pPrev == firstNode);
+    assert(listWithStuffInIt.pHead->pNext->pNext == thirdNode);
+    assert(thirdNode->pPrev == secondNode);
     
     cout<<"Passed pop_back Tests"<<endl;
     
@@ -627,7 +627,7 @@ int main(int argc, const char* argv[])
     //assignedToList is currently: 20<=>0<=>32
     assignedToList = listToAssign;
     //now assignedToList should be: 123
-    assert(assignedToList.numElements = 1);
+    assert(assignedToList.numElements == 1);
     //making sure the pointers all got set correctly
     assert(assignedToList.pHead != NULL);
     assert(assignedToList.pTail != NULL);
@@ -1097,17 +1097,13 @@ int main(int argc, const char* argv[])
     
     //testing inserting into a list with an invalid iterator (might be one from a different list, etc.)
     list<int>::iterator insertIterator;
-    insertIterator.ptr = new list<int>::node(2);
+    //insertIterator.ptr = new list<int>::node(2);
     
-    try {
-        insertList.insert(insertIterator, -7);
-        assert(false);
-    } catch (const char* message) {
-        assert(strcmp(message, "Error: invalid insertion location.") == 0);
-    }
+    //insertList.insert(insertIterator, -7);
+    //assert(insertList.numElements)
     //resetting insertIterator
-    delete insertIterator.ptr;
-    insertIterator.ptr = NULL;
+    //delete insertIterator.ptr;
+    //insertIterator.ptr = NULL;
     unit_testing_delete_call_counter = 0;
     
     //testing inserting into an empty list with valid iterator (simulating end iterator)
