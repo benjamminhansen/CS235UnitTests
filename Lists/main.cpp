@@ -600,7 +600,7 @@ int main(int argc, const char* argv[])
     
     unit_testing_delete_call_counter = 0;
     assignedToList = pushBackTestingList;
-    assert(assignedToList.numElements = 3);
+    assert(assignedToList.numElements == 3);
     //making sure the pointers all got set correctly
     assert(assignedToList.pHead != NULL);
     assert(assignedToList.pTail != NULL);
