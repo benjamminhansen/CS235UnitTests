@@ -795,15 +795,15 @@ int main(int argc, const char* argv[])
     secondNullNodeIterator.ptr = &secondNullNode;
     assert(!(nullNodeIterator == secondNullNodeIterator));
     //testing equality of non-null node, non-null data in node
-    int anInt = 7;
+    int* anInt = new int(7);
     list<int>::node secondNonNullDataNode;
-    secondNonNullDataNode.data = &anInt;
+    secondNonNullDataNode.data = anInt;
     list<int>::iterator secondNonNullDataNodeIterator;
     secondNonNullDataNodeIterator.ptr = &secondNonNullDataNode;
     assert(!(nonNullDataNodeIterator == secondNullNodeIterator));
     //testing equality of iterator with different node but same value in node
     list<int>::node thirdNonNullDataNode;
-    thirdNonNullDataNode.data = &anInt;
+    thirdNonNullDataNode.data = anInt;
     list<int>::iterator thirdNonNullDataNodeIterator;
     thirdNonNullDataNodeIterator.ptr = &thirdNonNullDataNode;
     assert(!(secondNonNullDataNodeIterator == thirdNonNullDataNodeIterator));
