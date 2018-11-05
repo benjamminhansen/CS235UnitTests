@@ -52,7 +52,7 @@ int main(int argc, const char* argv[])
      * Testing default constructor
      */
     node <int> defaultNode;
-    assert(defaultNode.data == NULL);
+    assert(defaultNode.data == 0);
     assert(defaultNode.pNext == NULL);
     assert(defaultNode.pPrev == NULL);
     cout << "Default Constructor Test Passed" << endl;
@@ -61,7 +61,7 @@ int main(int argc, const char* argv[])
      * Testing constructor with data
      */
     node<int> dataNode(4);
-    assert(*(dataNode.data) == 4);
+    assert(dataNode.data == 4);
     assert(dataNode.pNext == NULL);
     assert(dataNode.pPrev == NULL);
     
@@ -161,7 +161,7 @@ int main(int argc, const char* argv[])
     //Testing insertion before the head node.
     createdNode = insert(theHead, 3);
     //List of values is now 3<->5<->6<->7<->9<->9<->10.
-    assert(*(createdNode->data) == 3);
+    assert(createdNode->data == 3);
     assert(createdNode->pPrev == NULL);
     assert(createdNode->pNext == theHead);
     assert(theHead->pPrev == createdNode);
@@ -172,7 +172,7 @@ int main(int argc, const char* argv[])
     node<int>* nodeToBeInsertedBefore = theHead->pNext;
     createdNode = insert(theHead, 4, true);
     //List of values is now 3<->4<->5<->6<->7<->9<->9<->10.
-    assert(*(createdNode->data) == 4);
+    assert(createdNode->data == 4);
     assert(createdNode->pPrev == theHead);
     assert(createdNode->pNext == nodeToBeInsertedBefore);
     assert(theHead->pNext == createdNode);
@@ -181,7 +181,7 @@ int main(int argc, const char* argv[])
     node<int>* lastNode = theHead->pNext->pNext->pNext->pNext->pNext->pNext->pNext;
     createdNode = insert(lastNode, 12, true);
     //List of values is now 3<->4<->5<->6<->7<->9<->9<->10<->12.
-    assert(*(createdNode->data) == 12);
+    assert(createdNode->data == 12);
     assert(createdNode->pPrev == lastNode);
     assert(createdNode->pNext == NULL);
     assert(lastNode->pNext == createdNode);
@@ -193,7 +193,7 @@ int main(int argc, const char* argv[])
     node<int>* nodeToBeInsertedAfter = lastNode->pPrev;
     createdNode = insert(lastNode, 11);
     //List of values is now 3<->4<->5<->6<->7<->9<->9<->10<->11<->12.
-    assert(*(createdNode->data) == 11);
+    assert(createdNode->data == 11);
     assert(createdNode->pPrev == nodeToBeInsertedAfter);
     assert(createdNode->pNext == lastNode);
     assert(lastNode->pPrev == createdNode);
@@ -249,13 +249,13 @@ int main(int argc, const char* argv[])
     assert(foundNode == NULL);
     
     /*
-     * Testing freeData
+     * Testing clear
      */
     
     //Testing freeing NULL list
     try
     {
-        freeData(nullNode);
+        clear(nullNode);
         assert(false);
     } catch (const char* message) {
         assert(strcmp(message, "Error: freeing NULL list.") == 0);
@@ -264,26 +264,26 @@ int main(int argc, const char* argv[])
     }
     //Testing freeing list consisting of a single node.
     node<int>* singleNode = new node<int>(3);
-    freeData(singleNode);
+    clear(singleNode);
     assert(singleNode == NULL);//If you don't reset the pointer to the node passed in to your code in your code, you have a zombie pointer. Nasty things, zombie pointers.
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 1);
     
     
     //Resetting unit_testing_delete_call_counter
     unit_testing_delete_call_counter = 0;
     //Reusing findHead list with values 5<->6<->7<->5.
     //testing freeing a sublist
-    freeData(findHead->pNext->pNext);
+    clear(findHead->pNext->pNext);
     assert(findHead->pNext->pNext == NULL);
-    assert(unit_testing_delete_call_counter == 4);
+    assert(unit_testing_delete_call_counter == 2);
     
     //testing freeing an entire list
     //Resetting unit_testing_delete_call_counter
     unit_testing_delete_call_counter = 0;
     //theHead list is currently 3<->4<->5<->6<->7<->9<->9<->10<->11<->12
-    freeData(theHead);
+    clear(theHead);
     assert(theHead == NULL);
-    assert(unit_testing_delete_call_counter == 20);
+    assert(unit_testing_delete_call_counter == 10);
     
     /*
      * Testing Remove
@@ -325,7 +325,7 @@ int main(int argc, const char* argv[])
     nodeBefore = remove(malformedNode);
     assert(malformedNode == NULL);
     assert(nodeBefore == NULL);
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 1);
     
     
     //testing remove middle node
@@ -338,7 +338,7 @@ int main(int argc, const char* argv[])
     assert(nodeToRemove == NULL);
     assert(nodeBefore->pNext == nodeAfterToRemove);
     assert(nodeAfterToRemove->pPrev == nodeBefore);
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 1);
     
     //testing removing headNode
     unit_testing_delete_call_counter = 0;
@@ -348,7 +348,7 @@ int main(int argc, const char* argv[])
     //list is now 6<->5<->13.
     assert(currentFirstNode == secondNode);
     assert(removeHead == NULL);
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 1);
     
     //testing removing lastNode
     //resetting removeHead
@@ -358,7 +358,7 @@ int main(int argc, const char* argv[])
     nodeBefore = remove(nodeToRemove);
     assert(nodeBefore == removeHead->pNext);
     assert(nodeToRemove == NULL);
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 1);
     
     /*
      * Testing insert for Non-Integer set Behavior (Just to Make Sure set Works For Other Types)
