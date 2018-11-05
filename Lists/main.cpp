@@ -52,7 +52,7 @@ int main(int argc, const char* argv[])
      * Testing default node constructor
      */
     list<int>::node defaultNode;
-    assert(defaultNode.data == NULL);
+    assert(defaultNode.data == 0);
     assert(defaultNode.pNext == NULL);
     assert(defaultNode.pPrev == NULL);
     
@@ -60,7 +60,7 @@ int main(int argc, const char* argv[])
      * Testing Node constructor with data
      */
     list<int>::node dataNode(4);
-    assert(*(dataNode.data) == 4);
+    assert(dataNode.data == 4);
     assert(dataNode.pNext == NULL);
     assert(dataNode.pPrev == NULL);
     
@@ -80,7 +80,7 @@ int main(int argc, const char* argv[])
     unit_testing_delete_call_counter = 0;
     nodeToDelete = new list<int>::node(5);
     delete nodeToDelete;
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 1);
     //killing potential zombie
     nodeToDelete = NULL;
     cout<<"Passed Node Destructor Test"<<endl;
@@ -352,7 +352,7 @@ int main(int argc, const char* argv[])
     //testing non-empty lists front setter:5<=>6<=>7<=>9 becomes 7<=>6<=>7<=>9
     listWithStuffInIt.front() = 7;
     //make sure the first node's data changed
-    assert(*(listWithStuffInIt.pHead->data) == 7);
+    assert(listWithStuffInIt.pHead->data == 7);
     //make sure no nodes were changed in the list
     assert(listWithStuffInIt.numElements == 4);
     assert(listWithStuffInIt.pHead == firstNode);
@@ -404,7 +404,7 @@ int main(int argc, const char* argv[])
     //testing non-empty list back setter: 7<=>6<=>7<=>9 becomes 7<=>6<=>7<=>1
     listWithStuffInIt.back() = 1;
     //make sure the first node's data changed
-    assert(*(listWithStuffInIt.pTail->data) == 1);
+    assert(listWithStuffInIt.pTail->data == 1);
     //make sure no nodes were changed in the list
     assert(listWithStuffInIt.numElements == 4);
     assert(listWithStuffInIt.pHead == firstNode);
@@ -506,7 +506,7 @@ int main(int argc, const char* argv[])
     assert(pushTestingList.pTail == pushTestingList.pHead);
     assert(pushTestingList.pHead->pNext == NULL);
     assert(pushTestingList.pTail->pPrev == NULL);
-    assert(*(pushTestingList.pHead->data) == 3);
+    assert(pushTestingList.pHead->data == 3);
     
     //testing push_front on a list with one node: 3 becomes 5<=>3
     pushTestingList.push_front(5);
@@ -516,8 +516,8 @@ int main(int argc, const char* argv[])
     assert(pushTestingList.pHead != pushTestingList.pTail);
     assert(pushTestingList.pHead->pNext == pushTestingList.pTail);
     assert(pushTestingList.pTail->pPrev == pushTestingList.pHead);
-    assert(*(pushTestingList.pHead->data) == 5);
-    assert(*(pushTestingList.pHead->pNext->data) == 3);
+    assert(pushTestingList.pHead->data == 5);
+    assert(pushTestingList.pHead->pNext->data == 3);
     
     //testing push_front on a list with multiple nodes: 5<=>3 becomes -2<=>5<=>3
     list<int>::node* previousHead = pushTestingList.pHead;
@@ -534,9 +534,9 @@ int main(int argc, const char* argv[])
     assert(previousHead->pPrev == pushTestingList.pHead);
     assert(previousHead->pNext == pushTestingList.pTail);
     //making sure the data didn't get messed up
-    assert(*(pushTestingList.pHead->data) == -2);
-    assert(*(pushTestingList.pTail->data) == 3);
-    assert(*(previousHead->data) == 5);
+    assert(pushTestingList.pHead->data == -2);
+    assert(pushTestingList.pTail->data == 3);
+    assert(previousHead->data == 5);
     
     cout<<"Passed Push Front Tests"<<endl;
     
@@ -555,7 +555,7 @@ int main(int argc, const char* argv[])
     assert(pushBackTestingList.pTail == pushBackTestingList.pHead);
     assert(pushBackTestingList.pHead->pNext == NULL);
     assert(pushBackTestingList.pTail->pPrev == NULL);
-    assert(*(pushBackTestingList.pTail->data) == 20);
+    assert(pushBackTestingList.pTail->data == 20);
     
     //testing push_back on a list with one node: 20 becomes 20<=>0
     pushBackTestingList.push_back(0);
@@ -565,8 +565,8 @@ int main(int argc, const char* argv[])
     assert(pushBackTestingList.pHead != pushBackTestingList.pTail);
     assert(pushBackTestingList.pHead->pNext == pushBackTestingList.pTail);
     assert(pushBackTestingList.pTail->pPrev == pushBackTestingList.pHead);
-    assert(*(pushBackTestingList.pTail->data) == 0);
-    assert(*(pushBackTestingList.pHead->data) == 20);
+    assert(pushBackTestingList.pTail->data == 0);
+    assert(pushBackTestingList.pHead->data == 20);
     
     //testing push_back on a list with multiple nodes: 20<=>0 becomes 20<=>0<=>32
     list<int>::node* previousTail = pushBackTestingList.pTail;
@@ -583,9 +583,9 @@ int main(int argc, const char* argv[])
     assert(previousTail->pPrev == pushBackTestingList.pHead);
     assert(previousTail->pNext == pushBackTestingList.pTail);
     //making sure the data didn't get messed up
-    assert(*(pushBackTestingList.pHead->data) == 20);
-    assert(*(previousTail->data) == 0);
-    assert(*(pushBackTestingList.pTail->data) == 32);
+    assert(pushBackTestingList.pHead->data == 20);
+    assert(previousTail->data == 0);
+    assert(pushBackTestingList.pTail->data == 32);
     
     cout<<"Passed Push Back Tests"<<endl;
 
@@ -609,9 +609,9 @@ int main(int argc, const char* argv[])
     assert(assignedToList.pHead->pNext != pushBackTestingList.pHead->pNext);
     assert(assignedToList.pTail != pushBackTestingList.pTail);
     //making sure the data didn't get messed up
-    assert(*(assignedToList.pHead->data) == 20);
-    assert(*(assignedToList.pHead->pNext->data) == 0);
-    assert(*(assignedToList.pTail->data) == 32);
+    assert(assignedToList.pHead->data == 20);
+    assert(assignedToList.pHead->pNext->data == 0);
+    assert(assignedToList.pTail->data == 32);
     assert(unit_testing_delete_call_counter == 0);
     
     //testing assigning to a non-empty list
@@ -633,7 +633,7 @@ int main(int argc, const char* argv[])
     assert(assignedToList.pTail != NULL);
     assert(assignedToList.pHead == assignedToList.pTail);
     //making sure the data didn't get messed up
-    assert(*(assignedToList.pHead->data) == 123);
+    assert(assignedToList.pHead->data == 123);
     assert(unit_testing_delete_call_counter == 6);
 
     cout<<"Passed Assignment Operator Tests"<<endl;
@@ -650,34 +650,34 @@ int main(int argc, const char* argv[])
     //testing non-default constructor with node that has a null data pointer
     int leftDataValue = 5;
     list<int>::node* leftNode = new list<int>::node();
-    leftNode->data = &leftDataValue;
+    leftNode->data = leftDataValue;
     
     int rightDataValue = -76;
     list<int>::node* rightNode = new list<int>::node();
-    rightNode->data = &rightDataValue;
+    rightNode->data = rightDataValue;
     
-    list<int>::node* nullDataNode = new list<int>::node();
-    nullDataNode->data = NULL;
+    list<int>::node* defaultDataNode = new list<int>::node();
+    defaultDataNode->data = NULL;
     //set up the pointers correctly
-    nullDataNode->pNext = rightNode;
-    rightNode->pPrev = nullDataNode;
-    nullDataNode->pPrev = leftNode;
-    leftNode->pNext = nullDataNode;
+    defaultDataNode->pNext = rightNode;
+    rightNode->pPrev = defaultDataNode;
+    defaultDataNode->pPrev = leftNode;
+    leftNode->pNext = defaultDataNode;
     
-    list<int>::iterator nullDataNodeIterator(nullDataNode);
-    assert(nullDataNodeIterator.ptr == nullDataNode);
+    list<int>::iterator defaultDataNodeIterator(defaultDataNode);
+    assert(defaultDataNodeIterator.ptr == defaultDataNode);
     
     
     //make sure the pointers didn't get messed up
-    assert(nullDataNode->pNext == rightNode);
-    assert(rightNode->pPrev == nullDataNode);
-    assert(nullDataNode->pPrev == leftNode);
-    assert(leftNode->pNext == nullDataNode);
+    assert(defaultDataNode->pNext == rightNode);
+    assert(rightNode->pPrev == defaultDataNode);
+    assert(defaultDataNode->pPrev == leftNode);
+    assert(leftNode->pNext == defaultDataNode);
     
     //make sure the values didn't get messed up
-    assert(nullDataNode->data == NULL);
-    assert(*(leftNode->data) == 5);
-    assert(*(rightNode->data) == -76);
+    assert(defaultDataNode->data == 0);
+    assert(leftNode->data == 5);
+    assert(rightNode->data == -76);
     
     
     cout<<"Passed Iterator Constructor Tests"<<endl;
@@ -699,15 +699,15 @@ int main(int argc, const char* argv[])
     //testing non-default constructor with node that has a non-null data pointer
     int middleNodeDataValue = 512;
     list<int>::node* nonNullDataNode = new list<int>::node();
-    nonNullDataNode->data = &middleNodeDataValue;
+    nonNullDataNode->data = middleNodeDataValue;
     //set up the pointers correctly
     nonNullDataNode->pNext = rightNode;
     rightNode->pPrev = nonNullDataNode;
     nonNullDataNode->pPrev = leftNode;
     leftNode->pNext = nonNullDataNode;
     
-    list<int>::iterator nonNullDataNodeIterator(nonNullDataNode);
-    assert(nonNullDataNodeIterator.ptr == nonNullDataNode);
+    list<int>::iterator nonDefaultDataNodeIterator(nonNullDataNode);
+    assert(nonDefaultDataNodeIterator.ptr == nonNullDataNode);
     
     //make sure the pointers didn't get messed up
     assert(nonNullDataNode->pNext == rightNode);
@@ -716,30 +716,30 @@ int main(int argc, const char* argv[])
     assert(leftNode->pNext == nonNullDataNode);
     
     //make sure the values didn't get messed up
-    assert(*(nonNullDataNode->data) == 512);
-    assert(*(leftNode->data) == 5);
-    assert(*(rightNode->data) == -76);
+    assert(nonNullDataNode->data == 512);
+    assert(leftNode->data == 5);
+    assert(rightNode->data == -76);
     
     
-    //Testing copy constructor with null data node
-    list<int>::iterator nullDataCopiedIterator(nullDataNodeIterator);
-    assert(nullDataCopiedIterator.ptr == nullDataNodeIterator.ptr);
-    assert(nullDataCopiedIterator.ptr->pNext == rightNode);
-    assert(nullDataCopiedIterator.ptr->pPrev == leftNode);
+    //Testing copy constructor with default data node
+    list<int>::iterator defaultDataCopiedIterator(defaultDataNodeIterator);
+    assert(defaultDataCopiedIterator.ptr == defaultDataNodeIterator.ptr);
+    assert(defaultDataCopiedIterator.ptr->pNext == rightNode);
+    assert(defaultDataCopiedIterator.ptr->pPrev == leftNode);
     //make sure the values didn't get messed up
-    assert(nullDataCopiedIterator.ptr->data == NULL);
-    assert(*(leftNode->data) == 5);
-    assert(*(rightNode->data) == -76);
+    assert(defaultDataCopiedIterator.ptr->data == 0);
+    assert(leftNode->data == 5);
+    assert(rightNode->data == -76);
     
-    //Testing copy constructor with non-null data node
-    list<int>::iterator nonNullDataCopiedIterator(nonNullDataNodeIterator);
-    assert(nonNullDataCopiedIterator.ptr == nonNullDataNodeIterator.ptr);
+    //Testing copy constructor with non-default data node
+    list<int>::iterator nonNullDataCopiedIterator(nonDefaultDataNodeIterator);
+    assert(nonNullDataCopiedIterator.ptr == nonDefaultDataNodeIterator.ptr);
     assert(nonNullDataCopiedIterator.ptr->pNext == rightNode);
     assert(nonNullDataCopiedIterator.ptr->pPrev == leftNode);
     //make sure the values didn't get messed up
-    assert(*(nonNullDataNode->data) == 512);
-    assert(*(leftNode->data) == 5);
-    assert(*(rightNode->data) == -76);
+    assert(nonNullDataNode->data == 512);
+    assert(leftNode->data == 5);
+    assert(rightNode->data == -76);
     
     cout<<"Passed Iterator Copy Constructor Tests"<<endl;
     
@@ -755,24 +755,24 @@ int main(int argc, const char* argv[])
     
     
     //testing iterator when data in the node is null
-    list<int>::iterator nullDataAssignedTo = nullDataNodeIterator;
-    assert(nullDataAssignedTo.ptr == nullDataNodeIterator.ptr);
-    assert(nullDataAssignedTo.ptr->pNext == rightNode);
-    assert(nullDataAssignedTo.ptr->pPrev == leftNode);
+    list<int>::iterator defaultDataAssignedTo = defaultDataNodeIterator;
+    assert(defaultDataAssignedTo.ptr == defaultDataNodeIterator.ptr);
+    assert(defaultDataAssignedTo.ptr->pNext == rightNode);
+    assert(defaultDataAssignedTo.ptr->pPrev == leftNode);
     //make sure the values didn't get messed up
-    assert(nullDataAssignedTo.ptr->data == NULL);
-    assert(*(leftNode->data) == 5);
-    assert(*(rightNode->data) == -76);
+    assert(defaultDataAssignedTo.ptr->data == 0);
+    assert(leftNode->data == 5);
+    assert(rightNode->data == -76);
     
     //testing when data in the node is non-null
-    list<int>::iterator nonNullDataAssignedTo = nonNullDataNodeIterator;
-    assert(nonNullDataAssignedTo.ptr == nonNullDataNodeIterator.ptr);
+    list<int>::iterator nonNullDataAssignedTo = nonDefaultDataNodeIterator;
+    assert(nonNullDataAssignedTo.ptr == nonDefaultDataNodeIterator.ptr);
     assert(nonNullDataAssignedTo.ptr->pNext == rightNode);
     assert(nonNullDataAssignedTo.ptr->pPrev == leftNode);
     //make sure the values didn't get messed up
-    assert(*(nonNullDataNode->data) == 512);
-    assert(*(leftNode->data) == 5);
-    assert(*(rightNode->data) == -76);
+    assert(nonNullDataNode->data == 512);
+    assert(leftNode->data == 5);
+    assert(rightNode->data == -76);
     
     cout<<"Passed Iterator Assignment Operator Tests"<<endl;
     
@@ -785,22 +785,22 @@ int main(int argc, const char* argv[])
     //testing equality of not-self (null node)
     assert(nullNodeIteratorCopy == nullNodeIterator);
     //testing equality of not-self, non-null node, null data in node
-    assert(nullDataNodeIterator == nullDataCopiedIterator);
+    assert(defaultDataNodeIterator == defaultDataCopiedIterator);
     //testing equality of not-self, non-null node, non-null data in node
-    assert(nonNullDataNodeIterator == nonNullDataCopiedIterator);
+    assert(nonDefaultDataNodeIterator == nonNullDataCopiedIterator);
     //testing equality of non-null node, null data in node
     list<int>::node secondNullNode;
     secondNullNode.data = NULL;
     list<int>::iterator secondNullNodeIterator;
     secondNullNodeIterator.ptr = &secondNullNode;
     assert(!(nullNodeIterator == secondNullNodeIterator));
-    //testing equality of non-null node, non-null data in node
-    int* anInt = new int(7);
+    //testing equality of non-null node, default data in node
+    int anInt = 7;
     list<int>::node secondNonNullDataNode;
     secondNonNullDataNode.data = anInt;
     list<int>::iterator secondNonNullDataNodeIterator;
     secondNonNullDataNodeIterator.ptr = &secondNonNullDataNode;
-    assert(!(nonNullDataNodeIterator == secondNullNodeIterator));
+    assert(!(nonDefaultDataNodeIterator == secondNullNodeIterator));
     //testing equality of iterator with different node but same value in node
     list<int>::node thirdNonNullDataNode;
     thirdNonNullDataNode.data = anInt;
@@ -816,15 +816,15 @@ int main(int argc, const char* argv[])
     //testing inequality of non-null node, null data in node
     assert(secondNullNodeIterator != nullNodeIterator);
     //testing inequality of non-null node, non-null data in node
-    assert(nonNullDataNodeIterator != secondNonNullDataNodeIterator);
+    assert(nonDefaultDataNodeIterator != secondNonNullDataNodeIterator);
     //testing inequality of self
     assert(!(nullNodeIterator != nullNodeIterator));
     //testing inequality of not-self (null node)
     assert(!(nullNodeIteratorCopy != nullNodeIterator));
     //testing inequality of not-self, non-null node, null data in node
-    assert(!(nullDataNodeIterator != nullDataCopiedIterator));
+    assert(!(defaultDataNodeIterator != defaultDataCopiedIterator));
     //testing inequality of not-self, non-null node, non-null data in node
-    assert(!(nonNullDataNodeIterator != nonNullDataCopiedIterator));
+    assert(!(nonDefaultDataNodeIterator != nonNullDataCopiedIterator));
     //testing equality of iterator with different node but same value in node
     assert(secondNonNullDataNodeIterator != thirdNonNullDataNodeIterator);
     
@@ -946,12 +946,12 @@ int main(int argc, const char* argv[])
         assert(strcmp(message,"Error: dereferencing null node.") == 0);
     }
     try {
-        *nullDataNodeIterator;
+        *defaultDataNodeIterator;
         assert(false);
     } catch (const char* message) {
         assert(strcmp(message, "Error: dereferencing null data") == 0);
     }
-    assert(*nonNullDataNodeIterator == 512);
+    assert(*nonDefaultDataNodeIterator == 512);
     
     cout<<"Passed Iterator Dereference Operator Tests"<<endl;
     
@@ -1069,21 +1069,21 @@ int main(int argc, const char* argv[])
     unit_testing_delete_call_counter = 0;
     assert(filledFindList.erase(headIterator).ptr == nextHead);
     assert(filledFindList.pHead == nextHead);
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 1);
     
     //testing erasing something in the middle: 6<=>7<=>9
     unit_testing_delete_call_counter = 0;
     list<int>::iterator midIterator;
     midIterator.ptr = filledFindList.pHead->pNext;
     assert(filledFindList.erase(midIterator).ptr == filledFindList.pHead);
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 1);
     
     //testing erasing tail of list: 6<=>9
     unit_testing_delete_call_counter = 0;
     list<int>::iterator endIterator;
     endIterator.ptr = filledFindList.pTail;
     assert(filledFindList.erase(endIterator).ptr == filledFindList.pHead);
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 1);
     
     cout<<"Passed Erase Tests"<<endl;
     
@@ -1109,7 +1109,7 @@ int main(int argc, const char* argv[])
     //testing inserting into an empty list with valid iterator (simulating end iterator)
     insertList.insert(insertIterator, 4);
     assert(insertList.pHead != NULL);
-    assert(*(insertList.pHead->data) == 4);
+    assert(insertList.pHead->data == 4);
     assert(insertList.pHead == insertList.pTail);
     
     
@@ -1121,17 +1121,17 @@ int main(int argc, const char* argv[])
     assert(insertList.pHead != NULL);
     assert(insertList.pHead != previousHead);
     assert(insertList.pHead->pNext == previousHead);
-    assert(*(insertList.pHead->data) == 8);
-    assert(*(insertList.pTail->data) == 4);
+    assert(insertList.pHead->data == 8);
+    assert(insertList.pTail->data == 4);
     
     //testing inserting in middle, list will be: 8<=>13<=>4
     insertIterator.ptr = insertList.pTail;
     insertList.insert(insertIterator, 13);
     assert(insertList.pTail != NULL);
     assert(insertList.pTail->pPrev != insertList.pHead);
-    assert(*(insertList.pTail->pPrev->data) == 13);
-    assert(*(insertList.pTail->data) == 4);
-    assert(*(insertList.pHead->data) == 8);
+    assert(insertList.pTail->pPrev->data == 13);
+    assert(insertList.pTail->data == 4);
+    assert(insertList.pHead->data == 8);
     
     cout<<"Passed Insert Tests"<<endl;
     
@@ -1147,7 +1147,7 @@ int main(int argc, const char* argv[])
     stringList.push_back("Hello");
     
     assert(stringList.pHead == stringList.pTail);
-    assert(stringList.pHead->data->compare("Hello") == 0);
+    assert(stringList.pHead->data.compare("Hello") == 0);
     
     cout << "This list can hold strings!!!!" << endl;
      
