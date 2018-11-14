@@ -266,6 +266,7 @@ int main(int argc, const char * argv[]) {
     //                                                       5             9             11
     
     //reusing bstToDelete
+    bstToDelete = new BST<int>();
     bstToDelete->root = new BST<int>::BNode();
     bstToDelete->root->data = 7;
     
