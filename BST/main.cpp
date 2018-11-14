@@ -309,7 +309,7 @@ int main(int argc, const char * argv[]) {
     cout<<"Passed BST Deletion Tests"<<endl;
     
     /*
-     * Testing Insert
+     * Testing BST Insert
      */
     
     //Generating small BST with the values                              |
@@ -361,6 +361,7 @@ int main(int argc, const char * argv[]) {
     //                                                       5         ----9             11
     //                                                                 |
     //                                                                 8
+    assert(insertIntoBST.numElements == 7);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
     assert(insertIntoBST.root->pLeft->pRight == NULL);
@@ -386,7 +387,8 @@ int main(int argc, const char * argv[]) {
     //                                                       |             |             |
     //                                                       5         ----9             11-------
     //                                                                 |                          |
-    //                                                                 8                          20---
+    //                                                                 8                          20---8
+    assert(insertIntoBST.numElements == 8);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
     assert(insertIntoBST.root->pLeft->pRight == NULL);
@@ -413,7 +415,8 @@ int main(int argc, const char * argv[]) {
     //                                                       |             |             |
     //                                                   ----5         ----9---          11-------
     //                                                  |             |                           |
-    //                                                  3             8                           20
+    //                                                  3             8                           208
+    assert(insertIntoBST.numElements == 9);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
     assert(insertIntoBST.root->pLeft->pRight == NULL);
@@ -443,7 +446,8 @@ int main(int argc, const char * argv[]) {
     //                                                  |             |                           |
     //                                                  3---          8                           20
     //                                                      |
-    //                                                      4
+    //                                                      48
+    assert(insertIntoBST.numElements == 10);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
     assert(insertIntoBST.root->pLeft->pRight == NULL);
@@ -476,7 +480,8 @@ int main(int argc, const char * argv[]) {
     //                                                  |             |                           |
     //                                              ----3---          8                           20
     //                                             |        |
-    //                                             2        4
+    //                                             2        48
+    assert(insertIntoBST.numElements == 11);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
     assert(insertIntoBST.root->pLeft->pRight == NULL);
@@ -507,6 +512,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->data == 10);
     assert(buildBST.root->pRight == NULL);
     assert(buildBST.root->pLeft == NULL);
+    assert(buildBST.numElements == 1);
     
     buildBST.insert(5);
     //should be                                                     |
@@ -517,6 +523,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pRight == NULL);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
+    assert(buildBST.numElements == 2);
     
     buildBST.insert(11);
     //should be                                                     |
@@ -528,6 +535,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pRight->data == 11);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
+    assert(buildBST.numElements == 3);
     
     buildBST.insert(9);
     //should be                                                     |
@@ -546,6 +554,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pLeft->pRight->pRight == NULL);
     assert(buildBST.root->pLeft->pRight->pLeft == NULL);
     assert(buildBST.root->pLeft->pLeft == NULL);
+    assert(buildBST.numElements == 4);
     
     buildBST.insert(7);
     //should be                                                     |
@@ -568,6 +577,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pLeft->pRight->pLeft != NULL);
     assert(buildBST.root->pLeft->pRight->pLeft->data == 7);
     assert(buildBST.root->pLeft->pLeft == NULL);
+    assert(buildBST.numElements == 5);
     
     buildBST.insert(6);
     //should be                                                     |
@@ -595,6 +605,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pLeft->pRight->pLeft->pLeft != NULL);
     assert(buildBST.root->pLeft->pRight->pLeft->pLeft->data == 6);
     assert(buildBST.root->pLeft->pLeft == NULL);
+    assert(buildBST.numElements == 6);
     
     buildBST.insert(8);
     //should be                                                     |
@@ -623,6 +634,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pLeft->pRight->pLeft->pLeft != NULL);
     assert(buildBST.root->pLeft->pRight->pLeft->pLeft->data == 6);
     assert(buildBST.root->pLeft->pLeft == NULL);
+    assert(buildBST.numElements == 7);
     
     cout<<"Passed Insert Tests"<<endl;
     
