@@ -161,6 +161,7 @@ int main(int argc, const char * argv[]) {
     assert(bstCopy.root != NULL);
     assert(bstCopy.root != bstToCopy.root);
     assert(bstCopy.root->data == 7);
+    assert(bstCopy.numElements == 6);
     
     assert(bstCopy.root->pLeft != NULL);
     assert(bstCopy.root->pLeft != bstToCopy.root->pLeft);
