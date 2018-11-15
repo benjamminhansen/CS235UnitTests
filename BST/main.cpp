@@ -341,7 +341,8 @@ int main(int argc, const char * argv[]) {
     insertRootRight->pLeft = insertRootRightLeft;//(9)
     
     BST<int>::BNode* insertRootLeft = new BST<int>::BNode();
-    insertRootLeft->data = 6;    insertRootLeft->pRight = NULL;
+    insertRootLeft->data = 6;
+    insertRootLeft->pRight = NULL;
     insertRootLeft->pParent = insertIntoBST.root;//(7)
     insertIntoBST.root->pLeft = insertRootLeft;//(6)
     
