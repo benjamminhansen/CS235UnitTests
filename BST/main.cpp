@@ -527,7 +527,7 @@ int main(int argc, const char * argv[]) {
     assert(insertIntoBST.root->pLeft->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->data == 3);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pParent == insertIntoBST.root->pLeft->pLeft);
-    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft == NULL);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight != NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight->data == 4);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight->pRight == NULL);
@@ -615,7 +615,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
     assert(buildBST.root->pLeft->pParent == buildBST.root);
-    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pRight != NULL);
     assert(buildBST.root->pLeft->pLeft == NULL);
     assert(buildBST.root->pLeft->pRight->data == 9);
     assert(buildBST.root->pLeft->pRight->pParent == buildBST.root->pLeft);
@@ -632,7 +632,7 @@ int main(int argc, const char * argv[]) {
     //                                                       ----9
     //                                                      |
     //                                                      7
-    assert(buildBST.numElements == 4);
+    assert(buildBST.numElements == 5);
     assert(buildBST.root->data == 10);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pRight != NULL);
@@ -643,7 +643,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
     assert(buildBST.root->pLeft->pParent == buildBST.root);
-    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pRight != NULL);
     assert(buildBST.root->pLeft->pLeft == NULL);
     assert(buildBST.root->pLeft->pRight->data == 9);
     assert(buildBST.root->pLeft->pRight->pParent == buildBST.root->pLeft);
@@ -666,7 +666,7 @@ int main(int argc, const char * argv[]) {
     //                                                   ---7
     //                                                  |
     //                                                  6
-    assert(buildBST.numElements == 4);
+    assert(buildBST.numElements == 6);
     assert(buildBST.root->data == 10);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pRight != NULL);
@@ -677,7 +677,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
     assert(buildBST.root->pLeft->pParent == buildBST.root);
-    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pRight != NULL);
     assert(buildBST.root->pLeft->pLeft == NULL);
     assert(buildBST.root->pLeft->pRight->data == 9);
     assert(buildBST.root->pLeft->pRight->pParent == buildBST.root->pLeft);
@@ -705,7 +705,6 @@ int main(int argc, const char * argv[]) {
     //                                                  |       |
     //                                                  6       8
     assert(buildBST.numElements == 7);
-    assert(buildBST.numElements == 4);
     assert(buildBST.root->data == 10);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pRight != NULL);
@@ -716,7 +715,7 @@ int main(int argc, const char * argv[]) {
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
     assert(buildBST.root->pLeft->pParent == buildBST.root);
-    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pRight != NULL);
     assert(buildBST.root->pLeft->pLeft == NULL);
     assert(buildBST.root->pLeft->pRight->data == 9);
     assert(buildBST.root->pLeft->pRight->pParent == buildBST.root->pLeft);
@@ -1053,6 +1052,7 @@ int main(int argc, const char * argv[]) {
     eraseTree.root->pRight->pLeft->pParent = eraseTree.root->pRight;
     eraseTree.root->pRight->pRight = new BST<int>::BNode();
     eraseTree.root->pRight->pRight->data = 23;
+    eraseTree.root->pRight->pRight->pParent = eraseTree.root->pRight;
     
     BST<int>::iterator eraseIterator;
     eraseIterator.ptr = eraseTree.root->pLeft->pLeft;//(4)
@@ -1100,8 +1100,10 @@ int main(int argc, const char * argv[]) {
     
     elevenNode->pLeft = new BST<int>::BNode();
     elevenNode->pLeft->data = 10;
+    elevenNode->pLeft->pParent = elevenNode;
     elevenNode->pRight = new BST<int>::BNode();
     elevenNode->pRight->data = 12;
+    elevenNode->pRight->pParent = elevenNode;
     
     eraseTree.numElements = 7;
     
@@ -1144,13 +1146,13 @@ int main(int argc, const char * argv[]) {
     }
     //beginning of tree test
     incrementIterator.ptr = eraseTree.root->pLeft->pLeft;//(10)
-    assert(++incrementIterator.ptr == eraseTree.root->pLeft);//(11)
+    assert((++incrementIterator).ptr == eraseTree.root->pLeft);//(11)
     //end of tree test
     incrementIterator.ptr = eraseTree.root->pRight->pRight;
-    assert(++incrementIterator.ptr == NULL);
+    assert((++incrementIterator).ptr == NULL);
     //middle of tree test
     incrementIterator.ptr = eraseTree.root->pLeft->pRight;//(12)
-    assert(++incrementIterator.ptr == eraseTree.root->pLeft);
+    assert((++incrementIterator).ptr == eraseTree.root);
     
     cout<<"Passed Iterator Pre-Increment Test"<<endl;
     
@@ -1209,13 +1211,13 @@ int main(int argc, const char * argv[]) {
     }
     //beginning of tree test
     decrementIterator.ptr = eraseTree.root->pLeft->pLeft;//(10)
-    assert(--decrementIterator.ptr == NULL);
+    assert((--decrementIterator).ptr == NULL);
     //end of tree test
     decrementIterator.ptr = eraseTree.root->pRight->pRight;//(23)
-    assert(--decrementIterator.ptr == eraseTree.root->pRight);
+    assert((--decrementIterator).ptr == eraseTree.root->pRight);
     //middle of tree test
     decrementIterator.ptr = eraseTree.root->pLeft->pRight;//(12)
-    assert(--decrementIterator.ptr == eraseTree.root->pLeft);
+    assert((--decrementIterator.ptr) == eraseTree.root->pLeft);
     
     cout<<"Passed Iterator Pre-Decrement Tests"<<endl;
     
