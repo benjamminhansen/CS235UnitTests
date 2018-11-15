@@ -321,7 +321,7 @@ int main(int argc, const char * argv[]) {
     //                                                       5             9             11
     
     BST<int> insertIntoBST;
-    insertIntoBST.numElements = 6
+    insertIntoBST.numElements = 6;
     insertIntoBST.root = new BST<int>::BNode();
     insertIntoBST.root->data = 7;
     
@@ -365,18 +365,24 @@ int main(int argc, const char * argv[]) {
     assert(insertIntoBST.numElements == 7);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
+    assert(insertIntoBST.root->pLeft->pParent == insertIntoBST.root);
     assert(insertIntoBST.root->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->data == 5);
+    assert(insertIntoBST.root->pLeft->pLeft->pParent == insertIntoBST.root->pLeft);
     assert(insertIntoBST.root->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft == NULL);
     assert(insertIntoBST.root->pRight->data == 10);
+    assert(insertIntoBST.root->pRight->pParent == insertIntoBST.root);
     assert(insertIntoBST.root->pRight->pRight->data == 11);
+    assert(insertIntoBST.root->pRight->pRight->pParent == insertIntoBST.root->pRight);
     assert(insertIntoBST.root->pRight->pRight->pRight == NULL);
     assert(insertIntoBST.root->pRight->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->pLeft->data == 9);
+    assert(insertIntoBST.root->pRight->pLeft->pParent == insertIntoBST.root->pRight);
     assert(insertIntoBST.root->pRight->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->data ==8);
+    assert(insertIntoBST.root->pRight->pLeft->pLeft->pParent == insertIntoBST.root->pRight->pLeft);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pLeft == NULL);
     
@@ -388,23 +394,32 @@ int main(int argc, const char * argv[]) {
     //                                                       |             |             |
     //                                                       5         ----9             11-------
     //                                                                 |                          |
-    //                                                                 8                          20---8
+    //                                                                 8                          20
     assert(insertIntoBST.numElements == 8);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
+    assert(insertIntoBST.root->pLeft->pParent == insertIntoBST.root);
     assert(insertIntoBST.root->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->data == 5);
+    assert(insertIntoBST.root->pLeft->pLeft->pParent == insertIntoBST.root->pLeft);
     assert(insertIntoBST.root->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft == NULL);
     assert(insertIntoBST.root->pRight->data == 10);
+    assert(insertIntoBST.root->pRight->pParent == insertIntoBST.root);
     assert(insertIntoBST.root->pRight->pRight->data == 11);
+    assert(insertIntoBST.root->pRight->pRight->pParent == insertIntoBST.root->pRight);
+    assert(insertIntoBST.root->pRight->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->pRight->pRight != NULL);
     assert(insertIntoBST.root->pRight->pRight->pRight->data == 20);
-    assert(insertIntoBST.root->pRight->pRight->pLeft == NULL);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pParent == insertIntoBST.root->pRight->pRight);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pRight == NULL);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->pLeft->data == 9);
+    assert(insertIntoBST.root->pRight->pLeft->pParent == insertIntoBST.root->pRight);
     assert(insertIntoBST.root->pRight->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->data ==8);
+    assert(insertIntoBST.root->pRight->pLeft->pLeft->pParent == insertIntoBST.root->pRight->pLeft);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pLeft == NULL);
     
@@ -416,7 +431,7 @@ int main(int argc, const char * argv[]) {
     //                                                       |             |             |
     //                                                   ----5         ----9---          11-------
     //                                                  |             |                           |
-    //                                                  3             8                           208
+    //                                                  3             8                           20
     assert(insertIntoBST.numElements == 9);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
@@ -425,15 +440,25 @@ int main(int argc, const char * argv[]) {
     assert(insertIntoBST.root->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->data == 3);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pParent == insertIntoBST.root->pLeft->pLeft);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight == NULL);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft == NULL);
     assert(insertIntoBST.root->pRight->data == 10);
+    assert(insertIntoBST.root->pRight->pParent == insertIntoBST.root);
     assert(insertIntoBST.root->pRight->pRight->data == 11);
+    assert(insertIntoBST.root->pRight->pRight->pParent == insertIntoBST.root->pRight);
+    assert(insertIntoBST.root->pRight->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->pRight->pRight != NULL);
     assert(insertIntoBST.root->pRight->pRight->pRight->data == 20);
-    assert(insertIntoBST.root->pRight->pRight->pLeft == NULL);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pParent == insertIntoBST.root->pRight->pRight);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pRight == NULL);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->pLeft->data == 9);
+    assert(insertIntoBST.root->pRight->pLeft->pParent == insertIntoBST.root->pRight);
     assert(insertIntoBST.root->pRight->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->data ==8);
+    assert(insertIntoBST.root->pRight->pLeft->pLeft->pParent == insertIntoBST.root->pRight->pLeft);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pLeft == NULL);
     
@@ -447,7 +472,7 @@ int main(int argc, const char * argv[]) {
     //                                                  |             |                           |
     //                                                  3---          8                           20
     //                                                      |
-    //                                                      48
+    //                                                      4
     assert(insertIntoBST.numElements == 10);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
@@ -456,18 +481,28 @@ int main(int argc, const char * argv[]) {
     assert(insertIntoBST.root->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->data == 3);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pParent == insertIntoBST.root->pLeft->pLeft);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight != NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight->data == 4);
-    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft == NULL);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight->pRight == NULL);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->data == 10);
+    assert(insertIntoBST.root->pRight->pParent == insertIntoBST.root);
     assert(insertIntoBST.root->pRight->pRight->data == 11);
+    assert(insertIntoBST.root->pRight->pRight->pParent == insertIntoBST.root->pRight);
+    assert(insertIntoBST.root->pRight->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->pRight->pRight != NULL);
     assert(insertIntoBST.root->pRight->pRight->pRight->data == 20);
-    assert(insertIntoBST.root->pRight->pRight->pLeft == NULL);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pParent == insertIntoBST.root->pRight->pRight);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pRight == NULL);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->pLeft->data == 9);
+    assert(insertIntoBST.root->pRight->pLeft->pParent == insertIntoBST.root->pRight);
     assert(insertIntoBST.root->pRight->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->data ==8);
+    assert(insertIntoBST.root->pRight->pLeft->pLeft->pParent == insertIntoBST.root->pRight->pLeft);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pLeft == NULL);
     
@@ -481,7 +516,7 @@ int main(int argc, const char * argv[]) {
     //                                                  |             |                           |
     //                                              ----3---          8                           20
     //                                             |        |
-    //                                             2        48
+    //                                             2        4
     assert(insertIntoBST.numElements == 11);
     assert(insertIntoBST.root->data == 7);
     assert(insertIntoBST.root->pLeft->data == 6);
@@ -490,19 +525,31 @@ int main(int argc, const char * argv[]) {
     assert(insertIntoBST.root->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->data == 3);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pParent == insertIntoBST.root->pLeft->pLeft);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight != NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight->data == 4);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pRight->pRight == NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft->data == 2);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft->pRight == NULL);
+    assert(insertIntoBST.root->pLeft->pLeft->pLeft->pLeft->pLeft == NULL);
     assert(insertIntoBST.root->pRight->data == 10);
+    assert(insertIntoBST.root->pRight->pParent == insertIntoBST.root);
     assert(insertIntoBST.root->pRight->pRight->data == 11);
+    assert(insertIntoBST.root->pRight->pRight->pParent == insertIntoBST.root->pRight);
+    assert(insertIntoBST.root->pRight->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->pRight->pRight != NULL);
     assert(insertIntoBST.root->pRight->pRight->pRight->data == 20);
-    assert(insertIntoBST.root->pRight->pRight->pLeft == NULL);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pParent == insertIntoBST.root->pRight->pRight);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pRight == NULL);
+    assert(insertIntoBST.root->pRight->pRight->pRight->pLeft == NULL);
     assert(insertIntoBST.root->pRight->pLeft->data == 9);
+    assert(insertIntoBST.root->pRight->pLeft->pParent == insertIntoBST.root->pRight);
     assert(insertIntoBST.root->pRight->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft != NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->data ==8);
+    assert(insertIntoBST.root->pRight->pLeft->pLeft->pParent == insertIntoBST.root->pRight->pLeft);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pRight == NULL);
     assert(insertIntoBST.root->pRight->pLeft->pLeft->pLeft == NULL);
     
@@ -510,33 +557,44 @@ int main(int argc, const char * argv[]) {
     buildBST.insert(10);
     //should be                                                     |
     //                                                              10
+    assert(buildBST.numElements == 1);
     assert(buildBST.root->data == 10);
     assert(buildBST.root->pRight == NULL);
     assert(buildBST.root->pLeft == NULL);
-    assert(buildBST.numElements == 1);
+    assert(buildBST.root->pParent == NULL);
     
     buildBST.insert(5);
     //should be                                                     |
     //                                                       -------10
     //                                                      |
     //                                                      5
+    assert(buildBST.numElements == 2);
     assert(buildBST.root->data == 10);
     assert(buildBST.root->pRight == NULL);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
-    assert(buildBST.numElements == 2);
+    assert(buildBST.root->pLeft->pParent == buildBST.root);
+    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pLeft == NULL);
     
     buildBST.insert(11);
     //should be                                                     |
     //                                                       -------10-------
     //                                                      |                |
     //                                                      5                11
+    assert(buildBST.numElements == 3);
     assert(buildBST.root->data == 10);
+    assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pRight != NULL);
     assert(buildBST.root->pRight->data == 11);
+    assert(buildBST.root->pRight->pParent = buildBST.root);
+    assert(buildBST.root->pRight->pRight == NULL);
+    assert(buildBST.root->pRight->pLeft == NULL);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
-    assert(buildBST.numElements == 3);
+    assert(buildBST.root->pLeft->pParent == buildBST.root);
+    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pLeft == NULL);
     
     buildBST.insert(9);
     //should be                                                     |
@@ -545,17 +603,24 @@ int main(int argc, const char * argv[]) {
     //                                                      5----            11
     //                                                           |
     //                                                           9
+    assert(buildBST.numElements == 4);
     assert(buildBST.root->data == 10);
+    assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pRight != NULL);
     assert(buildBST.root->pRight->data == 11);
+    assert(buildBST.root->pRight->pParent = buildBST.root);
+    assert(buildBST.root->pRight->pRight == NULL);
+    assert(buildBST.root->pRight->pLeft == NULL);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
-    assert(buildBST.root->pLeft->pRight != NULL);
+    assert(buildBST.root->pLeft->pParent == buildBST.root);
+    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pLeft == NULL);
     assert(buildBST.root->pLeft->pRight->data == 9);
+    assert(buildBST.root->pLeft->pRight->pParent == buildBST.root->pLeft);
     assert(buildBST.root->pLeft->pRight->pRight == NULL);
     assert(buildBST.root->pLeft->pRight->pLeft == NULL);
-    assert(buildBST.root->pLeft->pLeft == NULL);
-    assert(buildBST.numElements == 4);
+    
     
     buildBST.insert(7);
     //should be                                                     |
@@ -566,19 +631,28 @@ int main(int argc, const char * argv[]) {
     //                                                       ----9
     //                                                      |
     //                                                      7
-    
+    assert(buildBST.numElements == 4);
     assert(buildBST.root->data == 10);
+    assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pRight != NULL);
     assert(buildBST.root->pRight->data == 11);
+    assert(buildBST.root->pRight->pParent = buildBST.root);
+    assert(buildBST.root->pRight->pRight == NULL);
+    assert(buildBST.root->pRight->pLeft == NULL);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
-    assert(buildBST.root->pLeft->pRight != NULL);
+    assert(buildBST.root->pLeft->pParent == buildBST.root);
+    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pLeft == NULL);
     assert(buildBST.root->pLeft->pRight->data == 9);
+    assert(buildBST.root->pLeft->pRight->pParent == buildBST.root->pLeft);
     assert(buildBST.root->pLeft->pRight->pRight == NULL);
     assert(buildBST.root->pLeft->pRight->pLeft != NULL);
     assert(buildBST.root->pLeft->pRight->pLeft->data == 7);
-    assert(buildBST.root->pLeft->pLeft == NULL);
-    assert(buildBST.numElements == 5);
+    assert(buildBST.root->pLeft->pRight->pLeft->pParent == buildBST.root->pLeft->pRight);
+    assert(buildBST.root->pLeft->pRight->pLeft->pLeft == NULL);
+    assert(buildBST.root->pLeft->pRight->pLeft->pRight == NULL);
+    
     
     buildBST.insert(6);
     //should be                                                     |
@@ -591,22 +665,32 @@ int main(int argc, const char * argv[]) {
     //                                                   ---7
     //                                                  |
     //                                                  6
-    
+    assert(buildBST.numElements == 4);
     assert(buildBST.root->data == 10);
+    assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pRight != NULL);
     assert(buildBST.root->pRight->data == 11);
+    assert(buildBST.root->pRight->pParent = buildBST.root);
+    assert(buildBST.root->pRight->pRight == NULL);
+    assert(buildBST.root->pRight->pLeft == NULL);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
-    assert(buildBST.root->pLeft->pRight != NULL);
+    assert(buildBST.root->pLeft->pParent == buildBST.root);
+    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pLeft == NULL);
     assert(buildBST.root->pLeft->pRight->data == 9);
+    assert(buildBST.root->pLeft->pRight->pParent == buildBST.root->pLeft);
     assert(buildBST.root->pLeft->pRight->pRight == NULL);
     assert(buildBST.root->pLeft->pRight->pLeft != NULL);
     assert(buildBST.root->pLeft->pRight->pLeft->data == 7);
+    assert(buildBST.root->pLeft->pRight->pLeft->pParent == buildBST.root->pLeft->pRight);
     assert(buildBST.root->pLeft->pRight->pLeft->pRight == NULL);
     assert(buildBST.root->pLeft->pRight->pLeft->pLeft != NULL);
     assert(buildBST.root->pLeft->pRight->pLeft->pLeft->data == 6);
-    assert(buildBST.root->pLeft->pLeft == NULL);
-    assert(buildBST.numElements == 6);
+    assert(buildBST.root->pLeft->pRight->pLeft->pLeft->pParent == buildBST.root->pLeft->pRight->pLeft);
+    assert(buildBST.root->pLeft->pRight->pLeft->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pRight->pLeft->pLeft->pLeft == NULL);
+    
     
     buildBST.insert(8);
     //should be                                                     |
@@ -619,23 +703,37 @@ int main(int argc, const char * argv[]) {
     //                                                   ---7---
     //                                                  |       |
     //                                                  6       8
-    
+    assert(buildBST.numElements == 7);
+    assert(buildBST.numElements == 4);
     assert(buildBST.root->data == 10);
+    assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pRight != NULL);
     assert(buildBST.root->pRight->data == 11);
+    assert(buildBST.root->pRight->pParent = buildBST.root);
+    assert(buildBST.root->pRight->pRight == NULL);
+    assert(buildBST.root->pRight->pLeft == NULL);
     assert(buildBST.root->pLeft != NULL);
     assert(buildBST.root->pLeft->data == 5);
-    assert(buildBST.root->pLeft->pRight != NULL);
+    assert(buildBST.root->pLeft->pParent == buildBST.root);
+    assert(buildBST.root->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pLeft == NULL);
     assert(buildBST.root->pLeft->pRight->data == 9);
+    assert(buildBST.root->pLeft->pRight->pParent == buildBST.root->pLeft);
     assert(buildBST.root->pLeft->pRight->pRight == NULL);
     assert(buildBST.root->pLeft->pRight->pLeft != NULL);
     assert(buildBST.root->pLeft->pRight->pLeft->data == 7);
-    assert(buildBST.root->pLeft->pRight->pLeft->pRight != NULL);
-    assert(buildBST.root->pLeft->pRight->pLeft->pRight->data == 8);
+    assert(buildBST.root->pLeft->pRight->pLeft->pParent == buildBST.root->pLeft->pRight);
     assert(buildBST.root->pLeft->pRight->pLeft->pLeft != NULL);
+    assert(buildBST.root->pLeft->pRight->pLeft->pRight != NULL);
     assert(buildBST.root->pLeft->pRight->pLeft->pLeft->data == 6);
-    assert(buildBST.root->pLeft->pLeft == NULL);
-    assert(buildBST.numElements == 7);
+    assert(buildBST.root->pLeft->pRight->pLeft->pLeft->pParent == buildBST.root->pLeft->pRight->pLeft);
+    assert(buildBST.root->pLeft->pRight->pLeft->pLeft->pRight == NULL);
+    assert(buildBST.root->pLeft->pRight->pLeft->pLeft->pLeft == NULL);
+    assert(buildBST.root->pLeft->pRight->pLeft->pRight->data == 8);
+    assert(buildBST.root->pLeft->pRight->pLeft->pRight->pParent == buildBST.root->pLeft->pRight->pLeft);
+    assert(buildBST.root->pLeft->pRight->pLeft->pRight->pRight == NULL);
+    assert(buildBST.root->pLeft->pRight->pLeft->pRight->pLeft == NULL);
+    
     
     cout<<"Passed Insert Tests"<<endl;
     
@@ -934,19 +1032,24 @@ int main(int argc, const char * argv[]) {
     eraseTree.root->data = 13;
     eraseTree.root->pLeft = new BST<int>::BNode();
     eraseTree.root->pLeft->data = 5;
+    eraseTree.root->pLeft->pParent = eraseTree.root;
     eraseTree.root->pLeft->pLeft = new BST<int>::BNode();
     eraseTree.root->pLeft->pLeft->data = 4;
+    eraseTree.root->pLeft->pLeft->pParent = eraseTree.root->pLeft;
     eraseTree.root->pLeft->pLeft->pRight = NULL;
     eraseTree.root->pLeft->pLeft->pLeft = NULL;
     eraseTree.root->pLeft->pRight = new BST<int>::BNode();
     eraseTree.root->pLeft->pRight->data = 11;
+    eraseTree.root->pLeft->pRight->pParent = eraseTree.root->pLeft;
     eraseTree.root->pLeft->pRight->pRight = NULL;
     eraseTree.root->pLeft->pRight->pLeft = NULL;
     
     eraseTree.root->pRight = new BST<int>::BNode();
     eraseTree.root->pRight->data = 22;
+    eraseTree.root->pRight->pParent = eraseTree.root;
     eraseTree.root->pRight->pLeft = new BST<int>::BNode();
     eraseTree.root->pRight->pLeft->data = 21;
+    eraseTree.root->pRight->pLeft->pParent = eraseTree.root->pRight;
     eraseTree.root->pRight->pRight = new BST<int>::BNode();
     eraseTree.root->pRight->pRight->data = 23;
     
