@@ -118,6 +118,7 @@ int main(int argc, const char * argv[]) {
     //                                                       5             9             11
     
     //reusing bstToCopy
+    bstToCopy.numElements = 6;
     bstToCopy.root = new BST<int>::BNode();
     bstToCopy.root->data = 7;
     
@@ -320,7 +321,7 @@ int main(int argc, const char * argv[]) {
     //                                                       5             9             11
     
     BST<int> insertIntoBST;
-    
+    insertIntoBST.numElements = 6
     insertIntoBST.root = new BST<int>::BNode();
     insertIntoBST.root->data = 7;
     
@@ -928,6 +929,7 @@ int main(int argc, const char * argv[]) {
     //                                                     4         11      21         23
     
     BST<int>eraseTree;
+    eraseTree.numElements = 7;
     eraseTree.root = new BST<int>::BNode();
     eraseTree.root->data = 13;
     eraseTree.root->pLeft = new BST<int>::BNode();
@@ -963,6 +965,7 @@ int main(int argc, const char * argv[]) {
     
     assert(unit_testing_delete_call_counter == 1);
     assert(eraseTree.root->pLeft->pLeft == NULL);
+    assert(eraseTree.numElements == 6);
     
     //setting up
     BST<int>::BNode* elevenNode = eraseTree.root->pLeft->pRight;
@@ -980,6 +983,7 @@ int main(int argc, const char * argv[]) {
     //                                                                       21         23
     assert(unit_testing_delete_call_counter == 1);
     assert(eraseTree.root->pLeft == elevenNode);
+    assert(eraseTree.numElements == 5);
     
     //rebuild tree for next test
     //                                                                  |
@@ -994,6 +998,8 @@ int main(int argc, const char * argv[]) {
     elevenNode->pLeft->data = 10;
     elevenNode->pRight = new BST<int>::BNode();
     elevenNode->pRight->data = 12;
+    
+    eraseTree.numElements = 7;
     
     //setting up
     BST<int>::BNode* twentyOneNode = eraseTree.root->pRight->pLeft;
@@ -1015,6 +1021,7 @@ int main(int argc, const char * argv[]) {
     assert(eraseTree.root->pRight == twentyTwoNode);
     assert(eraseTree.root->pRight->pLeft == NULL);
     assert(eraseTree.root->pLeft == elevenNode);
+    assert(eraseTree.numElements == 6);
     
     cout<<"Passed BST Erase Tests"<<endl;
     
