@@ -786,6 +786,7 @@ int main(int argc, const char * argv[]) {
     BST<int>::iterator otherNullNodeIterator;
     assert(nullNodeIterator == nullNodeIterator);//compare the memory locations of nodes
     assert(otherNullNodeIterator == otherNullNodeIterator);
+    assert(!(nullNodeIterator == otherNullNodeIterator));
     
     
     //resetting
@@ -793,7 +794,7 @@ int main(int argc, const char * argv[]) {
     BST<int>::iterator nonNullNodeIterator;
     nonNullNodeIterator.ptr = noDataNodePtr;
     assert(nonNullNodeIterator == nonNullNodeIterator);//compare memory locations of nodes
-    assert((nonNullNodeIterator == nullNodeIterator) == false);
+    assert(!(nonNullNodeIterator == nullNodeIterator));
     
     //setting up a node with the data
     BST<int>::BNode* dataNodePtr = new BST<int>::BNode();
