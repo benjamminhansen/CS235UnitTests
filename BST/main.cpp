@@ -1217,7 +1217,7 @@ int main(int argc, const char * argv[]) {
     assert((--decrementIterator).ptr == eraseTree.root->pRight);
     //middle of tree test
     decrementIterator.ptr = eraseTree.root->pLeft->pRight;//(12)
-    assert((--decrementIterator.ptr) == eraseTree.root->pLeft);
+    assert((--decrementIterator).ptr == eraseTree.root->pLeft);
     
     cout<<"Passed Iterator Pre-Decrement Tests"<<endl;
     
@@ -1244,7 +1244,7 @@ int main(int argc, const char * argv[]) {
     assert(decrementIterator.ptr == NULL);
     //end of tree test
     decrementIterator.ptr = eraseTree.root->pRight->pRight;//(23)
-    assert((decrementIterator--).ptr == eraseTree.root->pRight);
+    assert((decrementIterator--).ptr == eraseTree.root->pRight->pRight);
     //middle of tree test
     decrementIterator.ptr = eraseTree.root->pLeft->pRight;//(12)
     assert((decrementIterator--).ptr == eraseTree.root->pLeft->pRight);
