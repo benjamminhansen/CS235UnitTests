@@ -227,8 +227,8 @@ int main(int argc, const char * argv[]) {
     //                                                            ----<f,7>------
     //                                                            |              |
     //                                                       ---<c,21>--     --<g,10>------
-    //                                                       |             |              |
-    //                                                     <b,3>         <s,-5>         <z,0>
+    //                                                       |               |             |
+    //                                                     <b,3>           <s,-5>        <z,0>
     
     
     map<char, int> builtMap;
@@ -269,10 +269,11 @@ int main(int argc, const char * argv[]) {
     map<char,int>::pair<char,int>cPair;
     cPair.first = 'c';
     cPair.second = 21;
-    insertRootRight->data = cPair;
+    insertRootLeft->data = cPair;
     insertRootLeft->pRight = NULL;
-    insertRootLeft->pParent = builtMap.bst.root;//(7)
-    builtMap.bst.root->pLeft = insertRootLeft;//(6)
+    insertRootLeft->pParent = builtMap.bst.root;// <f,7>
+    builtMap.bst.root->pLeft = insertRootLeft;// <c,21>
+    insertRootLeft->pRight = NULL;
     
     
     BST<map<char,int>::pair<char,int>>::BNode* insertRootLeftLeft = new BST<map<char,int>::pair<char,int>>::BNode();
@@ -292,8 +293,8 @@ int main(int argc, const char * argv[]) {
     //                                                            ----<f,7>------
     //                                                            |              |
     //                                                       ---<c,21>--     --<g,10>------
-    //                                                       |             |              |
-    //                                                     <b,3>         <s,-5>         <z,0>
+    //                                                       |               |             |
+    //                                                     <b,3>           <s,-5>        <z,0>
     
     assert(copiedBuiltMap.bst.root != NULL);
     assert(copiedBuiltMap.bst.root != builtMap.bst.root);
@@ -396,8 +397,309 @@ int main(int argc, const char * argv[]) {
      */
     
     map<char,int>::iterator emptyIterator;
-    
     assert(emptyIterator.it.ptr == NULL);
+    
+    map<char, int>::iterator emptyIteratorCopy(emptyIterator);
+    assert(emptyIteratorCopy.it.ptr == NULL);
+    
+    //Generating small BST with the values                              |
+    //                                                            ----<j,32>------
+    //                                                            |              |
+    //                                                       ---<i,-1>----     <q,1000>------
+    //                                                       |            |                  |
+    //                                                     <a,100>      <e,8>              <y,-3>
+    map<char, int> iterMap;
+    iterMap.bst.numElements = 5;
+    iterMap.bst.root = new BST<map<char,int>::pair<char,int>>::BNode();
+    map<char,int>::pair<char,int>jPair;
+    fPair.first = 'j';
+    fPair.second = 32;
+    iterMap.bst.root->data = jPair;
+    
+    //right subtree
+    //reusing insert pointers
+    insertRootRight = new BST<map<char,int>::pair<char,int>>::BNode();
+    map<char,int>::pair<char,int>qPair;
+    gPair.first = 'q';
+    gPair.second = 1000;
+    insertRootRight->data = qPair;
+    insertRootRight->pParent = iterMap.bst.root;// <j,32>
+    iterMap.bst.root->pRight = insertRootRight;// <q,1000>
+    insertRootRight->pLeft = NULL;
+    
+    insertRootRightRight = new BST<map<char,int>::pair<char,int>>::BNode();
+    map<char,int>::pair<char,int>yPair;
+    zPair.first = 'y';
+    zPair.second = -3;
+    insertRootRight->data = zPair;
+    insertRootRightRight->pParent = insertRootRight;// <q,1000>
+    insertRootRight->pRight = insertRootRightRight;// <y,-3>
+    insertRootRight->pLeft = NULL;
+
+
+    //left subtree
+    insertRootLeft = new BST<map<char,int>::pair<char,int>>::BNode();
+    map<char,int>::pair<char,int>iPair;
+    cPair.first = 'i';
+    cPair.second = -1;
+    insertRootRight->data = iPair;
+    insertRootLeft->pParent = iterMap.bst.root;// <j,32>
+    iterMap.bst.root->pLeft = insertRootLeft;// <i,-1>
+    
+    insertRootLeftLeft = new BST<map<char,int>::pair<char,int>>::BNode();
+    map<char,int>::pair<char,int>aPair;
+    bPair.first = 'a';
+    bPair.second = 100;
+    insertRootRight->data = aPair;
+    insertRootLeftLeft->pRight = NULL;
+    insertRootLeftLeft->pLeft = NULL;
+    insertRootLeftLeft->pParent = insertRootLeft;// <i,-1>
+    insertRootLeft->pLeft = insertRootLeftLeft;// <a,100>
+    
+    BST<map<char,int>::pair<char,int>>::BNode* insertRootLeftRight = new BST<map<char,int>::pair<char,int>>::BNode();
+    map<char,int>::pair<char,int>ePair;
+    bPair.first = 'e';
+    bPair.second = 8;
+    insertRootRight->data = ePair;
+    insertRootLeftRight->pRight = NULL;
+    insertRootLeftRight->pLeft = NULL;
+    insertRootLeftRight->pParent = insertRootLeft;// <i,-1>
+    insertRootLeft->pRight = insertRootLeftRight;// <e,8>
+    
+    // BST with the values                                              |
+    //                                                            ----<j,32>------
+    //                                                            |              |
+    //                                                       ---<i,-1>----     <q,1000>------
+    //                                                       |            |                  |
+    //                                                     <a,100>      <e,8>              <y,-3>
+
+    /*
+     * Testing map begin
+     */
+    assert(defaultMap.begin().it.ptr == NULL);
+    assert(iterMap.begin().it.ptr->data.first == 'a');
+    assert(iterMap.begin().it.ptr->data.second == 100);
+    
+    cout<<"Passed Map Begin Test"<<endl;
+    
+    /*
+     * Testing map end
+     */
+    assert(defaultMap.end().it.ptr == NULL);
+    assert(iterMap.end().it.ptr->data.first == 'y');
+    assert(iterMap.end().it.ptr->data.second == -3);
+    
+    cout<<"Passed Map End Test"<<endl;
+    
+    /*
+     * Testing iterator equality operator
+     */
+    
+    map<char,int>::iterator nullNodeIterator;
+    map<char,int>::iterator otherNullNodeIterator;
+    assert(nullNodeIterator == nullNodeIterator);
+    assert(otherNullNodeIterator == otherNullNodeIterator);
+    assert(!(nullNodeIterator == otherNullNodeIterator));
+    
+    
+    map<char,int>::iterator nonNullNodeIterator;
+    map<char,int>::pair<char,int> somePair;
+    somePair.first = '!';
+    somePair.second = 567;
+    BST<custom::map<char, int>::pair<char, int> >::BNode commonNode;
+    commonNode.data = somePair;
+    nonNullNodeIterator.it.ptr = &commonNode;
+    
+    
+    map<char,int>::iterator otherNonNullNodeIterator;
+    otherNonNullNodeIterator.it.ptr = &commonNode;
+    assert(nonNullNodeIterator == otherNonNullNodeIterator);
+    
+    cout<<"Passed Iterator == Tests"<<endl;
+    
+    /*
+     * Testing iterator not-equal operator
+     */
+    
+    //reusing nullNodeIterator, nonNullNodeIterator, and otherNonNullNodeIterator
+    
+    map<char,int>::pair<char,int> someOtherPair;
+    someOtherPair.first = '$';
+    someOtherPair.second = 567;
+    BST<custom::map<char, int>::pair<char, int> >::BNode someOtherNode;
+    someOtherNode.data = someOtherPair;
+    otherNonNullNodeIterator.it.ptr = &someOtherNode;
+    assert(otherNonNullNodeIterator != nonNullNodeIterator);
+    assert(!(nullNodeIterator != nullNodeIterator));
+    assert(!(nonNullNodeIterator != nonNullNodeIterator));
+    //resetting
+    otherNonNullNodeIterator.it.ptr = nonNullNodeIterator.it.ptr;
+    assert(!(otherNonNullNodeIterator != nonNullNodeIterator));
+    
+    cout<<"Passed Iterator != Operator Tests"<<endl;
+    
+    /*
+     * Testing iterator assignment operator
+     */
+    
+    //reusing nonNullNodeIterator
+    map<char,int>::iterator assignedTo = nonNullNodeIterator;
+    assert(assignedTo.it.ptr != NULL);
+    assert(assignedTo.it.ptr == nonNullNodeIterator.it.ptr);
+    
+    assignedTo = emptyIterator;
+    assert(assignedTo.it.ptr == NULL);
+    
+    cout<<"Passed Iterator = Operator Tests"<<endl;
+    
+    /*
+     * Testing iterator dereference operator
+     */
+    
+    try {
+        *emptyIterator;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: dereferencing null node."));
+    }
+    map<char,int>::pair<char, int> retrievedPair = *nonNullNodeIterator;
+    assert(retrievedPair.first == nonNullNodeIterator.it.ptr->data.first);
+    assert(retrievedPair.second == nonNullNodeIterator.it.ptr->data.second);
+    
+    cout<<"Passed Iterator * Tests"<<endl;
+    
+
+    /*
+     * Testing iterator pre-increment operator
+     */
+    // BST with the values                                              |
+    //                                                            ----<j,32>------
+    //                                                            |              |
+    //                                                       ---<i,-1>----     <q,1000>------
+    //                                                       |            |                  |
+    //                                                     <a,100>      <e,8>              <y,-3>
+    
+    //reusing iterMap
+    map<char, int>::iterator incrementIterator;
+    incrementIterator.it.ptr = NULL;
+    try {
+        ++incrementIterator;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: incrementing null node.") == 0);
+    }
+    //beginning of tree test
+    incrementIterator.it.ptr = insertRootLeftLeft;// <a,100>
+    assert((++incrementIterator).it.ptr == insertRootLeftRight);// <e,8>
+    //end of tree test
+    incrementIterator.it.ptr = insertRootRightRight;// <y,-3>
+    assert((++incrementIterator).it.ptr == NULL);
+    //middle of tree test
+    incrementIterator.it.ptr = insertRootLeftRight;// <e,8>
+    assert((++incrementIterator).it.ptr == insertRootLeft);
+    
+    cout<<"Passed Iterator Pre-Increment Test"<<endl;
+    
+    /*
+     * Testing iterator post increment operator
+     */
+    
+    
+    // BST with the values                                              |
+    //                                                            ----<j,32>------
+    //                                                            |              |
+    //                                                       ---<i,-1>----     <q,1000>------
+    //                                                       |            |                  |
+    //                                                     <a,100>      <e,8>              <y,-3>
+    
+    //reusing iterMap
+    incrementIterator.it.ptr = NULL;
+    try {
+        incrementIterator++;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: incrementing null node.") == 0);
+    }
+    //reusing iterMap
+    //beginning of tree test
+    incrementIterator.it.ptr = insertRootLeftLeft;// <a,100>
+    assert((incrementIterator++).it.ptr == insertRootLeftLeft);// <a,100>
+    assert(incrementIterator.it.ptr == insertRootLeftRight);// <e,8>
+    //end of tree test
+    incrementIterator.it.ptr = insertRootRightRight;// <y,-3>
+    assert((incrementIterator++).it.ptr == insertRootRightRight);// <y,-3>
+    assert(incrementIterator.it.ptr == NULL);
+    //middle of tree test
+    incrementIterator.it.ptr = insertRootLeftRight;// <e,8>
+    assert((incrementIterator++).it.ptr == insertRootLeftRight);// <e,8>
+    assert(incrementIterator.it.ptr == insertRootLeft);// <i,-1>
+    
+    cout<<"Passed Iterator Post Increment Test"<<endl;
+    
+    /*
+     * Testing iterator pre-decrement operator
+     */
+    // BST with the values                                              |
+    //                                                            ----<j,32>------
+    //                                                            |              |
+    //                                                       ---<i,-1>----     <q,1000>------
+    //                                                       |            |                  |
+    //                                                     <a,100>      <e,8>              <y,-3>
+    
+    //reusing iterMap
+    map<char, int>::iterator decrementIterator;
+    decrementIterator.it.ptr = NULL;
+    try {
+        --decrementIterator;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: decrementing null node.") == 0);
+    }
+    //beginning of tree test
+    decrementIterator.it.ptr = insertRootLeftLeft;// <a,100>
+    assert((--decrementIterator).it.ptr == NULL);
+    //end of tree test
+    decrementIterator.it.ptr = insertRootRightRight;// <y,-3>
+    assert((--decrementIterator).it.ptr == insertRootRight);
+    //middle of tree test
+    decrementIterator.it.ptr = insertRootLeftRight;//(12)
+    assert((--decrementIterator).it.ptr == insertRootLeft);
+    
+    cout<<"Passed Iterator Pre-Decrement Tests"<<endl;
+    
+    /*
+     * Testing iterator post decrement operator
+     */
+    // BST with the values                                              |
+    //                                                            ----<j,32>------
+    //                                                            |              |
+    //                                                       ---<i,-1>----     <q,1000>------
+    //                                                       |            |                  |
+    //                                                     <a,100>      <e,8>              <y,-3>
+    
+    //reusing iterMap
+    decrementIterator.it.ptr = NULL;
+    try {
+        decrementIterator--;
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: decrementing null node.") == 0);
+    }
+    //beginning of tree test
+    decrementIterator.it.ptr = insertRootLeftLeft;// <a,100>
+    assert((decrementIterator--).it.ptr == insertRootLeftLeft);// <a,100>
+    assert(decrementIterator.it.ptr == NULL);
+    //end of tree test
+    decrementIterator.it.ptr = insertRootRightRight;// <y,-3>
+    assert((decrementIterator--).it.ptr == insertRootRightRight);
+    //middle of tree test
+    decrementIterator.it.ptr = insertRootLeftRight;// <e,8>
+    assert((decrementIterator--).it.ptr == insertRootLeftRight);// <e,8>
+    assert(decrementIterator.it.ptr == insertRootLeft);// <i,-1>
+    
+    cout<<"Passed Iterator Post Decrement Tests"<<endl;
+    
+    //*ToDo: Write string test.
     
     
 }
