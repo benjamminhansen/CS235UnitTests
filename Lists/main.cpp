@@ -227,7 +227,7 @@ int main(int argc, const char* argv[])
     currentNodePtr = NULL;
     
     delete listToDelete;
-    assert(unit_testing_delete_call_counter == 9);
+    assert(unit_testing_delete_call_counter == 5);
     //kill potential zombie
     listToDelete = NULL;
     
@@ -480,7 +480,7 @@ int main(int argc, const char* argv[])
     //testing non-empty list: 6<=>7
     unit_testing_delete_call_counter = 0;
     listWithStuffInIt.clear();
-    assert(unit_testing_delete_call_counter == 4);
+    assert(unit_testing_delete_call_counter == 2);
     assert(listWithStuffInIt.numElements == 0);
     assert(listWithStuffInIt.pHead == NULL);
     assert(listWithStuffInIt.pTail == NULL);
@@ -634,7 +634,7 @@ int main(int argc, const char* argv[])
     assert(assignedToList.pHead == assignedToList.pTail);
     //making sure the data didn't get messed up
     assert(assignedToList.pHead->data == 123);
-    assert(unit_testing_delete_call_counter == 6);
+    assert(unit_testing_delete_call_counter == 3);
 
     cout<<"Passed Assignment Operator Tests"<<endl;
     
