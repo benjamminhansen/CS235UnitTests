@@ -230,7 +230,6 @@ int main(int argc, const char * argv[]) {
     //                                                       |               |             |
     //                                                     <b,3>           <s,-5>        <z,0>
     
-    
     map<char, int> builtMap;
     //BST<map<char,int>::pair<char,int>> builtMap.bst;
     builtMap.bst.numElements = 6;
