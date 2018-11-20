@@ -80,7 +80,7 @@ int main(int argc, const char * argv[])
      */
     
     try {
-        Hash<int> zeroHash(-2);
+        Hash<int> badParameterHash(-2);
         assert(false);
     } catch (const char* message) {
         cout<<message<<endl;
@@ -88,7 +88,7 @@ int main(int argc, const char * argv[])
     }
     
     try {
-        Hash<int> zeroHash(0);
+        Hash<int> badParameterHash(0);
         assert(false);
     } catch (const char* message) {
         assert(strcmp(message, "Error: Hashes must have at least 1 bucket.") == 0);
@@ -146,18 +146,18 @@ int main(int argc, const char * argv[])
     Hash<int>* singleBucketNoValuesHash = new Hash<int>(1);
     unit_testing_delete_call_counter = 0;
     delete singleBucketNoValuesHash;
-    assert(unit_testing_delete_call_counter == 2);
+    assert(unit_testing_delete_call_counter == 2);//deletes the Hash and the single list
     
     Hash<int>* multipleBucketsMultipleValuesHash = new Hash<int>(3);
     //simulate inserting 8, 7, 3, 9.
-    multipleBucketsMultipleValuesHash->table[2]->pHead= new list<long>::node(8);
-    multipleBucketsMultipleValuesHash->table[1]->pHead= new list<long>::node(7);
-    multipleBucketsMultipleValuesHash->table[0]->pHead= new list<long>::node(3);
-    multipleBucketsMultipleValuesHash->table[0]->pHead= new list<long>::node(9);
+    multipleBucketsMultipleValuesHash->table[2]->pHead = new list<long>::node(8);
+    multipleBucketsMultipleValuesHash->table[1]->pHead = new list<long>::node(7);
+    multipleBucketsMultipleValuesHash->table[0]->pHead = new list<long>::node(3);
+    multipleBucketsMultipleValuesHash->table[0]->pHead->pNext = new list<long>::node(9);
     unit_testing_delete_call_counter = 0;
     delete multipleBucketsMultipleValuesHash;
     //The list implementation you did is a shallow copy.
-    assert(unit_testing_delete_call_counter == 8);
+    assert(unit_testing_delete_call_counter == 7);//deletes the Hash, 3 lists, and 4 nodes but not the data in the nodes.
     
     cout<<"Passed Hash Destructor Tests"<<endl;
     
@@ -213,6 +213,16 @@ int main(int argc, const char * argv[])
     hashToCopy.table[3]->pHead->pNext = new list<long>::node(3);
     hashToCopy.table[4]->pHead = new list<long>::node(9);
     
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <>,
+     *                          <>,
+     *                          <7>,
+     *                          <8,3>,
+     *                          <9>
+     *                       ]
+     */
+    
     Hash<int> copiedHash(hashToCopy);
     assert(copiedHash.numBuckets == 5);
     assert(copiedHash.numElements == 4);
@@ -238,6 +248,13 @@ int main(int argc, const char * argv[])
     assignFrom.table[1]->pHead= new list<long>::node(7);
     assignFrom.table[0]->pHead= new list<long>::node(3);
     assignFrom.table[0]->pHead->pNext= new list<long>::node(9);
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <3,9>,
+     *                          <7>,
+     *                          <8>
+     *                       ]
+     */
     
     Hash<int>emptyAssignTo(5);
     unit_testing_delete_call_counter = 0;
@@ -264,7 +281,13 @@ int main(int argc, const char * argv[])
     filledAssignTo.table[1]->pHead= new list<long>::node(7);
     filledAssignTo.table[0]->pHead= new list<long>::node(3);
     filledAssignTo.table[0]->pHead->pNext= new list<long>::node(9);
-    
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <3,9>,
+     *                          <7>,
+     *                          <8>
+     *                       ]
+     */
     unit_testing_delete_call_counter = 0;
     filledAssignTo = emptyAssignTo;
     assert(unit_testing_delete_call_counter == 7);
@@ -274,5 +297,228 @@ int main(int argc, const char * argv[])
     assert(filledAssignTo.table[0]->pTail == NULL);
     
     cout<<"Passed Assignment Operator Tests"<<endl;
+    
+    
+    /*
+     * Testing insert
+     */
+    
+    //inserting into empty Hash
+    Hash<int> emptyInsertHash(7);
+    emptyInsertHash.numBuckets = 7;
+    emptyInsertHash.table = new list<long>*[7];
+    emptyInsertHash.numElements = 0;
+    emptyInsertHash.insert(12, hashInt);
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <>,
+     *                          <>,
+     *                          <>,
+     *                          <>,
+     *                          <>,
+     *                          <12>,
+     *                          <>,
+     *                          <>,
+     *                          <>,
+     *                          <>,
+     *                          <>,
+     *                          <>
+     *                       ]
+     */
+    assert(emptyInsertHash.numBuckets == 7);
+    assert(emptyInsertHash.table[0]->pHead == NULL);
+    assert(emptyInsertHash.table[0]->pTail == NULL);
+    assert(emptyInsertHash.table[1]->pHead == NULL);
+    assert(emptyInsertHash.table[1]->pTail == NULL);
+    assert(emptyInsertHash.table[2]->pHead == NULL);
+    assert(emptyInsertHash.table[2]->pTail == NULL);
+    assert(emptyInsertHash.table[3]->pHead == NULL);
+    assert(emptyInsertHash.table[3]->pTail == NULL);
+    assert(emptyInsertHash.table[4]->pHead == NULL);
+    assert(emptyInsertHash.table[4]->pTail == NULL);
+    assert(emptyInsertHash.table[5]->pHead->data == 12);
+    assert(emptyInsertHash.table[5]->pTail->data == 12);
+    assert(emptyInsertHash.table[6]->pHead == NULL);
+    assert(emptyInsertHash.table[6]->pTail == NULL);
+    
+    //inserting into prebuilt Hash
+    
+    //reusing multipleBucketsMultipleValuesHash
+    //prebuilding as if inserted 8, 7, 9, 6.
+    Hash<int>nonEmptyInsertHash(1);
+    //resetting the Hash to have 3 buckets
+    delete [] nonEmptyInsertHash.table;
+    nonEmptyInsertHash.table = new list<int>*[3];
+    nonEmptyInsertHash.numBuckets = 3;
+    nonEmptyInsertHash.numElements = 4;
+    nonEmptyInsertHash.table[2]->pHead = new list<long>::node(8);
+    nonEmptyInsertHash.table[1]->pHead = new list<long>::node(7);
+    nonEmptyInsertHash.table[0]->pHead = new list<long>::node(9);
+    nonEmptyInsertHash.table[0]->pHead->pNext = new list<long>::node(6);
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <9,6>,
+     *                          <7>,
+     *                          <8>
+     *                       ]
+     */
+    
+    nonEmptyInsertHash.insert(22, hashInt);
+    
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <9,6>,
+     *                          <7,22>,
+     *                          <8>
+     *                       ]
+     */
+    assert(nonEmptyInsertHash.numBuckets == 3);
+    assert(nonEmptyInsertHash.numElements == 5);
+    assert(*(nonEmptyInsertHash.table[0]->pHead->data) == 9);
+    assert(*(nonEmptyInsertHash.table[0]->pTail->data) == 6);
+    assert(*(nonEmptyInsertHash.table[1]->pHead->data) == 7);
+    assert(*(nonEmptyInsertHash.table[1]->pTail->data) == 22);
+    assert(*(nonEmptyInsertHash.table[2]->pHead->data) == 8);
+    assert(*(nonEmptyInsertHash.table[2]->pTail->data) == 8);
+    
+    
+    nonEmptyInsertHash.insert(2, hashInt);
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <9,6>,
+     *                          <7,22>,
+     *                          <8,2>
+     *                       ]
+     */
+    assert(nonEmptyInsertHash.numBuckets == 3);
+    assert(nonEmptyInsertHash.numElements == 7);
+    assert(*(nonEmptyInsertHash.table[0]->pHead->data) == 9);
+    assert(*(nonEmptyInsertHash.table[0]->pTail->data) == 6);
+    assert(*(nonEmptyInsertHash.table[1]->pHead->data) == 7);
+    assert(*(nonEmptyInsertHash.table[1]->pTail->data) == 22);
+    assert(*(nonEmptyInsertHash.table[2]->pHead->data) == 8);
+    assert(*(nonEmptyInsertHash.table[2]->pTail->data) == 2);
+    
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <9,6>,
+     *                          <7,22>,
+     *                          <8,2,11>
+     *                       ]
+     */
+    nonEmptyInsertHash.insert(11, hashInt);
+    assert(nonEmptyInsertHash.numBuckets == 3);
+    assert(nonEmptyInsertHash.numElements == 8);
+    assert(*(nonEmptyInsertHash.table[0]->pHead->data) == 9);
+    assert(*(nonEmptyInsertHash.table[0]->pTail->data) == 6);
+    assert(*(nonEmptyInsertHash.table[1]->pHead->data) == 7);
+    assert(*(nonEmptyInsertHash.table[1]->pTail->data) == 22);
+    assert(*(nonEmptyInsertHash.table[2]->pHead->data) == 8);
+    assert(*(nonEmptyInsertHash.table[2]->pHead->pNext->data) == 2);
+    assert(*(nonEmptyInsertHash.table[2]->pTail->data) == 11);
+    
+    cout<<"Passed Hash Insert Tests"<<endl;
+    
+    
+    
+    /*
+     * Testing find
+     */
+    
+    Hash<int> emptyFindHash(1);
+    //resetting
+    delete [] emptyFindHash.table;
+    emptyFindHash.table = new list<int>*[1];
+    
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <>
+     *                       ]
+     */
+    assert(emptyFindHash.find(31, hashInt) == false);
+    
+    Hash<int> nonEmptyFindHash(1);
+    //resetting the Hash to have 3 buckets
+    delete [] nonEmptyFindHash.table;
+    nonEmptyFindHash.table = new list<int>*[3];
+    nonEmptyFindHash.numBuckets = 3;
+    nonEmptyFindHash.numElements = 4;
+    nonEmptyFindHash.table[2]->pHead = new list<long>::node(8);
+    nonEmptyFindHash.table[1]->pHead = new list<long>::node(7);
+    nonEmptyFindHash.table[0]->pHead = new list<long>::node(9);
+    nonEmptyFindHash.table[0]->pHead->pNext = new list<long>::node(6);
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <9,6>,
+     *                          <7>,
+     *                          <8>
+     *                       ]
+     */
+    
+    assert(nonEmptyFindHash.find(8, hashInt) == true);
+    assert(nonEmptyFindHash.find(7, hashInt) == true);
+    assert(nonEmptyFindHash.find(9, hashInt) == true);
+    assert(nonEmptyFindHash.find(6, hashInt) == true);
+    
+    assert(nonEmptyFindHash.find(-1, hashInt) == false);
+    assert(nonEmptyFindHash.find(31, hashInt) == false);
+    
+    
+    cout<<"Passed Hash Find Tests"<<endl;
+    
+    /*
+     * Testing Hash for Non-Integer Behavior (just to see if it works for other types)
+     */
+    
+    Hash<string> nameHash(12);
+    nameHash.insert("",hashString);
+    nameHash.insert(" ",hashString);
+    nameHash.insert("~",hashString);
+    nameHash.insert("Bob",hashString);
+    nameHash.insert("bob",hashString);
+    nameHash.insert("boB",hashString);
+    nameHash.insert("Sue",hashString);
+    nameHash.insert("sue",hashString);
+    nameHash.insert("Suzy",hashString);
+    nameHash.insert("Sven",hashString);
+    nameHash.insert("Gunhilda",hashString);
+    nameHash.insert("gunhilda",hashString);
+    nameHash.insert("gunHilda",hashString);
+    nameHash.insert("gunHilda",hashString);
+    /* hash array with lists is now (with <> meaning empty list)
+     *                       [
+     *                          <boB>,
+     *                          <Gunhilda,gunhilda,gunHilda>,
+     *                          <Sue,sue>,
+     *                          <~>,
+     *                          <Suzy>,
+     *                          <""," ",Sven,gunhildA>,
+     *                          <>,
+     *                          <>,
+     *                          <>,
+     *                          <>,
+     *                          <>,
+     *                          <>
+     *                       ]
+     */
+    
+    assert(*(nameHash.table[0]->pHead->data) == "boB");
+    assert(*(nameHash.table[0]->pTail->data) == "boB");
+    assert(*(nameHash.table[1]->pHead->data) == "Gunhilda");
+    assert(*(nameHash.table[1]->pHead->pNext->data) == "gunhilda");
+    assert(*(nameHash.table[1]->pHead->pNext->pNext->data) == "gunHilda");
+    assert(*(nameHash.table[2]->pHead->data) == "Sue");
+    assert(*(nameHash.table[2]->pTail->data) == "sue");
+    assert(*(nameHash.table[3]->pHead->data) == "~");
+    assert(*(nameHash.table[3]->pTail->data) == "~");
+    assert(*(nameHash.table[4]->pHead->data) == "Suzy");
+    assert(*(nameHash.table[4]->pTail->data) == "Suzy");
+    assert(*(nameHash.table[0]->pHead->data) == "");
+    assert(*(nameHash.table[0]->pHead->pNext->data) == " ");
+    assert(*(nameHash.table[0]->pHead->pNext->pNext->data) == "Sven");
+    assert(*(nameHash.table[0]->pHead->pNext->pNext->->pNext->data) == "gunhildA");
+    assert(*(nameHash.table[0]->pTail->data) == "boB");
+    
+    cout << "This Hash can hold strings!!!!" << endl;
     
 }
