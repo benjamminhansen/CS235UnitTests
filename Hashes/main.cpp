@@ -336,8 +336,8 @@ int main(int argc, const char * argv[])
     assert(emptyInsertHash.table[3]->pTail == NULL);
     assert(emptyInsertHash.table[4]->pHead == NULL);
     assert(emptyInsertHash.table[4]->pTail == NULL);
-    assert(emptyInsertHash.table[5]->pHead->data == 12);
-    assert(emptyInsertHash.table[5]->pTail->data == 12);
+    assert(*(emptyInsertHash.table[5]->pHead->data) == 12);
+    assert(*(emptyInsertHash.table[5]->pTail->data) == 12);
     assert(emptyInsertHash.table[6]->pHead == NULL);
     assert(emptyInsertHash.table[6]->pTail == NULL);
     
