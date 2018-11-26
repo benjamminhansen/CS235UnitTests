@@ -233,14 +233,14 @@ int main(int argc, const char * argv[]) {
     map<char, int> builtMap;
     //BST<map<char,int>::pair<char,int>> builtMap.bst;
     builtMap.bst.numElements = 6;
-    builtMap.bst.root = new BST<map<char,int>::pair<char,int>>::BNode();
+    builtMap.bst.root = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>fPair;
     fPair.first = 'f';
     fPair.second = 7;
     builtMap.bst.root->data = fPair;
     
     
-    BST<map<char,int>::pair<char,int>>::BNode* insertRootRight = new BST<map<char,int>::pair<char,int>>::BNode();
+    BST<map<char,int>::pair<char,int> >::BNode* insertRootRight = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>gPair;
     gPair.first = 'g';
     gPair.second = 10;
@@ -248,23 +248,23 @@ int main(int argc, const char * argv[]) {
     insertRootRight->pParent = builtMap.bst.root;// <f,7>
     builtMap.bst.root->pRight = insertRootRight;// <g,10>
     
-    BST<map<char,int>::pair<char,int>>::BNode* insertRootRightRight = new BST<map<char,int>::pair<char,int>>::BNode();
+    BST<map<char,int>::pair<char,int> >::BNode* insertRootRightRight = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>zPair;
     zPair.first = 'z';
     zPair.second = 0;
-    insertRootRight->data = zPair;
+    insertRootRightRight->data = zPair;
     insertRootRightRight->pParent = insertRootRight;// <g,10>
     insertRootRight->pRight = insertRootRightRight;// <z,0>
     
-    BST<map<char,int>::pair<char,int>>::BNode* insertRootRightLeft = new BST<map<char,int>::pair<char,int>>::BNode();
+    BST<map<char,int>::pair<char,int> >::BNode* insertRootRightLeft = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>sPair;
     sPair.first = 's';
     sPair.second = -5;
-    insertRootRight->data = sPair;
+    insertRootRightLeft->data = sPair;
     insertRootRightLeft->pParent = insertRootRight;// <g,10>
     insertRootRight->pLeft = insertRootRightLeft;// <s,-5>
     
-    BST<map<char,int>::pair<char,int>>::BNode* insertRootLeft = new BST<map<char,int>::pair<char,int>>::BNode();
+    BST<map<char,int>::pair<char,int> >::BNode* insertRootLeft = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>cPair;
     cPair.first = 'c';
     cPair.second = 21;
@@ -275,11 +275,11 @@ int main(int argc, const char * argv[]) {
     insertRootLeft->pRight = NULL;
     
     
-    BST<map<char,int>::pair<char,int>>::BNode* insertRootLeftLeft = new BST<map<char,int>::pair<char,int>>::BNode();
+    BST<map<char,int>::pair<char,int> >::BNode* insertRootLeftLeft = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>bPair;
     bPair.first = 'b';
     bPair.second = 3;
-    insertRootRight->data = cPair;
+    insertRootLeftLeft->data = bPair;
     insertRootLeftLeft->pRight = NULL;
     insertRootLeftLeft->pLeft = NULL;
     insertRootLeftLeft->pParent = insertRootLeft;// <c,21>
@@ -315,15 +315,15 @@ int main(int argc, const char * argv[]) {
     assert(copiedBuiltMap.bst.root->pRight->pRight->data.first == 'z');
     assert(copiedBuiltMap.bst.root->pRight->pRight->data.second == 0);
     assert(copiedBuiltMap.bst.root->pRight->pRight->pParent == copiedBuiltMap.bst.root->pRight);
-    assert(copiedBuiltMap.bst.root->pRight == NULL);
-    assert(copiedBuiltMap.bst.root->pLeft == NULL);
+    assert(copiedBuiltMap.bst.root->pRight->pRight->pRight == NULL);
+    assert(copiedBuiltMap.bst.root->pRight->pRight->pLeft == NULL);
     
     assert(copiedBuiltMap.bst.root->pRight->pLeft != builtMap.bst.root->pRight->pLeft);
     assert(copiedBuiltMap.bst.root->pRight->pLeft->data.first == 's');
     assert(copiedBuiltMap.bst.root->pRight->pLeft->data.second == -5);
-    assert(copiedBuiltMap.bst.root->pRight->pLeft->pParent == copiedBuiltMap.bst.root->pLeft);
-    assert(copiedBuiltMap.bst.root->pRight == NULL);
-    assert(copiedBuiltMap.bst.root->pLeft == NULL);
+    assert(copiedBuiltMap.bst.root->pRight->pLeft->pParent == copiedBuiltMap.bst.root->pRight);
+    assert(copiedBuiltMap.bst.root->pRight->pLeft->pRight == NULL);
+    assert(copiedBuiltMap.bst.root->pRight->pLeft->pLeft == NULL);
     
     
     //testing left sub-tree
@@ -332,21 +332,15 @@ int main(int argc, const char * argv[]) {
     assert(copiedBuiltMap.bst.root->pLeft->data.second == 21);
     assert(copiedBuiltMap.bst.root->pLeft->pParent == copiedBuiltMap.bst.root);
     assert(copiedBuiltMap.bst.root->pLeft->pLeft != NULL);
-    assert(copiedBuiltMap.bst.root->pLeft->pRight != NULL);
+    assert(copiedBuiltMap.bst.root->pLeft->pRight == NULL);
     
     assert(copiedBuiltMap.bst.root->pLeft->pLeft != builtMap.bst.root->pLeft->pLeft);
-    assert(copiedBuiltMap.bst.root->pLeft->pLeft->data.first == 'c');
-    assert(copiedBuiltMap.bst.root->pLeft->pLeft->data.second == 21);
+    assert(copiedBuiltMap.bst.root->pLeft->pLeft->data.first == 'b');
+    assert(copiedBuiltMap.bst.root->pLeft->pLeft->data.second == 3);
     assert(copiedBuiltMap.bst.root->pLeft->pLeft->pParent == copiedBuiltMap.bst.root->pLeft);
     assert(copiedBuiltMap.bst.root->pLeft->pLeft->pLeft == NULL);
     assert(copiedBuiltMap.bst.root->pLeft->pLeft->pRight == NULL);
     
-    assert(copiedBuiltMap.bst.root->pLeft->pRight != builtMap.bst.root->pLeft->pRight);
-    assert(copiedBuiltMap.bst.root->pLeft->pRight->data.first == 'b');
-    assert(copiedBuiltMap.bst.root->pLeft->pRight->data.second == 3);
-    assert(copiedBuiltMap.bst.root->pLeft->pRight->pParent == copiedBuiltMap.bst.root->pLeft);
-    assert(copiedBuiltMap.bst.root->pLeft->pRight->pRight == NULL);
-    assert(copiedBuiltMap.bst.root->pLeft->pRight->pLeft == NULL);
     
     cout<<"Passed Map Constructor Tests"<<endl;
     
@@ -409,57 +403,57 @@ int main(int argc, const char * argv[]) {
     //                                                     <a,100>      <e,8>              <y,-3>
     map<char, int> iterMap;
     iterMap.bst.numElements = 5;
-    iterMap.bst.root = new BST<map<char,int>::pair<char,int>>::BNode();
+    iterMap.bst.root = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>jPair;
-    fPair.first = 'j';
-    fPair.second = 32;
+    jPair.first = 'j';
+    jPair.second = 32;
     iterMap.bst.root->data = jPair;
     
     //right subtree
     //reusing insert pointers
-    insertRootRight = new BST<map<char,int>::pair<char,int>>::BNode();
+    insertRootRight = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>qPair;
-    gPair.first = 'q';
-    gPair.second = 1000;
+    qPair.first = 'q';
+    qPair.second = 1000;
     insertRootRight->data = qPair;
     insertRootRight->pParent = iterMap.bst.root;// <j,32>
     iterMap.bst.root->pRight = insertRootRight;// <q,1000>
     insertRootRight->pLeft = NULL;
     
-    insertRootRightRight = new BST<map<char,int>::pair<char,int>>::BNode();
+    insertRootRightRight = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>yPair;
-    zPair.first = 'y';
-    zPair.second = -3;
-    insertRootRight->data = zPair;
+    yPair.first = 'y';
+    yPair.second = -3;
+    insertRootRightRight->data = yPair;
     insertRootRightRight->pParent = insertRootRight;// <q,1000>
     insertRootRight->pRight = insertRootRightRight;// <y,-3>
     insertRootRight->pLeft = NULL;
 
 
     //left subtree
-    insertRootLeft = new BST<map<char,int>::pair<char,int>>::BNode();
+    insertRootLeft = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>iPair;
-    cPair.first = 'i';
-    cPair.second = -1;
-    insertRootRight->data = iPair;
+    iPair.first = 'i';
+    iPair.second = -1;
+    insertRootLeft->data = iPair;
     insertRootLeft->pParent = iterMap.bst.root;// <j,32>
     iterMap.bst.root->pLeft = insertRootLeft;// <i,-1>
     
-    insertRootLeftLeft = new BST<map<char,int>::pair<char,int>>::BNode();
+    insertRootLeftLeft = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>aPair;
-    bPair.first = 'a';
-    bPair.second = 100;
-    insertRootRight->data = aPair;
+    aPair.first = 'a';
+    aPair.second = 100;
+    insertRootLeftLeft->data = aPair;
     insertRootLeftLeft->pRight = NULL;
     insertRootLeftLeft->pLeft = NULL;
     insertRootLeftLeft->pParent = insertRootLeft;// <i,-1>
     insertRootLeft->pLeft = insertRootLeftLeft;// <a,100>
     
-    BST<map<char,int>::pair<char,int>>::BNode* insertRootLeftRight = new BST<map<char,int>::pair<char,int>>::BNode();
+    BST<map<char,int>::pair<char,int> >::BNode* insertRootLeftRight = new BST<map<char,int>::pair<char,int> >::BNode();
     map<char,int>::pair<char,int>ePair;
-    bPair.first = 'e';
-    bPair.second = 8;
-    insertRootRight->data = ePair;
+    ePair.first = 'e';
+    ePair.second = 8;
+    insertRootLeftRight->data = ePair;
     insertRootLeftRight->pRight = NULL;
     insertRootLeftRight->pLeft = NULL;
     insertRootLeftRight->pParent = insertRootLeft;// <i,-1>
@@ -698,7 +692,86 @@ int main(int argc, const char * argv[]) {
     
     cout<<"Passed Iterator Post Decrement Tests"<<endl;
     
-    //*ToDo: Write string test.
+    /*
+     * Testing map find
+     */
+    assert((*iterMap.find('z')).second == 35);
+    assert((*iterMap.find(';')).second == 95);
+    assert((*iterMap.find('e')).second == 25);
+    assert((*iterMap.find('@')).second == 901);
+    assert((*iterMap.find('q')).second == 10000);
+    // for fun
+    assert((*iterMap.find('j')).first == 'j');
+    assert(iterMap.find('*').it.ptr == NULL); // * is not in tree
+    cout<<"Passed Find Tests\n";
     
+    /*
+     * Testing square bracket operator
+     */
+    
+    map<char, int> emptyMap;
+    try {
+        emptyMap['j'];
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: no value associated with the key 'j'"));
+    }
+    try {
+        emptyMap['$'];
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: no value associated with the key '$'"));
+    }
+    
+    //reusing iterMap
+    
+    // BST should be                                                    |
+    //                                                            ----<j,32>------
+    //                                                            |              |
+    //                                                       ---<i,-1>----     <q,1000>------
+    //                                                       |            |                  |
+    //                                                     <a,100>      <e,8>              <y,-3>
+    //beginning square bracket operator accessor test
+    assert(iterMap['j'] == 32); 
+    assert(iterMap['i'] == -1);
+    assert(iterMap['a'] == 100);
+    assert(iterMap['e'] == 8);
+    assert(iterMap['q'] == 1000);
+    assert(iterMap['y'] == -3);
+    try {
+        iterMap['$'];
+        assert(false);
+    } catch (const char* message) {
+        assert(strcmp(message, "Error: no value associated with the key '$'"));
+    }
+    cout<<"Passed Map Square Bracket Operator Access Value Tests"<<endl;
+    
+    // beginning square bracket operator mutator test
+    iterMap['j'] = 15;
+    iterMap['i'] = 45;
+    iterMap['a'] = 75;
+    iterMap['e'] = 25;
+    iterMap['q'] = 10000;
+    iterMap['y'] = -300;
+    assert(iterMap.bst.root->data.second == 15);
+    assert(iterMap.bst.root->pLeft->data.second == 45);
+    assert(iterMap.bst.root->pLeft->pLeft->data.second == 75);
+    assert(iterMap.bst.root->pLeft->pRight->data.second == 25);
+    assert(iterMap.bst.root->pRight->data.second == 10000);
+    assert(iterMap.bst.root->pRight->pRight->data.second == -300);
+    cout<<"Passed Map Square Bracket Operator Mutate Values Tests"<<endl;
+    
+    // beginning square bracket operator insert test
+    iterMap['z'] = 35;
+    iterMap[';'] = 95;
+    assert(iterMap.bst.root->pRight->pRight->pRight->data.first == 'z');
+    assert(iterMap.bst.root->pRight->pRight->pRight->data.second == 35);
+    assert(iterMap.bst.root->pLeft->pLeft->pLeft->data.first == ';');
+    assert(iterMap.bst.root->pLeft->pLeft->pLeft->data.second == 95);
+    
+    cout<<"Passed Square Bracket Operator Tests\n";
+
+    
+    // ToDo: Write string test.
     
 }
