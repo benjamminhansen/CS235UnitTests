@@ -150,10 +150,10 @@ int main(int argc, const char * argv[])
     
     Hash<int>* multipleBucketsMultipleValuesHash = new Hash<int>(3);
     //simulate inserting 8, 7, 3, 9.
-    multipleBucketsMultipleValuesHash->table[2]->pHead = new list<long>::node(8);
-    multipleBucketsMultipleValuesHash->table[1]->pHead = new list<long>::node(7);
-    multipleBucketsMultipleValuesHash->table[0]->pHead = new list<long>::node(3);
-    multipleBucketsMultipleValuesHash->table[0]->pHead->pNext = new list<long>::node(9);
+    multipleBucketsMultipleValuesHash->table[2]->pHead = new list<int>::node(8);
+    multipleBucketsMultipleValuesHash->table[1]->pHead = new list<int>::node(7);
+    multipleBucketsMultipleValuesHash->table[0]->pHead = new list<int>::node(3);
+    multipleBucketsMultipleValuesHash->table[0]->pHead->pNext = new list<int>::node(9);
     unit_testing_delete_call_counter = 0;
     delete multipleBucketsMultipleValuesHash;
     //The list implementation you did is a shallow copy.
@@ -208,10 +208,10 @@ int main(int argc, const char * argv[])
     //simulate inserting 8, 7, 3, 9.
     hashToCopy.numBuckets = 5;
     hashToCopy.numElements = 4;
-    hashToCopy.table[3]->pHead = new list<long>::node(8);
-    hashToCopy.table[2]->pHead = new list<long>::node(7);
-    hashToCopy.table[3]->pHead->pNext = new list<long>::node(3);
-    hashToCopy.table[4]->pHead = new list<long>::node(9);
+    hashToCopy.table[3]->pHead = new list<int>::node(8);
+    hashToCopy.table[2]->pHead = new list<int>::node(7);
+    hashToCopy.table[3]->pHead->pNext = new list<int>::node(3);
+    hashToCopy.table[4]->pHead = new list<int>::node(9);
     
     /* hash array with lists is now (with <> meaning empty list)
      *                       [
@@ -244,10 +244,10 @@ int main(int argc, const char * argv[])
      */
     Hash<int> assignFrom(3);
     //simulate inserting 8, 7, 3, 9.
-    assignFrom.table[2]->pHead= new list<long>::node(8);
-    assignFrom.table[1]->pHead= new list<long>::node(7);
-    assignFrom.table[0]->pHead= new list<long>::node(3);
-    assignFrom.table[0]->pHead->pNext= new list<long>::node(9);
+    assignFrom.table[2]->pHead= new list<int>::node(8);
+    assignFrom.table[1]->pHead= new list<int>::node(7);
+    assignFrom.table[0]->pHead= new list<int>::node(3);
+    assignFrom.table[0]->pHead->pNext= new list<int>::node(9);
     /* hash array with lists is now (with <> meaning empty list)
      *                       [
      *                          <3,9>,
@@ -277,10 +277,10 @@ int main(int argc, const char * argv[])
     
     Hash<int> filledAssignTo(3);
     //simulate inserting 8, 7, 3, 9.
-    filledAssignTo.table[2]->pHead= new list<long>::node(8);
-    filledAssignTo.table[1]->pHead= new list<long>::node(7);
-    filledAssignTo.table[0]->pHead= new list<long>::node(3);
-    filledAssignTo.table[0]->pHead->pNext= new list<long>::node(9);
+    filledAssignTo.table[2]->pHead= new list<int>::node(8);
+    filledAssignTo.table[1]->pHead= new list<int>::node(7);
+    filledAssignTo.table[0]->pHead= new list<int>::node(3);
+    filledAssignTo.table[0]->pHead->pNext= new list<int>::node(9);
     /* hash array with lists is now (with <> meaning empty list)
      *                       [
      *                          <3,9>,
@@ -306,7 +306,7 @@ int main(int argc, const char * argv[])
     //inserting into empty Hash
     Hash<int> emptyInsertHash(7);
     emptyInsertHash.numBuckets = 7;
-    emptyInsertHash.table = new list<long>*[7];
+    emptyInsertHash.table = new list<int>*[7];
     emptyInsertHash.numElements = 0;
     emptyInsertHash.insert(12, hashInt);
     /* hash array with lists is now (with <> meaning empty list)
@@ -351,10 +351,10 @@ int main(int argc, const char * argv[])
     nonEmptyInsertHash.table = new list<int>*[3];
     nonEmptyInsertHash.numBuckets = 3;
     nonEmptyInsertHash.numElements = 4;
-    nonEmptyInsertHash.table[2]->pHead = new list<long>::node(8);
-    nonEmptyInsertHash.table[1]->pHead = new list<long>::node(7);
-    nonEmptyInsertHash.table[0]->pHead = new list<long>::node(9);
-    nonEmptyInsertHash.table[0]->pHead->pNext = new list<long>::node(6);
+    nonEmptyInsertHash.table[2]->pHead = new list<int>::node(8);
+    nonEmptyInsertHash.table[1]->pHead = new list<int>::node(7);
+    nonEmptyInsertHash.table[0]->pHead = new list<int>::node(9);
+    nonEmptyInsertHash.table[0]->pHead->pNext = new list<int>::node(6);
     /* hash array with lists is now (with <> meaning empty list)
      *                       [
      *                          <9,6>,
@@ -443,10 +443,10 @@ int main(int argc, const char * argv[])
     nonEmptyFindHash.table = new list<int>*[3];
     nonEmptyFindHash.numBuckets = 3;
     nonEmptyFindHash.numElements = 4;
-    nonEmptyFindHash.table[2]->pHead = new list<long>::node(8);
-    nonEmptyFindHash.table[1]->pHead = new list<long>::node(7);
-    nonEmptyFindHash.table[0]->pHead = new list<long>::node(9);
-    nonEmptyFindHash.table[0]->pHead->pNext = new list<long>::node(6);
+    nonEmptyFindHash.table[2]->pHead = new list<int>::node(8);
+    nonEmptyFindHash.table[1]->pHead = new list<int>::node(7);
+    nonEmptyFindHash.table[0]->pHead = new list<int>::node(9);
+    nonEmptyFindHash.table[0]->pHead->pNext = new list<int>::node(6);
     /* hash array with lists is now (with <> meaning empty list)
      *                       [
      *                          <9,6>,
@@ -484,7 +484,7 @@ int main(int argc, const char * argv[])
     nameHash.insert("Gunhilda",hashString);
     nameHash.insert("gunhilda",hashString);
     nameHash.insert("gunHilda",hashString);
-    nameHash.insert("gunHilda",hashString);
+    nameHash.insert("gunhildA",hashString);
     /* hash array with lists is now (with <> meaning empty list)
      *                       [
      *                          <boB>,
@@ -516,7 +516,7 @@ int main(int argc, const char * argv[])
     assert(*(nameHash.table[0]->pHead->data) == "");
     assert(*(nameHash.table[0]->pHead->pNext->data) == " ");
     assert(*(nameHash.table[0]->pHead->pNext->pNext->data) == "Sven");
-    assert(*(nameHash.table[0]->pHead->pNext->pNext->->pNext->data) == "gunhildA");
+    assert(*(nameHash.table[0]->pHead->pNext->pNext->pNext->data) == "gunhildA");
     assert(*(nameHash.table[0]->pTail->data) == "boB");
     
     cout << "This Hash can hold strings!!!!" << endl;
